@@ -8,8 +8,6 @@ angular.module('eeStore').controller 'storeCtrl', ($rootScope, $state, $location
   storefront.categories = categories
   storefront.state = $state.current.name
 
-  # storefront.fns =
-  #   update: () -> $rootScope.forceReload $location.path(), '?page=' + storefront.data.pagination.page
   if $state.current.name is 'storefront' and $rootScope.pageDepth > 1 then eeUser.fns.getUser()
 
   storefront.params = $location.search()
