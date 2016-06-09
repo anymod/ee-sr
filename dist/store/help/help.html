@@ -1,0 +1,95 @@
+<style>
+  .help-page li.active > a > uib-tab-heading { color: #555; }
+</style>
+
+<div class="container max-width-900 vert-20 help-page">
+  <uib-tabset>
+    <!-- Returns -->
+    <uib-tab active="help.returnsTab">
+      <uib-tab-heading class="text-muted">Returns</uib-tab-heading>
+      <div class="pad-10">
+        <h4>Customer satisfaction is our #1 goal</h4>
+        <p>Because we want you to have the best possible experience, we make returning your items simple and easy.</p>
+        <p>
+          To initiate a return, simply submit your order number here and we will send you instructions on how to return your order.  To find your order number, please refer to your confirmation email you received when you placed your order. Having trouble locating the order number? Send us a note in the <a href ng-click="help.contactTab = true">Contact Us</a> tab.
+          <form ng-submit="help.initiateReturn()" class="form-inline max-width-300">
+            <small>Order Number</small>
+            <br>
+            <input type="text" class="form-control" style="max-width: 160px;" placeholder="111111-111111" ng-model="help.orderNumber">
+            <button type="submit" class="btn btn-default" ng-disabled="help.initiating">Start your return</button>
+            <div ng-if="help.initiated" class="alert alert-success vert-5">
+              Return initiated. We will send you an email shortly with instructions on how to proceed with your return.
+            </div>
+            <div class="alert alert-info vert-5" ng-show='help.returnAlert' ng-bind="help.returnAlert"></div>
+          </form>
+        </p>
+        <br>
+        <h4>Returns Policy 101</h4>
+        <ul>
+          <li>Customers may return a product up to 14 days after it has been received.</li>
+          <li>Return the items in their original packaging.</li>
+          <li>Returns will only be accepted if the entire original item is included in the return.</li>
+          <li>Items that have been used or washed cannot be returned.</li>
+          <li>The customer will pay the return shipping costs.</li>
+          <li>If you receive damaged merchandise or there is a shipping or warehouse error, then the cost of shipping will be reimbursed by us as a credit to your account.</li>
+          <li>If a package is lost, stolen, refused, undeliverable, or returned to sender, a credit cannot be issued until the package is received back in our supplier's warehouse.</li>
+          <li>At the time of return please indicate whether you prefer a refund, exchange, or replacement product, and we will work to make that happen for you.</li>
+        </ul>
+        <p>We will provide a full refund for items that arrive back to our warehouse in their original packaging and condition. Shipping cost is non-refundable, unless we made an error in the order.</p>
+        <p>There may be a 25% restocking fee if items are not returned in original packaging. This includes "refused", "unclaimed", or "undeliverable” items returned by the shipping company.</p>
+        <p>If you have multiple orders to return, please fill out an individual form for each order and keep the items in original packaging.</p>
+      </div>
+    </uib-tab>
+    <!-- /Returns -->
+
+    <!-- Shipping -->
+    <uib-tab active="help.shippingTab">
+      <uib-tab-heading class="text-muted">Shipping</uib-tab-heading>
+      <div class="pad-10">
+        <h4>We typically ship within 1-2 business days</h4>
+        <p>We strive to have fast turnaround times so that you can receive your order quickly.</p>
+        <br>
+        <h4>Shipping within the United States</h4>
+        <p>Our supplier warehouses are located in the United States, which makes our shipment times faster and more reliable.</p>
+        <p>We use UPS, FedEx, and USPS to ship orders within the United States.  Most orders receive a shipment tracking number that is included when we send your shipment confirmation email.</p>
+        <br>
+        <h4>Shipping outside of the United States</h4>
+        <p>We do not currently offer shipping outside of the United States.</p>
+      </div>
+    </uib-tab>
+    <!-- /Shipping -->
+
+    <!-- Contact -->
+    <uib-tab active="help.contactTab">
+      <uib-tab-heading class="text-muted">Contact Us</uib-tab-heading>
+      <div class="pad-10">
+        <h4>Contact Us</h4>
+        <p>Use the form below to contact us with questions, comments, or feedback.</p>
+        <form ng-submit="help.submit()" ng-hide="help.success" class="max-width-300">
+          <div class="alert alert-info" ng-show='help.alert' ng-bind="help.alert"></div>
+          <textarea cols="30" rows="8"
+            ng-model="help.message"
+            placeholder="Your message"
+            class="form-control vert-5 max-width-100-pct margin-top-0"
+            autofocus></textarea>
+          <input type="text"
+            ng-model="help.name"
+            placeholder="Name (optional)"
+            class="form-control input-lg vert-5">
+          <input type="email"
+            ng-model="help.email"
+            placeholder="Email (optional)"
+            class="form-control input-lg vert-5">
+          <button class="btn btn-lg btn-default btn-block"
+            type="submit"
+            ng-bind="help.btnText"
+            ng-disabled="help.btnText != 'Send'"></button>
+        </form>
+      </div>
+      <div ng-show="help.success" class="alert alert-success max-width-300">
+        Your message was sent. Thanks!
+      </div>
+    </uib-tab>
+    <!-- /Contact -->
+  </uib-tabset>
+</div>

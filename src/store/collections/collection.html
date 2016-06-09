@@ -1,0 +1,56 @@
+<div class="container max-width-900 vert-20 text-center" ng-class="{ 'opacity-05': collection.ee.Collection.reading }">
+
+  <img ng-src="{{ collection.ee.Collection.collection.banner | cloudinaryResizeTo:425:250 }}" class="full-width max-width-400"/>
+
+  <div class="row">
+
+    <div class="col col-xs-12 position-inherit">
+
+      <div ng-if="collection.ee.Collection.products.length > 0" class="text-center" ng-class="{ 'opacity-05': collection.ee.Collection.reading }">
+
+        <div class="margin-10">
+          <uib-pagination ng-if="collection.ee.Collection.count > collection.ee.Collection.inputs.perPage"
+            total-items="collection.ee.Collection.count"
+            items-per-page="collection.ee.Collection.inputs.perPage"
+            ng-model="collection.ee.Collection.inputs.page"
+            max-size="5"
+            class="pagination-sm margin-0 vertical-align-top"
+            previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+            boundary-links="true"
+            rotate="false"
+            ng-change="collection.update()">
+          </uib-pagination>
+        </div>
+
+        <div class="full-width text-center vert-20 overflow-hidden" ng-hide="collection.ee.Collection.reading">
+          <div ng-repeat="product in collection.ee.Collection.products"
+            class="product-repeater text-left inline-block vertical-align-top">
+            <ee-product-for-store product="product"></ee-product-for-store>
+          </div>
+        </div>
+
+        <div class="pad-20 vert-20" ng-hide="collection.ee.Collection.reading">
+          <uib-pagination ng-if="collection.ee.Collection.count > collection.ee.Collection.inputs.perPage"
+            total-items="collection.ee.Collection.count"
+            items-per-page="collection.ee.Collection.inputs.perPage"
+            ng-model="collection.ee.Collection.inputs.page"
+            max-size="5"
+            class="pagination-sm margin-0 vertical-align-top"
+            previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+            boundary-links="true"
+            rotate="false"
+            ng-change="collection.update()">
+          </uib-pagination>
+        </div>
+      </div>
+
+      <div ng-if="collection.ee.Collection.products.length <= 0">
+        <h4 class="margin-5 font-weight-200">This collection is coming soon</h4>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<ee-loading loading="collection.ee.Collection.reading" ee-min-height="600"></ee-loading>
