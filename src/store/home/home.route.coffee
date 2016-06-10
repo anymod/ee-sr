@@ -9,10 +9,13 @@ angular.module('store.home').config ($stateProvider) ->
       views:
         top:
           controller: 'storeCtrl as storefront'
-          templateUrl: 'store/store.header.html'
+          templateUrl: 'store/home/home.header.html'
         middle:
-          controller: 'storeCtrl as storefront'
-          templateUrl: 'ee-shared/storefront/storefront.carousel.html'
+          controller: 'homeCtrl as home'
+          templateUrl: 'store/home/home.html'
+        # middle:
+        #   controller: 'storeCtrl as storefront'
+        #   templateUrl: 'ee-shared/storefront/storefront.carousel.html'
         footer:
           controller: 'storeCtrl as storefront'
           templateUrl: 'ee-shared/storefront/storefront.footer.html'

@@ -9098,7 +9098,7 @@ body.modal-open {
   }
   .carousel-control .glyphicon {
     padding: 8px;
-    margin-top: -8px;
+    margin-top: -18px;
     background: #474747;
   }
 }
@@ -9120,9 +9120,10 @@ body.modal-open {
 .ng-cloak {
   display: none;
 }
-.container.squeeze {
-  max-width: 730px;
-  margin: 0 auto;
+.container-narrow {
+  max-width: 900px;
+  padding-left: 2px;
+  padding-right: 2px;
 }
 html,
 body {
@@ -10381,7 +10382,7 @@ a.product:focus .product-title {
   background-color: white;
   border: 1px solid #fcfcfc;
   border-radius: 2px;
-  margin: 3px;
+  margin: 1px;
   transition: all 0.2s ease-in-out;
   max-width: 210px;
 }
