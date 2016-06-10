@@ -49,7 +49,7 @@ angular.module('store.core').run ($rootScope, $window, $cookies, $location, eeMo
     setKeenio()
     keen.addEvent title, keenio
 
-  if eeBootstrap.username is 'stylishrustic' and !$cookies.get('offered')
+  if !$cookies.get('offered')
     $rootScope.mouseleave = () ->
       $cookies.put 'offered', ($rootScope.pageDepth || true)
       eeModal.fns.open 'offer'
