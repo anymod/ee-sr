@@ -10384,7 +10384,7 @@ a.product:focus .product-title {
   border-radius: 2px;
   margin: 1px;
   transition: all 0.2s ease-in-out;
-  max-width: 210px;
+  max-width: 218px;
 }
 .product-container:hover,
 .product-container:focus {
@@ -10492,6 +10492,29 @@ img.zoom-img {
 .zoom-overlay-open,
 .zoom-overlay-transitioning {
   cursor: default;
+}
+img.logo {
+  max-height: 60px;
+}
+@media (max-width: 767px) {
+  img.logo {
+    max-height: 50px;
+  }
+}
+.nav-side {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: -280px;
+  width: 250px;
+  overflow-y: scroll;
+  z-index: 4000;
+}
+.nav-side li {
+  width: 100%;
+}
+.nav-side.open {
+  left: 0;
 }
 
 /*# sourceMappingURL=ee.css.map */

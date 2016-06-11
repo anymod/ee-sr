@@ -8,12 +8,12 @@
       <div class="pad-10">
         <h1 ng-bind="product.title" class="vert-15 margin-top-0 font-weight-200" style="font-size: 24px;"></h1>
         <div ng-if="product.skus.length > 1">
-          <h4 ng-bind="currentSku.selection_text" class="inline-block font-weight-200"></h4>
+          <h4 ng-bind="currentSku.selection_text" class="inline-block font-weight-200 margin-top-0" style="width: 85%;"></h4>
           <div class="pull-right btn-group" uib-dropdown>
             <button type="button" class="btn btn-default dropdown-toggle" uib-dropdown-toggle>
               <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu-right" uib-dropdown-menu>
+            <ul class="dropdown-menu-right max-width-300 overflow-hidden" uib-dropdown-menu>
               <li ng-repeat="sku in skus" ng-if="!sku.discontinued">
                 <a href ng-click="setCurrentSku(sku)">
                   <small ng-bind="sku.price | centToDollar" class="inline-block text-muted min-width-40"></small>
@@ -65,7 +65,7 @@
 
   <!-- Similar products -->
   <div ng-if="products.length > 0" class="vert-20 margin-bottom-0 text-center">
-    <h5 class="font-weight-200 text-left margin-0">You might also like</h5>
+    <h5 class="font-weight-200 text-left vert-5 margin-top-0">You might also like</h5>
     <div ng-repeat="prod in products" class="homepage-product text-left inline-block vertical-align-top">
       <ee-product-for-store product="prod"></ee-product-for-store>
     </div>
