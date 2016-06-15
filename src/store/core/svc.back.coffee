@@ -126,3 +126,28 @@ angular.module('store.core').factory 'eeBack', ($rootScope, $http, $q, eeBackUrl
         url: eeBackUrl + 'contact'
         data: { name: name, email: email, message: message }
       }
+
+    favoritesPOST: (email, sku_ids, on_mailing_list) ->
+      _makeRequest {
+        method: 'POST'
+        url: eeBackUrl + 'favorites'
+        data:
+          email: email
+          sku_ids: sku_ids
+          on_mailing_list: on_mailing_list
+          seller_id: eeBootstrap?.id
+          domain: eeBootstrap?.url
+      }
+
+    favoritesGET: (favorite_id) ->
+      _makeRequest {
+        method: 'GET'
+        url: eeBackUrl + 'favorites/' + favorite_id + '?u=' + eeBootstrap?.id
+      }
+
+    favoritesPUT: (favorite_id, data) ->
+      _makeRequest {
+        method: 'PUT'
+        url: eeBackUrl + 'favorites/' + favorite_id
+        data: data
+      }

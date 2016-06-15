@@ -61,7 +61,7 @@ angular.module('store.core').factory 'eeCart', ($rootScope, $state, $cookies, ee
         _addDataSku pair
       else if !matchSku.price?
         _syncSku pair, matchSku
-      console.log pair, matchSku,
+      # console.log pair, matchSku,
 
       # matchingSku = undefined
       # for sku in _data.skus

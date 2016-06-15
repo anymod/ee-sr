@@ -66,6 +66,7 @@ sources.storeModule = [
   './src/store/core/svc.collections.coffee'
   './src/store/core/svc.definer.coffee'
   './src/store/core/svc.cart.coffee'
+  './src/store/core/svc.favorites.coffee'
   # Module - store
   './src/store/store.controller.coffee'
   # Module - home
@@ -97,6 +98,10 @@ sources.storeModule = [
   './src/store/search/search.controller.coffee'
   # Module - modal
   './src/store/modal/modal.controller.coffee'
+  # Module - favorites
+  './src/store/favorites/favorites.module.coffee'
+  './src/store/favorites/favorites.route.coffee'
+  './src/store/favorites/favorites.controller.coffee'
 ]
 
 ### DIRECTIVES ###
@@ -118,6 +123,7 @@ sources.storeDirective = [
   './src/ee-shared/components/ee-empty-message.coffee'
   './src/ee-shared/components/ee-loading.coffee'
   './src/ee-shared/components/ee-signup.coffee'
+  './src/ee-shared/components/ee-favorites-signup.coffee'
 ]
 
 module.exports = sources

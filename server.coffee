@@ -63,18 +63,6 @@ app.get ['/'], (req, res, next) ->
     console.error 'error in HOME', err
     res.send 'Not found'
 
-# ABOUT
-app.get ['/about'], (req, res, next) ->
-  { bootstrap, host, path } = utils.setup req
-  User.defineStorefront host, bootstrap
-  .then () ->
-    bootstrap.stringified = utils.stringify bootstrap
-    res.render 'store.ejs', { bootstrap: bootstrap }
-  .catch (err) ->
-    # TODO add better error pages
-    console.error 'error in ABOUT', err
-    res.redirect '/'
-
 # PRODUCT
 app.get '/products/:id/:title*?', (req, res, next) ->
   { bootstrap, host, path } = utils.setup req
@@ -155,17 +143,6 @@ app.get '/search', (req, res, next) ->
 #     console.error 'error in COLLECTIONS', err
 #     res.redirect '/'
 
-# HELP
-app.get ['/help', '/terms', '/privacy'], (req, res, next) ->
-  { bootstrap, host, path } = utils.setup req
-  User.defineStorefront host, bootstrap
-  .then () ->
-    bootstrap.stringified = utils.stringify bootstrap
-    res.render 'store.ejs', { bootstrap: bootstrap }
-  .catch (err) ->
-    console.error 'error in HELP', err
-    res.redirect '/'
-
 # CART
 app.get '/cart', (req, res, next) ->
   { bootstrap, host, path } = utils.setup req
@@ -199,6 +176,17 @@ app.get ['/sitemap', '/sitemap.xml'], (req, res, next) ->
 # LEGACY REDIRECTS
 app.get ['/selections/:id/:title', '/shop', '/shop/:title', '/collections'], (req, res, next) ->
   res.redirect '/'
+
+# CATCHALL (about, help, terms, privacy, favorites)
+app.get '/*', (req, res, next) ->
+  { bootstrap, host, path } = utils.setup req
+  User.defineStorefront host, bootstrap
+  .then () ->
+    bootstrap.stringified = utils.stringify bootstrap
+    res.render 'store.ejs', { bootstrap: bootstrap }
+  .catch (err) ->
+    console.error 'error in /*', err
+    res.redirect '/'
 
 app.listen process.env.PORT, ->
   console.log 'Store app listening on port ' + process.env.PORT
