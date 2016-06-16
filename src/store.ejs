@@ -152,13 +152,15 @@
       }
       .ee-scroll-to-top { background-color: <%= bootstrap.storefront_meta.brand.color.secondary %>; }
       .ee-scroll-to-top i { color: <%= bootstrap.storefront_meta.brand.color.tertiary %>; }
+      .text-themed-secondary { color: <%= bootstrap.storefront_meta.brand.color.secondary %>; }
+      .text-themed-secondary-accent { color: <%= bootstrap.storefront_meta.brand.color.secondaryAccent %>; }
+      .text-themed-tertiary { color: <%= bootstrap.storefront_meta.brand.color.tertiary %>; }
       .btn-themed,
       .bg-themed {
         background-color: <%= bootstrap.storefront_meta.brand.color.secondary %>;
         color: <%= bootstrap.storefront_meta.brand.color.tertiary %>;
         border-color: <%= bootstrap.storefront_meta.brand.color.secondaryAccent %> !important;
         border-bottom: 2px solid <%= bootstrap.storefront_meta.brand.color.secondaryAccent %> !important;
-
       }
       .btn-themed { text-shadow: 1px 1px <%= bootstrap.storefront_meta.brand.color.secondaryAccent %>; }
       .btn-themed:hover,
@@ -263,6 +265,8 @@
   <script src="js/ee-shared/components/ee-loading.js"></script>
   <script src="js/ee-shared/components/ee-signup.js"></script>
   <script src="js/ee-shared/components/ee-favorites-signup.js"></script>
+  <script src="js/ee-shared/components/ee-favorites-heart.js"></script>
+  <script src="js/ee-shared/components/ee-image-fadein.js"></script>
   <!-- endbuild -->
 
 </body>

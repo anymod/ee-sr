@@ -1,10 +1,24 @@
-<div ng-hide="favorites.ee.Favorites.reading" class="container container-narrow text-center vert-10 min-height-600">
-  <div class="max-width-300 margin-0-auto">
-    <div class="well white-background box-shadow text-left margin-5">
-      <ee-favorites-signup></ee-favorites-signup>
+<div ng-hide="favorites.ee.Favorites.reading"
+  class="container container-narrow text-center vert-10 min-height-600">
+
+  <div ng-hide="favorites.ee.Favorites.logged_in">
+    <div class="max-width-300 margin-0-auto">
+      <div class="well white-background box-shadow text-left margin-5">
+        <ee-favorites-signup></ee-favorites-signup>
+      </div>
+    </div>
+  </div>
+
+  <div ng-show="favorites.ee.Favorites.logged_in">
+    <div class="max-width-300 margin-0-auto">
+      <div class="well white-background box-shadow text-left margin-5">
+        <div class="btn btn-link" ng-click="favorites.fns.logout()">Log out</div>
+      </div>
     </div>
   </div>
 
   <pre class="text-left">{{ favorites.ee.Favorites | json }}</pre>
 
 </div>
+
+<ee-loading loading="favorites.ee.Favorites.reading" ee-min-height="600"></ee-loading>
