@@ -1,24 +1,10 @@
 <div>
-  <ee-storefront-announcement
-    ng-if="storefront.ee.User.user"
-    user="storefront.ee.User.user"
-    hide-buttons="storefront.state == 'sale'">
-  </ee-storefront-announcement>
   <ee-storefront-header
     user="storefront.ee.User.user"
-    show-scrollnav="storefront.state != 'sale'"
+    show-scrollnav="true"
     compact-view="true">
   </ee-storefront-header>
-  <div ng-if="storefront.state == 'sale'" class="vert-10">
-    <div class="margin-0-auto text-center bg-themed pad-10 round-5" style="max-width: 320px;">
-      <h1 class="margin-0">SALE</h1>
-      <h3 class="font-weight-200 vert-5">Follow for even more exclusive offers</h3>
-      <div class="white-background pad-10">
-        <ee-signup></ee-signup>
-      </div>
-    </div>
-  </div>
-  <div class="container max-width-600 vert-5" ng-if="storefront.state != 'sale'">
+  <div class="container max-width-600 vert-5">
     <ee-search-sort></ee-search-sort>
   </div>
 </div>

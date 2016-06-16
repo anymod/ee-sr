@@ -10400,6 +10400,11 @@ a.product:focus .product-title {
     max-width: 100%;
   }
 }
+ee-product-card .main-image {
+  width: auto;
+  max-height: 450px;
+  max-width: 100%;
+}
 @media (max-width: 480px) {
   .product-repeater {
     max-width: 49%;

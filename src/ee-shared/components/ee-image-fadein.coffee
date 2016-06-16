@@ -7,13 +7,15 @@ angular.module('ee-image-fadein').directive "eeImageFadein", ($filter, $timeout)
     eeSrc: '@'
     eeW: '@'
     eeH: '@'
+    eeCrop: '@'
     watch: '@'
     loadBoolean: '='
   link: (scope, element) ->
     w = parseInt scope.eeW
     h = parseInt scope.eeH
+    crop = scope.eeCrop || 'pad'
     scope.loadBoolean = false
-    element.attr 'src', 'https://placeholdit.imgix.net/~text?txtsize=40&bg=fcfcfc&txtclr=ffcccc&txt=loading+image&w=' + w + '&h=' + h
+    element.attr 'src', 'https://placeholdit.imgix.net/~text?txtsize=40&bg=ffffff&txtclr=ffcccc&txt=loading+image&w=' + w + '&h=' + h
 
     loadImage = (url) ->
       element.attr 'style', 'opacity: 0.5;'
@@ -22,7 +24,7 @@ angular.module('ee-image-fadein').directive "eeImageFadein", ($filter, $timeout)
         element.attr 'style', 'opacity: 1;'
         $timeout(() -> scope.loadBoolean = false)
 
-    element.one 'load', () -> loadImage $filter('cloudinaryResizeTo')(scope.eeSrc, w, h)
+    element.one 'load', () -> loadImage $filter('cloudinaryResizeTo')(scope.eeSrc, w, h, crop)
 
     if scope.watch
       scope.$watch 'eeSrc', (newVal, oldVal) ->

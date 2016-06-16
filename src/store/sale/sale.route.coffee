@@ -1,18 +1,18 @@
 'use strict'
 
-angular.module('store.collections').config ($stateProvider) ->
+angular.module('store.sale').config ($stateProvider) ->
 
   $stateProvider
 
-    .state 'collection',
-      url: '/collections/:id/:title?q&p&s&r&coll'
+    .state 'sale',
+      url: '/sale/:id/:title?q&p&s&r&coll'
       views:
         top:
           controller: 'storeCtrl as storefront'
-          templateUrl: 'store/collections/collection.header.html'
+          templateUrl: 'store/sale/sale.header.html'
         middle:
           controller: 'searchCtrl as search'
-          templateUrl: 'store/collections/collection.html'
+          templateUrl: 'store/sale/sale.html'
         footer:
           controller: 'storeCtrl as storefront'
           templateUrl: 'ee-shared/storefront/storefront.footer.html'
