@@ -8,5 +8,6 @@ angular.module('store.home').controller 'favoritesCtrl', ($rootScope, eeDefiner,
   favorites.fns = eeFavorites.fns
 
   eeFavorites.fns.defineSkuIds()
+  eeFavorites.fns.defineProducts()
 
   return

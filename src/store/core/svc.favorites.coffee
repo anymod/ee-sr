@@ -12,6 +12,7 @@ angular.module('store.core').factory 'eeFavorites', ($rootScope, $state, $cookie
     logged_in: $cookies.get('favorites')?
     email_sent: false
     sku_ids: eeBootstrap?.favorites?.sku_ids || []
+    products: eeBootstrap?.products || []
 
   ## PRIVATE FUNCTIONS
   _defineSkuIds = () ->
@@ -21,6 +22,16 @@ angular.module('store.core').factory 'eeFavorites', ($rootScope, $state, $cookie
     eeBack.fns.favoritesGET favorite_id
     .then (favorite) ->
       _data.sku_ids = favorite.sku_ids
+      $rootScope.$broadcast 'favorites:update'
+    .finally () -> _data.reading = false
+
+  _defineProducts = () ->
+    return if !$cookies.get('favorites')?
+    _data.reading = true
+    [ee, favorite_id, token] = $cookies.get('favorites').split('.')
+    eeBack.fns.favoriteProductsGET favorite_id
+    .then (products) ->
+      _data.products = products
       $rootScope.$broadcast 'favorites:update'
     .finally () -> _data.reading = false
 
@@ -86,5 +97,6 @@ angular.module('store.core').factory 'eeFavorites', ($rootScope, $state, $cookie
     addSku:         _addSku
     removeSkus:     _removeSkus
     defineSkuIds:   _defineSkuIds
+    defineProducts: _defineProducts
     createOrUpdate: _createOrUpdate
     logout:         _logout

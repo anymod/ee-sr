@@ -151,3 +151,9 @@ angular.module('store.core').factory 'eeBack', ($rootScope, $http, $q, eeBackUrl
         url: eeBackUrl + 'favorites/' + favorite_id
         data: data
       }
+
+    favoriteProductsGET: (id) ->
+      _makeRequest {
+        method: 'GET'
+        url: eeBackUrl + 'store/' + eeBootstrap?.tr_uuid + '/favorites/' + id
+      }
