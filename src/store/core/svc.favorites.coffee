@@ -3,58 +3,66 @@
 angular.module('store.core').factory 'eeFavorites', ($rootScope, $state, $cookies, eeBootstrap, eeBack) ->
 
   ## SETUP
-  #
+  _cookieParts = () ->
+    cookie = $cookies.get 'favorites'
+    return {} if !cookie?
+    [ee, obfuscated_id, uuid] = cookie.split('.')
+    if obfuscated_id is "" then obfuscated_id = null
+    if uuid is "" then uuid = null
+    {
+      obfuscated_id: obfuscated_id
+      uuid: uuid
+    }
+  _obfuscatedId = () -> _cookieParts().obfuscated_id
+  _uuid = () -> _cookieParts().uuid
 
   ## PRIVATE EXPORT DEFAULTS
   _data =
     reading:  false
     updating: false
-    logged_in: $cookies.get('favorites')?
+    logged_in: _uuid()?
     email_sent: false
-    sku_ids: eeBootstrap?.favorites?.sku_ids || []
-    products: eeBootstrap?.products || []
+    sku_ids: []
+    products: []
 
   ## PRIVATE FUNCTIONS
   _defineSkuIds = () ->
-    return if !$cookies.get('favorites')?
+    return if !_obfuscatedId()?
     _data.reading = true
-    [ee, favorite_id, token] = $cookies.get('favorites').split('.')
-    eeBack.fns.favoritesGET favorite_id
+    eeBack.fns.favoritesGET _obfuscatedId()
     .then (favorite) ->
       _data.sku_ids = favorite.sku_ids
       $rootScope.$broadcast 'favorites:update'
     .finally () -> _data.reading = false
 
-  _defineProducts = () ->
-    return if !$cookies.get('favorites')?
+  _defineProducts = (obfuscated_id) ->
+    obfuscated_id ||= _obfuscatedId()
+    return if !obfuscated_id?
     _data.reading = true
-    [ee, favorite_id, token] = $cookies.get('favorites').split('.')
-    eeBack.fns.favoriteProductsGET favorite_id
-    .then (products) ->
-      _data.products = products
+    eeBack.fns.favoriteProductsGET obfuscated_id
+    .then (res) ->
+      _data.products = res.rows
       $rootScope.$broadcast 'favorites:update'
     .finally () -> _data.reading = false
 
-  _createOrUpdate = (email, sku_ids, on_mailing_list) ->
+  _createOrUpdate = (email, on_mailing_list) ->
     # Update
-    if $cookies.get('favorites')?
+    if _uuid()? and _obfuscatedId()?
       _data.updating = true
-      [ee, favorite_id, token] = $cookies.get('favorites').split('.')
-      eeBack.fns.favoritesPUT favorite_id, { sku_ids: sku_ids, token: token }
-      .then (res) -> _login res.id, res.uuid, res
+      eeBack.fns.favoritesPUT _obfuscatedId(), { sku_ids: _data.sku_ids, token: _uuid() }
+      .then (res) -> _login res.obfuscated_id, res.uuid, res
       .finally () -> _data.updating = false
     # Create
     else
       _data.updating = true
-      eeBack.fns.favoritesPOST email, sku_ids, on_mailing_list
-      .then (res) -> _login res.id, res.uuid, res
+      eeBack.fns.favoritesPOST email, _data.sku_ids, on_mailing_list
+      .then (res) -> _login res.obfuscated_id, res.uuid, res
       .finally () -> _data.updating = false
 
   _syncFavorites = () ->
     return if !$cookies.get('favorites')?
     _data.updating = true
-    [ee, favorite_id, token] = $cookies.get('favorites').split('.')
-    eeBack.fns.favoritesPUT favorite_id, { sku_ids: _data.sku_ids, token: token }
+    eeBack.fns.favoritesPUT _obfuscatedId(), { sku_ids: _data.sku_ids, token: _uuid() }
     .then (res) ->
       _data.sku_ids = res.sku_ids
       $rootScope.$broadcast 'favorites:update'
@@ -71,11 +79,11 @@ angular.module('store.core').factory 'eeFavorites', ($rootScope, $state, $cookie
     _data.sku_ids = new_ids
     _syncFavorites()
 
-  _login = (id, uuid, res) ->
-    if !id? or !uuid?
+  _login = (obfuscated_id, uuid, res) ->
+    if !obfuscated_id? or !uuid?
       if res?.message is 'success' then _data.email_sent = true
       return _logout()
-    $cookies.put 'favorites', ['ee', id, uuid].join('.')
+    $cookies.put 'favorites', ['ee', obfuscated_id, uuid].join('.')
     _data.logged_in = true
     $state.go 'favorites', null, reload: true
 
@@ -83,7 +91,14 @@ angular.module('store.core').factory 'eeFavorites', ($rootScope, $state, $cookie
     $cookies.remove 'favorites'
     _data.sku_ids = []
     _data.logged_in = false
-    # $state.go 'favorites', null, reload: true
+    $state.go 'favorites', null, reload: true
+
+  _redirectIfLoggedIn = () ->
+    if _obfuscatedId()? then $state.go('favorite', { obfuscated_id: _obfuscatedId() })
+
+  _setFavoritesCookieUnlessExists = (obfuscated_id, uuid) ->
+    return if $cookies.get('favorites')?
+    $cookies.put 'favorites', ['ee', obfuscated_id, uuid].join('.')
 
   ## MESSAGING
   #
@@ -100,3 +115,5 @@ angular.module('store.core').factory 'eeFavorites', ($rootScope, $state, $cookie
     defineProducts: _defineProducts
     createOrUpdate: _createOrUpdate
     logout:         _logout
+    redirectIfLoggedIn: _redirectIfLoggedIn
+    setFavoritesCookieUnlessExists: _setFavoritesCookieUnlessExists

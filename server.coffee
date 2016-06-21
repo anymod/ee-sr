@@ -129,20 +129,6 @@ app.get '/search', (req, res, next) ->
     console.error 'error in SEARCH', err
     res.redirect '/'
 
-# SALE
-# app.get '/sale/:id', (req, res, next) ->
-#   { bootstrap, host, path } = utils.setup req
-#   User.defineStorefront host, bootstrap
-#   .then () -> Collection.findSaleBySellerId bootstrap.id
-#   .then (collection) ->
-#     bootstrap.collection_id = collection.id
-#     bootstrap.collection = collection
-#     opts = utils.searchOpts bootstrap
-#     searchAndRespond res, opts, bootstrap
-#   .catch (err) ->
-#     console.error 'error in COLLECTIONS', err
-#     res.redirect '/'
-
 # CART
 app.get '/cart', (req, res, next) ->
   { bootstrap, host, path } = utils.setup req

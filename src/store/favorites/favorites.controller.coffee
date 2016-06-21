@@ -7,7 +7,9 @@ angular.module('store.home').controller 'favoritesCtrl', ($rootScope, eeDefiner,
   favorites.ee = eeDefiner.exports
   favorites.fns = eeFavorites.fns
 
-  eeFavorites.fns.defineSkuIds()
-  eeFavorites.fns.defineProducts()
+  eeFavorites.fns.redirectIfLoggedIn()
+
+  # eeFavorites.fns.defineSkuIds()
+  # eeFavorites.fns.defineProducts()
 
   return

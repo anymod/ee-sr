@@ -1,15 +1,13 @@
 <div ng-hide="favorites.ee.Favorites.reading"
-  class="container container-narrow text-center vert-10 min-height-600">
+  class="container container-narrow text-center vert-10 min-height-300">
 
-  <div ng-hide="favorites.ee.Favorites.logged_in">
-    <div class="max-width-300 margin-0-auto">
-      <div class="well white-background box-shadow text-left margin-5">
-        <ee-favorites-signup></ee-favorites-signup>
-      </div>
+  <div class="max-width-300 margin-0-auto">
+    <div class="well white-background box-shadow text-left margin-5">
+      <ee-favorites-signup></ee-favorites-signup>
     </div>
   </div>
 
-  <div ng-show="favorites.ee.Favorites.logged_in">
+  <!-- <div ng-show="favorites.ee.Favorites.logged_in">
     <div class="max-width-300 margin-0-auto">
       <div class="well white-background box-shadow text-left margin-5">
         <div class="btn btn-link" ng-click="favorites.fns.logout()">Log out</div>
@@ -17,7 +15,14 @@
     </div>
   </div>
 
-  <pre class="text-left">{{ favorites.ee.Favorites | json }}</pre>
+  <div class="full-width text-center vert-20 overflow-hidden">
+    <div ng-repeat="product in favorites.ee.Favorites.products"
+      class="product-repeater text-left inline-block vertical-align-top">
+      <ee-product-for-store product="product"></ee-product-for-store>
+    </div>
+  </div> -->
+
+  <pre>{{ favorites.ee.Favorites | json }}</pre>
 
 </div>
 

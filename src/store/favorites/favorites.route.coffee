@@ -16,3 +16,16 @@ angular.module('store.favorites').config ($stateProvider) ->
         footer:
           controller: 'storeCtrl as storefront'
           templateUrl: 'ee-shared/storefront/storefront.footer.html'
+
+    .state 'favorite',
+      url: '/favorites/:obfuscated_id'
+      views:
+        top:
+          controller: 'storeCtrl as storefront'
+          templateUrl: 'store/favorites/favorites.header.html'
+        middle:
+          controller: 'favoriteCtrl as favorite'
+          templateUrl: 'store/favorites/favorite.html'
+        footer:
+          controller: 'storeCtrl as storefront'
+          templateUrl: 'ee-shared/storefront/storefront.footer.html'
