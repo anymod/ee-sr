@@ -1,18 +1,44 @@
 <div ng-hide="favorite.ee.Favorites.reading"
   class="container container-narrow text-center vert-10 min-height-300">
 
-  <div ng-hide="favorite.ee.Favorites.logged_in">
-    <div class="max-width-300 margin-0-auto">
-      <div class="well white-background box-shadow text-left margin-5">
-        <ee-favorites-signup></ee-favorites-signup>
-      </div>
-    </div>
-  </div>
-
-  <div ng-show="favorite.ee.Favorites.logged_in">
-    <div class="max-width-300 margin-0-auto">
-      <div class="well white-background box-shadow text-left margin-5">
-        <div class="btn btn-link" ng-click="favorite.fns.logout()">Log out</div>
+  <div>
+    <small class="inline-block vert-10 hover-pointer"
+      ng-click="favorite.copyToClipboard(favorite.absUrl)">
+      Send this link:
+      <br>
+      <span class="text-success"><i class="fa fa-fw fa-lg fa-copy"></i>&nbsp;{{ favorite.absUrl }}</span>
+      <div ng-show="favorite.copiedToClipboard">copied to clipboard</div>
+    </small>
+    <div>
+      <div class="margin-0-auto text-center" style="width: 290px">
+        <div ng-click="favorite.openEmail(favorite.absUrl)"
+          class="inline-block no-underline" target="_blank" rel="nofollow">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x text-envelope"></i>
+            <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+          </span>
+        </div>
+        <a ng-href="https://www.facebook.com/sharer/sharer.php?u={{ favorite.absUrl }}"
+          class="no-underline" target="_blank" rel="nofollow">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x text-facebook"></i>
+            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+          </span>
+        </a>
+        <a ng-href="http://www.pinterest.com/pin/create/button/?url={{ favorite.absUrl }}&media=https://res.cloudinary.com/eeosk/image/upload/e_trim/c_lpad,w_280,h_80/v1462488274/logo_300x80/i9ncfyc8hwshqrppkl1c.jpg&description=My favorites on Stylish Rustic: {{ favorite.absUrl }}"
+          class="no-underline" data-pin-do="buttonPin" data-pin-custom="true">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x text-pinterest"></i>
+            <i class="fa fa-pinterest fa-stack-1x fa-inverse"></i>
+          </span>
+        </a>
+        <!-- <a ng-href="http://twitter.com/share?url={{ favorite.absUrl }}&text=My favorites on Stylish Rustic:"
+          class="no-underline" target="_blank" rel="nofollow">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x text-twitter"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+          </span>
+        </a> -->
       </div>
     </div>
   </div>
@@ -21,6 +47,14 @@
     <div ng-repeat="product in favorite.ee.Favorites.products"
       class="product-repeater text-left inline-block vertical-align-top">
       <ee-product-for-store product="product"></ee-product-for-store>
+    </div>
+  </div>
+
+  <div ng-show="favorite.ee.Favorites.logged_in">
+    <div class="max-width-300 margin-0-auto">
+      <div class="well white-background box-shadow text-left margin-5">
+        <div class="btn btn-link" ng-click="favorite.fns.logout()">Log out</div>
+      </div>
     </div>
   </div>
 

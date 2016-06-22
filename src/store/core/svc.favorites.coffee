@@ -13,6 +13,7 @@ angular.module('store.core').factory 'eeFavorites', ($rootScope, $state, $cookie
       obfuscated_id: obfuscated_id
       uuid: uuid
     }
+    
   _obfuscatedId = () -> _cookieParts().obfuscated_id
   _uuid = () -> _cookieParts().uuid
 
