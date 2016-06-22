@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('store.core').factory 'eeFavorites', ($rootScope, $state, $cookies, eeBootstrap, eeBack) ->
+angular.module('store.core').factory 'eeFavorites', ($rootScope, $q, $state, $cookies, eeBootstrap, eeBack) ->
 
   ## SETUP
   _cookieParts = () ->
@@ -13,7 +13,7 @@ angular.module('store.core').factory 'eeFavorites', ($rootScope, $state, $cookie
       obfuscated_id: obfuscated_id
       uuid: uuid
     }
-    
+
   _obfuscatedId = () -> _cookieParts().obfuscated_id
   _uuid = () -> _cookieParts().uuid
 
@@ -21,29 +21,28 @@ angular.module('store.core').factory 'eeFavorites', ($rootScope, $state, $cookie
   _data =
     reading:  false
     updating: false
-    logged_in: _uuid()?
+    uuid: _uuid()
+    obfuscated_id: _obfuscatedId()
     email_sent: false
     sku_ids: []
     products: []
 
   ## PRIVATE FUNCTIONS
-  _defineSkuIds = () ->
-    return if !_obfuscatedId()?
-    _data.reading = true
+  _skuIdsPromise = () ->
     eeBack.fns.favoritesGET _obfuscatedId()
-    .then (favorite) ->
-      _data.sku_ids = favorite.sku_ids
-      $rootScope.$broadcast 'favorites:update'
-    .finally () -> _data.reading = false
+    .then (favorite) -> _data.sku_ids = favorite.sku_ids
 
-  _defineProducts = (obfuscated_id) ->
+  _productsPromise = (obfuscated_id) ->
+    return if !obfuscated_id?
+    eeBack.fns.favoriteProductsGET obfuscated_id
+    .then (res) -> _data.products = res.rows
+
+  _defineSkuIdsAndProducts = (obfuscated_id) ->
     obfuscated_id ||= _obfuscatedId()
     return if !obfuscated_id?
     _data.reading = true
-    eeBack.fns.favoriteProductsGET obfuscated_id
-    .then (res) ->
-      _data.products = res.rows
-      $rootScope.$broadcast 'favorites:update'
+    $q.all([_skuIdsPromise(), _productsPromise(obfuscated_id)])
+    .then () -> $rootScope.$broadcast 'favorites:update'
     .finally () -> _data.reading = false
 
   _createOrUpdate = (email, on_mailing_list) ->
@@ -85,36 +84,37 @@ angular.module('store.core').factory 'eeFavorites', ($rootScope, $state, $cookie
       if res?.message is 'success' then _data.email_sent = true
       return _logout()
     $cookies.put 'favorites', ['ee', obfuscated_id, uuid].join('.')
-    _data.logged_in = true
+    _data.uuid = uuid
+    _data.obfuscated_id = obfuscated_id
     $state.go 'favorites', null, reload: true
 
   _logout = () ->
-    $cookies.remove 'favorites'
     _data.sku_ids = []
-    _data.logged_in = false
-    $state.go 'favorites', null, reload: true
+    _data.uuid = null
+    _data.obfuscated_id = null
+    $cookies.remove 'favorites'
+    $state.go 'favorites'
 
   _redirectIfLoggedIn = () ->
-    if _obfuscatedId()? then $state.go('favorite', { obfuscated_id: _obfuscatedId() })
+    if _uuid()? or _obfuscatedId()? then $state.go('favorite', { obfuscated_id: _obfuscatedId() })
 
   _setFavoritesCookieUnlessExists = (obfuscated_id, uuid) ->
-    return if $cookies.get('favorites')?
+    return if _uuid()?
     $cookies.put 'favorites', ['ee', obfuscated_id, uuid].join('.')
 
   ## MESSAGING
   #
 
   ## AUTO RUN
-  _defineSkuIds()
+  # _defineSkuIds()
 
   ## EXPORTS
   data: _data
   fns:
     addSku:         _addSku
     removeSkus:     _removeSkus
-    defineSkuIds:   _defineSkuIds
-    defineProducts: _defineProducts
     createOrUpdate: _createOrUpdate
     logout:         _logout
     redirectIfLoggedIn: _redirectIfLoggedIn
     setFavoritesCookieUnlessExists: _setFavoritesCookieUnlessExists
+    defineSkuIdsAndProducts: _defineSkuIdsAndProducts

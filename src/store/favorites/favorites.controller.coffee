@@ -9,7 +9,4 @@ angular.module('store.home').controller 'favoritesCtrl', ($rootScope, eeDefiner,
 
   eeFavorites.fns.redirectIfLoggedIn()
 
-  # eeFavorites.fns.defineSkuIds()
-  # eeFavorites.fns.defineProducts()
-
   return

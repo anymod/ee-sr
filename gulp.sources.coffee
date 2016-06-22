@@ -4,7 +4,7 @@ sources = {}
 stripSrc  = (arr) -> _.map arr, (str) -> str.replace('./src/', '')
 toJs      = (arr) -> _.map arr, (str) -> str.replace('.coffee', '.js').replace('./src/', 'js/')
 unmin     = (arr) ->
-  _.map arr, (str) -> str.replace('dist/angulartics', 'src/angulartics').replace('.min.js', '.js')
+  _.map arr, (str) -> str.replace('dist/angulartics', 'src/angulartics').replace('.min.js', '.js').replace('sourceMappingURL', 'foobar')
 
 sources.storeJs = () ->
   [].concat stripSrc(unmin(sources.storeVendorMin))
@@ -33,6 +33,9 @@ sources.storeVendorMin = [
   './src/bower_components/angulartics-google-analytics/dist/angulartics-google-analytics.min.js'
   './src/bower_components/zoom.js/dist/zoom.min.js'
   './src/bower_components/keen-js/dist/keen.min.js'
+]
+sources.storeVendorMaps = [
+  './src/bower_components/angulartics-google-analytics/dist/angulartics-google-analytics.min.js.map'
 ]
 sources.storeVendorUnmin = [
   # TODO remove once zoom.js gone
