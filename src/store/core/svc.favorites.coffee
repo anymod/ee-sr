@@ -56,7 +56,9 @@ angular.module('store.core').factory 'eeFavorites', ($rootScope, $q, $state, $co
     else
       _data.updating = true
       eeBack.fns.favoritesPOST email, _data.sku_ids, on_mailing_list
-      .then (res) -> _login res.obfuscated_id, res.uuid, res
+      .then (res) ->
+        if res?.obfuscated_id and res?.uuid then _login(res.obfuscated_id, res.uuid, res)
+        _data.email_sent = true
       .finally () -> _data.updating = false
 
   _syncFavorites = () ->
@@ -86,15 +88,16 @@ angular.module('store.core').factory 'eeFavorites', ($rootScope, $q, $state, $co
     _data.obfuscated_id = obfuscated_id
     $state.go 'favorite', { obfuscated_id: obfuscated_id }, reload: true
 
-  _logout = () ->
+  _logout = (stop_redirect) ->
     _data.sku_ids = []
     _data.uuid = null
     _data.obfuscated_id = null
     $cookies.remove 'favorites'
-    $state.go 'favorites', null, reload: true
+    $state.go 'favorites', null, reload: true unless stop_redirect
 
   _redirectIfLoggedIn = () ->
     if _uuid()? or _obfuscatedId()? then $state.go('favorite', { obfuscated_id: _obfuscatedId() })
+    if !_uuid()? and !_obfuscatedId() then _logout(true)
 
   _setFavoritesCookieUnlessExists = (obfuscated_id, uuid) ->
     return if _uuid()? and !uuid?

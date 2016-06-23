@@ -5,7 +5,8 @@ angular.module 'ee-signup', []
 angular.module('ee-signup').directive 'eeSignup', ($rootScope, $window, $timeout, eeModal, eeBack) ->
   templateUrl: 'ee-shared/components/ee-signup.html'
   restrict: 'EA'
-  scope: {}
+  scope:
+    runParse: '@'
   link: (scope, ele, attr) ->
 
     scope.subscribe = () ->
@@ -18,13 +19,13 @@ angular.module('ee-signup').directive 'eeSignup', ($rootScope, $window, $timeout
       .catch (err) -> scope.alert = 'Please check your email address.'
       .finally () -> scope.submitting = false
 
-    fbParse = () ->
-      return if $rootScope.pageDepth < 2
+    socialParse = () ->
+      return if !scope.runParse and $rootScope.pageDepth < 2
       parent = ele.parent()[0]
       $window.FB?.XFBML?.parse(parent)
       $window.PinUtils?.build(parent)
-    # $timeout(fbParse, 100)
-    fbParse()
+    # $timeout(socialParse, 100)
+    socialParse()
 
     # page_like_callback = (url, html_element) ->
     #   console.log 'running'
