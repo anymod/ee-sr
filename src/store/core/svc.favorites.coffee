@@ -99,7 +99,7 @@ angular.module('store.core').factory 'eeFavorites', ($rootScope, $q, $state, $co
     if _uuid()? or _obfuscatedId()? then $state.go('favorite', { obfuscated_id: _obfuscatedId() })
 
   _setFavoritesCookieUnlessExists = (obfuscated_id, uuid) ->
-    return if _uuid()?
+    return if _uuid()? and !uuid?
     $cookies.put 'favorites', ['ee', obfuscated_id, uuid].join('.')
 
   ## MESSAGING

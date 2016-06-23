@@ -7,9 +7,10 @@ angular.module('store.home').controller 'favoriteCtrl', ($window, $state, $locat
   favorite.ee = eeDefiner.exports
   favorite.fns = eeFavorites.fns
   favorite.categories = categories
-  favorite.absUrl = $location.absUrl()
+  favorite.absUrl = $location.absUrl().split('?')[0]
 
-  eeFavorites.fns.setFavoritesCookieUnlessExists $state.params.obfuscated_id
+  eeFavorites.fns.setFavoritesCookieUnlessExists $state.params.obfuscated_id, $location.search().token
+
   eeFavorites.fns.defineSkuIdsAndProducts $state.params.obfuscated_id
 
   eeFavorites.fns.redirectIfLoggedIn()
@@ -33,7 +34,7 @@ angular.module('store.home').controller 'favoriteCtrl', ($window, $state, $locat
 
   favorite.openEmail = (refUrl) ->
     subject = 'My favorites on Stylish Rustic'
-    body = "Hi!\n\nI've created a list of favorites on Stylish Rustic and I thought you might be interested in seeing them:" +
+    body = "Hi!\n\nI'd like to share my list of Stylish Rustic favorites with you:" +
     '\n\n' + refUrl +
     '\n\n' + 'Enjoy!'
     mailto = 'mailto:?Subject=' + encodeURI(subject) + '&body=' + encodeURI(body).replace(/\&/g, '%26')
