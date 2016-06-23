@@ -9158,7 +9158,7 @@ html {
   background: none;
   color: #03a9f4;
 }
-@media (max-width: 400px) {
+@media (max-width: 370px) {
   #footer-region .bg-themed,
   #store-footer-region .bg-themed {
     margin: 10px -25px;
