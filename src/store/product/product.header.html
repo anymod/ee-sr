@@ -1,13 +1,12 @@
 <div>
-  <!-- <ee-storefront-announcement
-    ng-if="product.ee.User.user"
-    user="product.ee.User.user">
-  </ee-storefront-announcement> -->
   <ee-storefront-header
     user="product.ee.User.user"
     compact-view="true">
   </ee-storefront-header>
-  <div class="full-width text-center text-muted vert-5 margin-bottom-0 visible-xs">
-    <strong>Free Shipping over $50</strong>
-  </div>
+
+  <ee-storefront-announcement
+    ng-if="product.ee.User.user"
+    user="product.ee.User.user"
+    hide-buttons="true">
+  </ee-storefront-announcement>
 </div>

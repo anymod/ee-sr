@@ -6,3 +6,8 @@
   quantity-array="storefront.ee.Cart.quantity_array">
 </ee-storefront-header>
 <!-- /Store navbar -->
+
+<ee-storefront-announcement
+  ng-if="storefront.ee.User.user"
+  user="storefront.ee.User.user">
+</ee-storefront-announcement>
