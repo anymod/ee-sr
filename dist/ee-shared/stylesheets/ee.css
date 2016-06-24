@@ -9062,17 +9062,7 @@ body.modal-open {
   background: none !important;
 }
 .carousel-indicators {
-  bottom: -35px !important;
-  right: 15px !important;
-  left: inherit !important;
-  text-align: right;
-}
-.carousel-indicators li {
-  border: 1px solid #777777 !important;
-  background-color: #fcfcfc !important;
-}
-.carousel-indicators .active {
-  background-color: #777777 !important;
+  display: none;
 }
 .carousel-caption {
   left: 0;
@@ -9092,9 +9082,6 @@ body.modal-open {
 @media (max-width: 600px) {
   .carousel {
     margin-bottom: 0;
-  }
-  .carousel-indicators {
-    display: none;
   }
   .carousel-control .glyphicon {
     padding: 8px;
@@ -9748,6 +9735,9 @@ html {
 }
 .max-height-2400 {
   max-height: 2400px;
+}
+.min-height-120 {
+  min-height: 120px;
 }
 .min-height-300 {
   min-height: 300px;
@@ -10404,6 +10394,11 @@ ee-product-card .main-image {
   width: auto;
   max-height: 450px;
   max-width: 100%;
+}
+@media (min-width: 768px) {
+  ee-product-card .product-info {
+    text-align: left !important;
+  }
 }
 @media (max-width: 480px) {
   .product-repeater {
