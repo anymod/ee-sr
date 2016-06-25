@@ -45,8 +45,8 @@
       </div>
     </div>
 
-    <div ng-if="favorite.ee.Favorites.products.length < 1">
-      <div class="full-width max-width-300 vert-20">
+    <div ng-if="favorite.ee.Favorites.products.length < 1" class="vert-20">
+      <div class="full-width max-width-300 margin-0-auto">
         Add products to get your list started:
         <div class="vert-20">
           <a ng-repeat="category in favorite.categories"
@@ -76,12 +76,17 @@
     </div>
   </div>
 
-  <div class="full-width text-center vert-10 overflow-hidden">
+  <ee-products-list
+    products="favorite.ee.Favorites.products"
+    show-signup=false>
+  </ee-products-list>
+
+  <!-- <div class="full-width text-center vert-10 overflow-hidden">
     <div ng-repeat="product in favorite.ee.Favorites.products"
       class="product-repeater text-left inline-block vertical-align-top">
       <ee-product-for-store product="product"></ee-product-for-store>
     </div>
-  </div>
+  </div> -->
 
 </div>
 

@@ -6,6 +6,7 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
   _inputDefaults =
     perPage:      eeBootstrap?.perPage
     page:         eeBootstrap?.page
+    similarSize:  36
     search:       $stateParams.q || null
     searchLabel:  null
     range:
@@ -155,17 +156,16 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     _runQuery()
 
   _searchLike = (term, category_id) ->
-    similarSize = 24
     _clearProducts()
     _setSort null
     _setCategoryById category_id
     _data.inputs.search = term
-    _data.inputs.size   = similarSize + 1
+    _data.inputs.size   = _data.inputs.similarSize + 1
     _runQuery(true)
     .then () ->
       products = []
       for prod, i in _data.products
-        if products.length < similarSize and prod.title isnt term then products.push prod
+        if products.length < _data.inputs.similarSize and prod.title isnt term then products.push prod
       _data.products = products
       _data.inputs.size = _inputDefaults.perPage
       return

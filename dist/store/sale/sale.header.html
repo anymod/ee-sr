@@ -1,21 +1,20 @@
 <div>
-  <!-- <ee-storefront-announcement
-    ng-if="storefront.ee.User.user"
-    user="storefront.ee.User.user"
-    hide-buttons="true">
-  </ee-storefront-announcement> -->
   <ee-storefront-header
     user="storefront.ee.User.user"
     show-scrollnav="false"
     compact-view="true">
   </ee-storefront-header>
+
+  <ee-storefront-announcement
+    ng-if="storefront.ee.User.user"
+    user="storefront.ee.User.user"
+    hide-buttons="true">
+  </ee-storefront-announcement>
+
   <div class="vert-10">
-    <div class="margin-0-auto text-center bg-themed pad-10 round-5" style="max-width: 320px;">
+    <div class="margin-0-auto text-center bg-themed pad-10 round-5"
+      style="max-width: 320px;">
       <h1 class="margin-0">SALE</h1>
-      <h3 class="font-weight-200 vert-5">Follow for even more exclusive offers</h3>
-      <div class="white-background pad-10">
-        <ee-signup></ee-signup>
-      </div>
     </div>
   </div>
 </div>

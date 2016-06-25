@@ -15,12 +15,17 @@
     </uib-pagination>
   </div>
 
-  <div class="full-width text-center vert-20 overflow-hidden">
+  <ee-products-list
+    products="search.ee.Products.products"
+    show-signup=true>
+  </ee-products-list>
+
+  <!-- <div class="full-width text-center vert-20 overflow-hidden">
     <div ng-repeat="product in search.ee.Products.products"
       class="product-repeater text-left inline-block vertical-align-top">
       <ee-product-for-store product="product"></ee-product-for-store>
     </div>
-  </div>
+  </div> -->
 
   <div class="pad-20 vert-20">
     <uib-pagination ng-if="search.ee.Products.count > search.ee.Products.inputs.perPage"

@@ -44,5 +44,6 @@ angular.module 'eeStore', [
   'ee-favorites-signup'
   'ee-favorites-heart'
   'ee-image-fadein'
+  'ee-products-list'
   # 'ee.templates' # commented out during build step for inline templates
 ]
