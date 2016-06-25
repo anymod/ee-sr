@@ -110,7 +110,6 @@ angular.module('store.core').factory 'eeBack', ($rootScope, $http, $q, eeBackUrl
       }
 
     customerPOST: (email) ->
-      console.log 'called customerPost'
       $rootScope.$emit 'keen:addEvent', 'signup'
       _makeRequest {
         method: 'POST'
