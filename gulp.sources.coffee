@@ -130,6 +130,7 @@ sources.storeDirective = [
   './src/ee-shared/components/ee-empty-message.coffee'
   './src/ee-shared/components/ee-loading.coffee'
   './src/ee-shared/components/ee-signup.coffee'
+  './src/ee-shared/components/ee-signup-message.coffee'
   './src/ee-shared/components/ee-favorites-signup.coffee'
   './src/ee-shared/components/ee-favorites-heart.coffee'
   './src/ee-shared/components/ee-image-fadein.coffee'

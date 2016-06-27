@@ -41,6 +41,7 @@ angular.module 'eeStore', [
   'ee-empty-message'
   'ee-loading'
   'ee-signup'
+  'ee-signup-message'
   'ee-favorites-signup'
   'ee-favorites-heart'
   'ee-image-fadein'
