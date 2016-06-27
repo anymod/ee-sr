@@ -23,31 +23,32 @@ angular.module('store.core').run ($rootScope, $window, $cookies, $location, eeMo
   keen = new Keen
     projectId: '565c9b27c2266c0bb36521db',
     writeKey: 'a36f4230d8a77258c853d2bcf59509edc5ae16b868a6dbd8d6515b9600086dbca7d5d674c9307314072520c35f462b79132c2a1654406bdf123aba2e8b1e880bd919482c04dd4ce9801b5865f4bc95d72fbe20769bc238e1e6e453ab244f9243cf47278e645b2a79398b86d7072cb75c'
-  keenio = {}
-  setKeenio = () ->
-    keenio =
-      user:           eeBootstrap.tr_uuid
-      referer:        eeBootstrap.referer
-      refererDomain:  $rootScope.refererDomain
-      url:            $location.absUrl()
-      host:           $location.host()
-      path:           $location.path()
-      toState:        $rootScope.stateChange?.toState?.name
-      toParams:       $rootScope.stateChange?.toParams
-      fromState:      $rootScope.stateChange?.fromState?.name
-      fromParams:     $rootScope.stateChange?.fromParams
-      pageDepth:      $rootScope.pageDepth
-      signupModalDepth: $cookies.get('offered')
-      windowWidth:    $window.innerWidth
-      self:           !!$cookies.get('_eeself')
-      _ee:            $cookies.get('_ee')
-      _ga:            $cookies.get('_ga')
-      _gat:           $cookies.get('_gat')
-  setKeenio()
-  $rootScope.$on 'keen:addEvent', (e, title) ->
-    return if $location.host() is 'localhost' or !title?
-    setKeenio()
-    keen.addEvent title, keenio
+
+  addKeenEvent = (title, data) ->
+    return if !title? or $location.host() is 'localhost' or $location.host().indexOf('herokuapp') > -1
+    keen.addEvent title, data
+
+  getKeenObject = () -> {
+    user:           eeBootstrap.tr_uuid
+    referer:        eeBootstrap.referer
+    refererDomain:  $rootScope.refererDomain
+    url:            $location.absUrl()
+    host:           $location.host()
+    path:           $location.path()
+    toState:        $rootScope.stateChange?.toState?.name
+    toParams:       $rootScope.stateChange?.toParams
+    fromState:      $rootScope.stateChange?.fromState?.name
+    fromParams:     $rootScope.stateChange?.fromParams
+    pageDepth:      $rootScope.pageDepth
+    signupModalDepth: $cookies.get('offered')
+    windowWidth:    $window.innerWidth
+    self:           !!$cookies.get('_eeself')
+    _ee:            $cookies.get('_ee')
+    _ga:            $cookies.get('_ga')
+    _gat:           $cookies.get('_gat')
+  }
+
+  $rootScope.$on 'keen:addEvent', (e, title) -> addKeenEvent title, getKeenObject()
 
   if !$cookies.get('offered')
     $rootScope.mouseleave = () ->
@@ -82,22 +83,10 @@ angular.module('store.core').run ($rootScope, $window, $cookies, $location, eeMo
     return
 
   $rootScope.$on 'favorites:toggle', (e, favorited, sku_id) ->
-    keen.addEvent 'favorites', {
-      toggledOn: favorited
-      toggledOff: !favorited
-      sku_id: sku_id
-      user:           eeBootstrap.tr_uuid
-      referer:        eeBootstrap.referer
-      refererDomain:  $rootScope.refererDomain
-      url:            $location.absUrl()
-      host:           $location.host()
-      path:           $location.path()
-      pageDepth:      $rootScope.pageDepth
-      windowWidth:    $window.innerWidth
-      self:           !!$cookies.get('_eeself')
-      _ee:            $cookies.get('_ee')
-      _ga:            $cookies.get('_ga')
-      _gat:           $cookies.get('_gat')
-    }
+    data = getKeenObject()
+    data.toggledOn = favorited
+    data.toggledOff = !favorited
+    data.sku_id = sku_id
+    addKeenEvent 'favorites', data
 
   return
