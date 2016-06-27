@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('store.core').factory 'eeAnalytics', ($rootScope, $window, $cookies, $location, eeBootstrap) ->
+angular.module('store.core').factory 'eeAnalytics', ($window, $cookies, $location, eeBootstrap) ->
 
   ## SETUP
   # Keen.js
@@ -28,10 +28,6 @@ angular.module('store.core').factory 'eeAnalytics', ($rootScope, $window, $cooki
     url:            $location.absUrl()
     host:           $location.host()
     path:           $location.path()
-    toState:        $rootScope.stateChange?.toState?.name
-    toParams:       $rootScope.stateChange?.toParams
-    fromState:      $rootScope.stateChange?.fromState?.name
-    fromParams:     $rootScope.stateChange?.fromParams
     pageDepth:      _data.pageDepth
     signupModalDepth: $cookies.get('offered')
     windowWidth:    $window.innerWidth
@@ -52,3 +48,4 @@ angular.module('store.core').factory 'eeAnalytics', ($rootScope, $window, $cooki
   data: _data
   fns:
     addKeenEvent: _addKeenEvent
+    

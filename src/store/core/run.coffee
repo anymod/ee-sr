@@ -1,14 +1,9 @@
 'use strict'
 
-angular.module('store.core').run ($rootScope, $cookies, $location, eeModal, eeBootstrap, eeAnalytics) ->
+angular.module('store.core').run ($rootScope, $cookies, $location, eeModal, eeAnalytics) ->
 
   ## SETUP
   $rootScope.isStore = true
-  $rootScope.stateChange =
-    toState: null
-    toParams: null
-    fromState: null
-    fromParams: null
 
   if !$cookies.get('offered')
     $rootScope.mouseleave = () ->
@@ -29,11 +24,13 @@ angular.module('store.core').run ($rootScope, $cookies, $location, eeModal, eeBo
 
   $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
     eeAnalytics.data.pageDepth++
-    $rootScope.stateChange =
+
+    eeAnalytics.fns.addKeenEvent 'store', {
       toState:    toState?.name
       toParams:   toParams
       fromState:  fromState?.name
       fromParams: fromParams
+    }
 
     if eeAnalytics.data.pageDepth > 1 and (toState.name isnt fromState.name or toParams.id isnt fromParams.id) then $rootScope.$broadcast 'reset:page'
 
@@ -44,8 +41,6 @@ angular.module('store.core').run ($rootScope, $cookies, $location, eeModal, eeBo
     if $location.search().s is 't'
       $cookies.put '_eeself', true
       $location.search 's', null
-
-    eeAnalytics.fns.addKeenEvent 'store'
 
     return
 

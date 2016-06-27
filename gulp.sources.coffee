@@ -62,6 +62,7 @@ sources.storeModule = [
   './src/store/core/core.route.coffee'
   # Services
   './src/store/core/svc.back.coffee'
+  './src/store/core/svc.analytics.coffee'
   './src/store/core/svc.user.coffee'
   './src/store/core/svc.product.coffee'
   './src/store/core/svc.products.coffee'
