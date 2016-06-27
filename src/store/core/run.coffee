@@ -81,4 +81,23 @@ angular.module('store.core').run ($rootScope, $window, $cookies, $location, eeMo
 
     return
 
+  $rootScope.$on 'favorites:toggle', (e, favorited, sku_id) ->
+    keen.addEvent 'favorites', {
+      toggledOn: favorited
+      toggledOff: !favorited
+      sku_id: sku_id
+      user:           eeBootstrap.tr_uuid
+      referer:        eeBootstrap.referer
+      refererDomain:  $rootScope.refererDomain
+      url:            $location.absUrl()
+      host:           $location.host()
+      path:           $location.path()
+      pageDepth:      $rootScope.pageDepth
+      windowWidth:    $window.innerWidth
+      self:           !!$cookies.get('_eeself')
+      _ee:            $cookies.get('_ee')
+      _ga:            $cookies.get('_ga')
+      _gat:           $cookies.get('_gat')
+    }
+
   return
