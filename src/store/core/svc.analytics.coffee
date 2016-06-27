@@ -36,7 +36,7 @@ angular.module('store.core').factory 'eeAnalytics', ($window, $cookies, $locatio
     host:           $location.host()
     path:           $location.path()
     pageDepth:      _data.pageDepth
-    signupText:     _data.signupText  
+    signupText:     _data.signupText
     signupModalDepth: $cookies.get('offered')
     windowWidth:    $window.innerWidth
     self:           !!$cookies.get('_eeself')
