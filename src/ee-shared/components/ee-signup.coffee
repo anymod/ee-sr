@@ -2,7 +2,7 @@
 
 angular.module 'ee-signup', []
 
-angular.module('ee-signup').directive 'eeSignup', ($rootScope, $window, $timeout, eeModal, eeBack) ->
+angular.module('ee-signup').directive 'eeSignup', ($rootScope, $window, $timeout, eeModal, eeBack, eeAnalytics) ->
   templateUrl: 'ee-shared/components/ee-signup.html'
   restrict: 'EA'
   scope:
@@ -21,7 +21,7 @@ angular.module('ee-signup').directive 'eeSignup', ($rootScope, $window, $timeout
       .finally () -> scope.submitting = false
 
     socialParse = () ->
-      return if !scope.runParse and $rootScope.pageDepth < 2
+      return if !scope.runParse and eeAnalytics.data.pageDepth < 2
       parent = ele.parent()[0]
       $window.FB?.XFBML?.parse(parent)
       $window.PinUtils?.build(parent)

@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('store.search').controller 'searchCtrl', ($rootScope, $location, $state, $scope, eeDefiner, eeProducts, eeCollection, categories) ->
+angular.module('store.search').controller 'searchCtrl', ($location, $state, eeDefiner, eeProducts, eeCollection, eeAnalytics) ->
 
   search = this
 
@@ -9,7 +9,7 @@ angular.module('store.search').controller 'searchCtrl', ($rootScope, $location, 
 
   search.update = () -> eeProducts.fns.runQuery()
 
-  if $rootScope.pageDepth > 1
+  if eeAnalytics.data.pageDepth > 1
     switch $state.current.name
       when 'collection', 'sale' then eeCollection.fns.defineCollection $state.params.id, true
 

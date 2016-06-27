@@ -2,8 +2,6 @@
 
 angular.module('store.core').factory 'eeBack', ($rootScope, $http, $q, eeBackUrl, eeBootstrap) ->
 
-  back = this
-
   _data =
     requesting: false
     requestingArray: []
