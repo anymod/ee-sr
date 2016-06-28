@@ -19,6 +19,13 @@
     </uib-pagination>
   </div>
 
+  <ee-storefront-announcement
+    ng-if="search.ee.User.user"
+    user="search.ee.User.user"
+    show-favorites-message=true
+    hide-buttons=true>
+  </ee-storefront-announcement>
+
   <ee-products-list
     products="search.ee.Products.products"
     show-signup=true>
