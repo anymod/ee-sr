@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('eeStore').controller 'modalCtrl', (eeBack, eeDefiner, eeModal) ->
+angular.module('eeStore').controller 'modalCtrl', (eeDefiner) ->
 
   modal = this
 

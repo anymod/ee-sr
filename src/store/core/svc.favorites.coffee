@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('store.core').factory 'eeFavorites', ($rootScope, $q, $state, $cookies, eeBootstrap, eeBack) ->
+angular.module('store.core').factory 'eeFavorites', ($rootScope, $q, $state, $cookies, eeBootstrap, eeBack, eeModal, eeAnalytics) ->
 
   ## SETUP
   _cookieParts = () ->
@@ -57,7 +57,9 @@ angular.module('store.core').factory 'eeFavorites', ($rootScope, $q, $state, $co
       _data.updating = true
       eeBack.fns.favoritesPOST email, _data.sku_ids, on_mailing_list
       .then (res) ->
-        if res?.obfuscated_id and res?.uuid then _login(res.obfuscated_id, res.uuid, res)
+        if res?.obfuscated_id and res?.uuid
+          _login(res.obfuscated_id, res.uuid, res)
+          eeAnalytics.fns.addKeenEvent 'signup', { signupIdentifier: 'favorites' }
         _data.email_sent = true
       .finally () -> _data.updating = false
 
@@ -86,6 +88,7 @@ angular.module('store.core').factory 'eeFavorites', ($rootScope, $q, $state, $co
     $cookies.put 'favorites', ['ee', obfuscated_id, uuid].join('.')
     _data.uuid = uuid
     _data.obfuscated_id = obfuscated_id
+    eeModal.fns.close 'favorites'
     $state.go 'favorite', { obfuscated_id: obfuscated_id }, reload: true
 
   _logout = (stop_redirect) ->
@@ -93,11 +96,15 @@ angular.module('store.core').factory 'eeFavorites', ($rootScope, $q, $state, $co
     _data.uuid = null
     _data.obfuscated_id = null
     $cookies.remove 'favorites'
-    $state.go 'favorites', null, reload: true unless stop_redirect
+    unless stop_redirect
+      eeModal.fns.close 'favorites'
+      $state.go 'storefront'
 
-  _redirectIfLoggedIn = () ->
+  _modalOrRedirect = () ->
     if _uuid()? or _obfuscatedId()? then $state.go('favorite', { obfuscated_id: _obfuscatedId() })
-    if !_uuid()? and !_obfuscatedId() then _logout(true)
+    if !_uuid()? and !_obfuscatedId()
+      _logout(true)
+      eeModal.fns.open 'favorites'
 
   _setFavoritesCookieUnlessExists = (obfuscated_id, uuid) ->
     return if _uuid()? and !uuid?
@@ -116,6 +123,6 @@ angular.module('store.core').factory 'eeFavorites', ($rootScope, $q, $state, $co
     removeSkus:     _removeSkus
     createOrUpdate: _createOrUpdate
     logout:         _logout
-    redirectIfLoggedIn: _redirectIfLoggedIn
+    modalOrRedirect: _modalOrRedirect
     setFavoritesCookieUnlessExists: _setFavoritesCookieUnlessExists
     defineSkuIdsAndProducts: _defineSkuIdsAndProducts

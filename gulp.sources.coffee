@@ -107,7 +107,7 @@ sources.storeModule = [
   # Module - favorites
   './src/store/favorites/favorites.module.coffee'
   './src/store/favorites/favorites.route.coffee'
-  './src/store/favorites/favorites.controller.coffee'
+  # './src/store/favorites/favorites.controller.coffee'
   './src/store/favorites/favorite.controller.coffee'
 ]
 

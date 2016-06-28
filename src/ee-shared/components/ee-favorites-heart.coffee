@@ -2,7 +2,7 @@
 
 angular.module 'ee-favorites-heart', []
 
-angular.module('ee-favorites-heart').directive 'eeFavoritesHeart', (eeFavorites) ->
+angular.module('ee-favorites-heart').directive 'eeFavoritesHeart', (eeFavorites, eeModal) ->
   templateUrl: 'ee-shared/components/ee-favorites-heart.html'
   restrict: 'EA'
   scope:
@@ -24,6 +24,7 @@ angular.module('ee-favorites-heart').directive 'eeFavoritesHeart', (eeFavorites)
       scope.$emit 'favorites:toggle', scope.heartActive, sku_ids[0]
       if scope.heartActive
         eeFavorites.fns.addSku sku_ids[0]
+        if !eeFavorites.data.uuid? then eeModal.fns.open 'favorites'
       else
         eeFavorites.fns.removeSkus sku_ids
 

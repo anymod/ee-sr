@@ -13,7 +13,7 @@ angular.module('store.home').controller 'favoriteCtrl', ($window, $state, $locat
 
   eeFavorites.fns.defineSkuIdsAndProducts $state.params.obfuscated_id
 
-  eeFavorites.fns.redirectIfLoggedIn()
+  eeFavorites.fns.modalOrRedirect()
 
   favorite.copiedToClipboard = false
   favorite.copyToClipboard = (toCopy) ->
