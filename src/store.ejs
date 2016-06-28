@@ -151,10 +151,12 @@
       .btn-themed { text-shadow: 1px 1px <%= bootstrap.storefront_meta.brand.color.secondaryAccent %>; }
       .btn-themed:hover,
       .btn-themed:focus,
-      .btn-themed:active {
+      .btn-themed:active,
+      .tooltip-inner {
         color: <%= bootstrap.storefront_meta.brand.color.tertiary %> !important;
         background: <%= bootstrap.storefront_meta.brand.color.secondaryAccent %> !important;
       }
+      .tooltip-arrow { border-bottom-color: <%= bootstrap.storefront_meta.brand.color.secondaryAccent %> !important; }
       .btn-themed.btn-lg { font-weight: bold; }
       .btn-themed.btn-arrow {
         border-top: none !important;

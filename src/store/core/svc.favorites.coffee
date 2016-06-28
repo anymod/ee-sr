@@ -114,7 +114,7 @@ angular.module('store.core').factory 'eeFavorites', ($rootScope, $q, $state, $co
   #
 
   ## AUTO RUN
-  # _defineSkuIds()
+  _defineSkuIdsAndProducts()
 
   ## EXPORTS
   data: _data
