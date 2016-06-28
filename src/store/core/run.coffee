@@ -1,15 +1,23 @@
 'use strict'
 
-angular.module('store.core').run ($rootScope, $cookies, $location, eeModal, eeAnalytics) ->
+angular.module('store.core').run ($rootScope, $cookies, $location, $window, eeModal, eeAnalytics) ->
 
   ## SETUP
   $rootScope.isStore = true
 
-  if !$cookies.get('offered')
-    $rootScope.mouseleave = () ->
+  if !$cookies.get('offered')?
+    $rootScope.openSignupModal = () ->
       $cookies.put 'offered', (eeAnalytics.data.pageDepth || true)
       eeModal.fns.open 'offer'
-      $rootScope.mouseleave = () -> false
+      $rootScope.openSignupModal = () -> false
+
+    win = angular.element($window)
+    win.bind 'touchstart', (e) ->
+      win.unbind 'touchstart'
+      win.bind 'scroll', (e) ->
+        if $window.pageYOffset > 1999
+          $rootScope.openSignupModal()
+          win.unbind 'scroll'
 
   ## MESSAGING
   $rootScope.$on 'keen:addEvent', (e, title) ->

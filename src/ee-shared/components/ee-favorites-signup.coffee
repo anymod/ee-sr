@@ -2,7 +2,7 @@
 
 angular.module 'ee-favorites-signup', []
 
-angular.module('ee-favorites-signup').directive 'eeFavoritesSignup', (eeFavorites) ->
+angular.module('ee-favorites-signup').directive 'eeFavoritesSignup', (eeFavorites, eeAnalytics) ->
   templateUrl: 'ee-shared/components/ee-favorites-signup.html'
   restrict: 'EA'
   scope: {}
@@ -16,7 +16,9 @@ angular.module('ee-favorites-signup').directive 'eeFavoritesSignup', (eeFavorite
       scope.alert = false
       scope.submitting = true
       eeFavorites.fns.createOrUpdate scope.email, scope.on_mailing_list
-      .then (res) -> scope.alert = false
+      .then (res) ->
+        scope.alert = false
+        if res.obfuscated_id? then eeAnalytics.fns.addKeenEvent 'signup', { signupIdentifier: 'favorites' }
       .catch (err) -> scope.alert = 'Problem with email address'
       .finally () -> scope.submitting = false
 
