@@ -1,5 +1,51 @@
 <div class="container container-narrow vert-20">
 
+
+  <div class="row">
+    <!-- <form id="myContainer" method="post" action="/checkout"></form> -->
+    <div class="col-md-4">
+      <h3>Toy Story Jessie T-Shirt</h3>
+      <a href="http://166.78.8.98/cgi-bin/aries.cgi?live=1&returnurl=http://166.78.8.98/cgi-bin/return.htm&cancelurl=http://166.78.8.98/cgi-bin/cancel.htm" id="t1"></a>
+    </div>
+
+    <script>
+      window.paypalCheckoutReady = function() {
+        paypal.checkout.setup("WJ7QFVAKXGVG8", {
+          environment: 'sandbox',
+          click: function(event) {
+            event.preventDefault();
+
+            paypal.checkout.initXO();
+            $.support.cors = true;
+            $.ajax({
+              url: "http://166.78.8.98/cgi-bin/aries.cgi?sandbox=1&direct=1&returnurl=http://166.78.8.98/cgi-bin/return.htm&cancelurl=http://166.78.8.98/cgi-bin/cancel.htm",
+              type: "GET",
+              data: '&ajax=1&onlytoken=1',
+              async: true,
+              crossDomain: true,
+
+              //Load the minibrowser with the redirection url in the success handler
+              success: function (token) {
+                var url = paypal.checkout.urlPrefix +token;
+
+                //Loading Mini browser with redirect url, true for async AJAX calls
+                paypal.checkout.startFlow(url);
+              },
+              error: function (responseData, textStatus, errorThrown) {
+                alert("Error in ajax post"+responseData.statusText);
+                //Gracefully Close the minibrowser in case of AJAX errors
+                paypal.checkout.closeFlow();
+              }
+            });
+          },
+          buttons: [{ container: 't1' }]
+        });
+      }
+    </script>
+    <script async src="//www.paypalobjects.com/api/checkout.js"></script>
+  </div>
+
+
   <div class="row margin-0">
 
     <div class="col col-sm-8">
