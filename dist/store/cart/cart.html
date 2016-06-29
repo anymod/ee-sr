@@ -2,11 +2,14 @@
 
 
   <div class="row">
-    <!-- <form id="myContainer" method="post" action="/checkout"></form> -->
     <div class="col-md-4">
-      <h3>Toy Story Jessie T-Shirt</h3>
-      <a href="http://166.78.8.98/cgi-bin/aries.cgi?live=1&returnurl=http://166.78.8.98/cgi-bin/return.htm&cancelurl=http://166.78.8.98/cgi-bin/cancel.htm" id="t1"></a>
+      <h3>Example</h3>
+      <form id="t1" class="ajaxasync" method="POST"
+        action="http://localhost:5000/v0/payments">
+        <input type="text" name="cart_uuid" id="cart_uuid" value="a12abbf7-6238-47b9-bed8-b84e561593bd">
+      </form>
     </div>
+    <hr>
 
     <script>
       window.paypalCheckoutReady = function() {
@@ -18,27 +21,33 @@
             paypal.checkout.initXO();
             $.support.cors = true;
             $.ajax({
-              url: "http://166.78.8.98/cgi-bin/aries.cgi?sandbox=1&direct=1&returnurl=http://166.78.8.98/cgi-bin/return.htm&cancelurl=http://166.78.8.98/cgi-bin/cancel.htm",
-              type: "GET",
-              data: '&ajax=1&onlytoken=1',
+              // url: "http://166.78.8.98/cgi-bin/aries.cgi?sandbox=1&direct=1&returnurl=http://166.78.8.98/cgi-bin/return.htm&cancelurl=http://166.78.8.98/cgi-bin/cancel.htm",
+              url: "http://localhost:5000/v0/payments",
+              type: "POST",
+              data: {
+                cart_uuid: 'a12abbf7-6238-47b9-bed8-b84e561593bd'
+              },
               async: true,
               crossDomain: true,
 
               //Load the minibrowser with the redirection url in the success handler
               success: function (token) {
+                console.log('token', token)
                 var url = paypal.checkout.urlPrefix +token;
+                console.log('url', url)
 
                 //Loading Mini browser with redirect url, true for async AJAX calls
                 paypal.checkout.startFlow(url);
               },
               error: function (responseData, textStatus, errorThrown) {
+                console.log('err', responseData)
                 alert("Error in ajax post"+responseData.statusText);
                 //Gracefully Close the minibrowser in case of AJAX errors
                 paypal.checkout.closeFlow();
               }
             });
           },
-          buttons: [{ container: 't1' }]
+          buttons: [{ container: 't1', shape: 'rect', size: 'medium' }]
         });
       }
     </script>
