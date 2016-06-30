@@ -1,0 +1,17 @@
+<!-- <ee-storefront-announcement
+  ng-if="storefront.ee.User.user"
+  user="storefront.ee.User.user">
+</ee-storefront-announcement> -->
+
+<!-- Store navbar -->
+<ee-storefront-header
+  ng-if="storefront.ee.User.user"
+  class="navbar-static"
+  user="storefront.ee.User.user"
+  username="{{ storefront.ee.User.user.username }}"
+  quantity-array="storefront.ee.Cart.quantity_array"
+  query="storefront.query"
+  show-scroll-to-top="true"
+  fluid="true">
+</ee-storefront-header>
+<!-- /Store navbar -->
