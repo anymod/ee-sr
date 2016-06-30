@@ -33,13 +33,6 @@ angular.module('store.core').run ($rootScope, $cookies, $location, $window, eeMo
   $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
     eeAnalytics.data.pageDepth++
 
-    eeAnalytics.fns.addKeenEvent 'store', {
-      toState:    toState?.name
-      toParams:   toParams
-      fromState:  fromState?.name
-      fromParams: fromParams
-    }
-
     if eeAnalytics.data.pageDepth > 1 and (toState.name isnt fromState.name or toParams.id isnt fromParams.id) then $rootScope.$broadcast 'reset:page'
 
     if !$cookies.get('_ee')
@@ -49,6 +42,13 @@ angular.module('store.core').run ($rootScope, $cookies, $location, $window, eeMo
     if $location.search().s is 't'
       $cookies.put '_eeself', true
       $location.search 's', null
+
+    eeAnalytics.fns.addKeenEvent 'store', {
+      toState:    toState?.name
+      toParams:   toParams
+      fromState:  fromState?.name
+      fromParams: fromParams
+    }
 
     return
 

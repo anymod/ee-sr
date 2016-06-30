@@ -94,6 +94,10 @@ sources.storeModule = [
   './src/store/cart/cart.module.coffee'
   './src/store/cart/cart.route.coffee'
   './src/store/cart/cart.controller.coffee'
+  # Module - cart
+  './src/store/checkout/checkout.module.coffee'
+  './src/store/checkout/checkout.route.coffee'
+  './src/store/checkout/checkout.controller.coffee'
   # Module - help
   './src/store/help/help.module.coffee'
   './src/store/help/help.route.coffee'
