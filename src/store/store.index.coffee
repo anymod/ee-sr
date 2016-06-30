@@ -22,6 +22,7 @@ angular.module 'eeStore', [
   'store.product'
   'store.cart'
   'store.checkout'
+  'store.order'
   'store.help'
   'store.search'
   'store.favorites'

@@ -1,0 +1,46 @@
+<div class="container container-narrow vert-20" ng-hide="order.ee.Order.reading">
+
+  <div ng-if="order.ee.Order.order.email" class="well white-background box-shadow margin-0-auto text-center" style="max-width: 320px;">
+    <h2 class="text-success margin-top-0">Success!</h2>
+    You will receive a confirmation email at
+    <h4 class="margin-top-0" ng-bind="order.ee.Order.order.email"></h4>
+  </div>
+
+  <br ng-if="order.ee.Order.order.email">
+
+  <div ng-if="order.ee.Order.order.identifier"
+    class="well white-background box-shadow margin-0-auto text-center"
+    style="max-width: 320px;">
+    <div class="vert-20">
+      <strong>Your order number is</strong>
+      <h2 ng-bind="order.ee.Order.order.identifier" class="margin-0"></h2>
+    </div>
+    <div class="vert-20 full-width inline-block text-left">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <span class="badge" ng-bind="order.ee.Order.order.created_at | date : 'dd - MMM'"></span>
+          <i class="fa fa-fw fa-check text-success"></i>&nbsp;&nbsp;Order received
+        </li>
+        <li class="list-group-item">
+          <span class="badge">
+            <span ng-if="order.ee.Order.order.charged_at" ng-bind="order.ee.Order.order.charged_at | date : 'dd - MMM'"></span>
+            <span ng-if="!order.ee.Order.order.charged_at">pending</span>
+          </span>
+          <span ng-if="order.ee.Order.order.charged_at"><i class="fa fa-fw fa-check text-success"></i>&nbsp;&nbsp;Paid</span>
+          <span ng-if="!order.ee.Order.order.charged_at"><i class="fa fa-fw fa-ellipsis-h text-info"></i>&nbsp;&nbsp;Payment pending</span>
+        </li>
+        <li class="list-group-item">
+          <span class="badge">
+            <span ng-if="order.ee.Order.order.shipped_at" ng-bind="order.ee.Order.order.shipped_at | date : 'dd - MMM'"></span>
+            <span ng-if="!order.ee.Order.order.shipped_at">pending</span>
+          </span>
+          <span ng-if="order.ee.Order.order.shipped_at"><i class="fa fa-fw fa-check text-success"></i>&nbsp;&nbsp;Order shipped</span>
+          <span ng-if="!order.ee.Order.order.shipped_at"><i class="fa fa-fw fa-ellipsis-h text-info"></i>&nbsp;&nbsp;Shipment pending</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<ee-loading loading="order.ee.Order.reading" ee-min-height="600"></ee-loading>

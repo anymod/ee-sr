@@ -71,6 +71,7 @@ sources.storeModule = [
   './src/store/core/svc.definer.coffee'
   './src/store/core/svc.cart.coffee'
   './src/store/core/svc.favorites.coffee'
+  './src/store/core/svc.order.coffee'
   # Module - store
   './src/store/store.controller.coffee'
   # Module - home
@@ -94,10 +95,14 @@ sources.storeModule = [
   './src/store/cart/cart.module.coffee'
   './src/store/cart/cart.route.coffee'
   './src/store/cart/cart.controller.coffee'
-  # Module - cart
+  # Module - checkout
   './src/store/checkout/checkout.module.coffee'
   './src/store/checkout/checkout.route.coffee'
   './src/store/checkout/checkout.controller.coffee'
+  # Module - order
+  './src/store/orders/order.module.coffee'
+  './src/store/orders/order.route.coffee'
+  './src/store/orders/order.controller.coffee'
   # Module - help
   './src/store/help/help.module.coffee'
   './src/store/help/help.route.coffee'

@@ -4,12 +4,12 @@ angular.module('store.checkout').config ($stateProvider) ->
 
   $stateProvider
 
-    .state 'checkout-shipping',
-      url: '/checkout/shipping'
+    .state 'checkout',
+      url: '/checkout/:cart_uuid'
       views:
         top:
           controller: 'checkoutCtrl as checkout'
           templateUrl: 'store/checkout/checkout.header.html'
         middle:
           controller:  'checkoutCtrl as checkout'
-          templateUrl: 'store/checkout/checkout.shipping.html'
+          templateUrl: 'store/checkout/checkout.html'
