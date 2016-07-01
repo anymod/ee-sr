@@ -3,6 +3,20 @@
 angular.module('store.core').factory 'eeCart', ($rootScope, $state, $cookies, eeBootstrap, eeBack) ->
 
   ## SETUP
+  _cookieParts = () ->
+    cookie = $cookies.get 'cart'
+    return {} if !cookie?
+    [ee, id, uuid] = cookie.split('.')
+    if id is "" then id = null
+    if uuid is "" then uuid = null
+    {
+      id: id
+      uuid: uuid
+    }
+
+  _id = () -> _cookieParts().id
+  _uuid = () -> _cookieParts().uuid
+
   _summary =
     cumulative_price: 0
     shipping_total:   0
@@ -17,13 +31,25 @@ angular.module('store.core').factory 'eeCart', ($rootScope, $state, $cookies, ee
     quantity_array: eeBootstrap?.cart?.quantity_array || []
     skus: eeBootstrap?.cart?.skus || []
     summary: _summary
+    id: _id()
+    uuid: _uuid()
 
   ## PRIVATE FUNCTIONS
+  _login = (id, uuid) ->
+    if !id? or !uuid? then return
+    $cookies.put 'cart', ['ee', id, uuid].join('.')
+    _data.id = id
+    _data.uuid = uuid
+
+  _logout = () ->
+    _data.id = null
+    _data.uuid = null
+    $cookies.remove 'cart'
+
   _defineCart = () ->
-    return if !$cookies.get('cart')
+    return if !_id()? or !_uuid()?
     _data.reading = true
-    [ee, cart_id, token] = $cookies.get('cart')?.split('.')
-    eeBack.fns.cartGET cart_id
+    eeBack.fns.cartGET _id()
     .then (cart) ->
       _data.quantity_array = cart.quantity_array
       _defineSummary()
@@ -61,23 +87,6 @@ angular.module('store.core').factory 'eeCart', ($rootScope, $state, $cookies, ee
         _addDataSku pair
       else if !matchSku.price?
         _syncSku pair, matchSku
-      # console.log pair, matchSku,
-
-      # matchingSku = undefined
-      # for sku in _data.skus
-      #   if sku.id is pair.sku_id then matchingSku = sku
-      # if !matchingSku and matchingSku.price
-      #   _data.updating = true
-      #   eeBack.fns.skuGET pair.product_id, pair.sku_id
-      #   .then (fullSku) ->
-      #     delete fullSku.baseline_price
-      #     # for sku in _data.skus
-      #     #   if sku.id is fullSku.id
-      #     matchingSku[attr] = fullSku[attr] for attr in Object.keys(fullSku)
-      #     if unmatched then _data.skus.push fullSku
-      #   .finally () ->
-      #     _defineSummary()
-      #     _data.updating = false
 
   _defineSummary = () ->
     # Set lookup object
@@ -116,21 +125,21 @@ angular.module('store.core').factory 'eeCart', ($rootScope, $state, $cookies, ee
 
   _createOrUpdate = () ->
     # Update
-    if $cookies.get('cart')
+    if _id()? and _uuid()
       _data.updating = true
-      [ee, cart_id, token] = $cookies.get('cart').split('.')
-      eeBack.fns.cartPUT cart_id, { quantity_array: _data.quantity_array, token: token }
+      eeBack.fns.cartPUT _id(), { quantity_array: _data.quantity_array, token: _uuid() }
       .then (res) ->
-        $cookies.put 'cart', ['ee', res.id, res.uuid].join('.')
+        _login res.id, res.uuid
         $state.go 'cart', null, reload: true
       .catch (err) -> console.error err
       .finally () -> _data.updating = false
     # Create
     else
+      _logout()
       _data.updating = true
       eeBack.fns.cartPOST _data.quantity_array
       .then (res) ->
-        $cookies.put 'cart', ['ee', res.id, res.uuid].join('.')
+        _login res.id, res.uuid
         $state.go 'cart', null, reload: true
       .catch (err) -> console.error err
       .finally () -> _data.updating = false
@@ -149,22 +158,6 @@ angular.module('store.core').factory 'eeCart', ($rootScope, $state, $cookies, ee
       if parseInt(sku_id) isnt parseInt(sku.id) then tempSkus.push sku
     _data.skus = tempSkus
     _createOrUpdate()
-
-  # _updateCartTo = (quantity_array) ->
-  #   quantity_array ||= []
-  #   [ee, cart_id, token] = $cookies.get('cart').split('.')
-  #   eeBack.fns.cartPUT cart_id, { quantity_array: quantity_array, token: token }
-  #   .then (res) ->
-  #     _data.quantity_array = res.quantity_array
-  #     $cookies.put 'cart', ['ee', res.id, res.uuid].join('.')
-  #     $state.go 'cart', null, reload: true
-  #   .catch (err) -> console.error err
-
-  # n = 0
-  # $rootScope.$watch '_data.quantity_array', (newVal, oldVal) ->
-  #   if n is 0 then return n = 1
-  #   _update()
-  # , true
 
   ## MESSAGING
   $rootScope.$on 'cart:add:sku', (e, sku) -> _addSku sku

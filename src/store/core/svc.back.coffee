@@ -36,7 +36,6 @@ angular.module('store.core').factory 'eeBack', ($http, $q, eeBackUrl, eeBootstra
     addQuery(key) for key in keys
     '?' + parts.join('&')
 
-
   _productGET = (id) ->
     _makeRequest {
       method: 'GET'
@@ -158,4 +157,12 @@ angular.module('store.core').factory 'eeBack', ($http, $q, eeBackUrl, eeBootstra
       _makeRequest {
         method: 'GET'
         url: eeBackUrl + 'store/' + eeBootstrap?.tr_uuid + '/orders/' + uuid
+      }
+
+    paymentPOST: (uuid) ->
+      _makeRequest {
+        method: 'POST'
+        url: eeBackUrl + 'payments'
+        data:
+          cart_uuid: uuid
       }

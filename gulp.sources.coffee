@@ -144,6 +144,7 @@ sources.storeDirective = [
   './src/ee-shared/components/ee-favorites-heart.coffee'
   './src/ee-shared/components/ee-image-fadein.coffee'
   './src/ee-shared/components/ee-products-list.coffee'
+  './src/ee-shared/components/ee-paypal-button.coffee'
 ]
 
 module.exports = sources
