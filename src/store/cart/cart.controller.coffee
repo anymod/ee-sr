@@ -5,6 +5,7 @@ angular.module('eeStore').controller 'cartCtrl', ($rootScope, $scope, $window, $
   cart = this
 
   cart.ee = eeDefiner.exports
+  cart.showPaypalButton = false
 
   ###### OLD
 

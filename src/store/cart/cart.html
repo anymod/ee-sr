@@ -1,41 +1,28 @@
-<div class="container container-narrow vert-20">
+<div class="container container-narrow vert-5">
 
-  <div class="row margin-0">
+  <h3 class="vert-10 margin-top-0 pad-10 pad-top-0 font-weight-200 text-center border-bottom-gray">
+    Shopping cart
+  </h3>
 
-    <div class="col col-sm-8">
-      <h3 class="margin-0">Shopping cart</h3>
+  <div class="row vert-10" ng-class="{ 'opacity-05': cart.ee.Cart.reading || cart.ee.Cart.updating }">
 
-      <div class="row margin-0">
-        <div class="col col-xs-2 col-sm-offset-6 col-xs-offset-7">
-          <small>Price</small>
+    <div class="col col-sm-7">
+
+      <div ng-repeat="sku in cart.ee.Cart.skus"
+        class="media border-bottom-gray max-width-400"
+        style="margin: 0 auto 10px;">
+        <div class="media-left media-top">
+          <a ui-sref="product({ id: sku.product_id, title: (sku.product.title | urlText) })">
+            <img ng-src="{{ sku.product.image | cloudinaryResizeTo:64:64 }}" />
+          </a>
         </div>
-        <div class="col col-xs-3">
-          <small>Quantity</small>
-        </div>
-      </div>
-
-      <hr class="margin-0">
-
-      <div class="row margin-0" ng-repeat="pair in cart.ee.Cart.quantity_array">
-        <div class="row margin-0" ng-repeat="sku in cart.ee.Cart.skus" ng-if="sku.id == pair.sku_id">
-          <div class="vert-10">
-            <div class="col col-sm-2 col-xs-3">
-              <a ui-sref="product({ id: sku.product_id, title: (sku.product.title | urlText) })">
-                <img ng-src="{{ sku.product.image | cloudinaryResizeTo:250:250 }}" class="full-width" />
-              </a>
-            </div>
-            <div class="col col-xs-4">
-              <a ui-sref="product({ id: sku.product_id, title: (sku.product.title | urlText) })">
-                <h4 ng-bind="sku.product.title" class="margin-0 text-muted"></h4>
-              </a>
-              <h5 ng-bind="sku.selection_text" class="font-weight-200 margin-0 text-muted"></h5>
-              <small class="text-success">In Stock</small>
-              <br>
-              <small><a href ng-click="cart.removeSku(sku.id)">Delete</a></small>
-            </div>
-            <div class="col col-xs-2">
-              <span ng-if="sku.msrp && sku.msrp > sku.price">
-                <s class="text-muted" ng-bind="sku.msrp | centToDollar"></s>
+        <div class="media-body">
+          <h4 ng-bind="sku.product.title" class="font-weight-200 media-heading text-muted"></h4>
+          <h5 ng-bind="sku.selection_text" class="font-weight-200 margin-0 text-muted"></h5>
+          <div class="row vert-5">
+            <div class="col-xs-5 col-sm-3">
+              <span ng-show="sku.msrp && sku.msrp > sku.price">
+                <s class="text-muted" ng-bind="sku.msrp | centToDollar"></s>&nbsp;
               </span>
               <strong ng-bind="sku.price | centToDollar"></strong>
               <div class="text-muted">
@@ -44,30 +31,45 @@
                 </em>
               </div>
             </div>
-            <div class="col col-sm-2 col-xs-3">
-              <select class="form-control input-sm"
-                ng-model="pair.quantity"
-                ng-options="qty for qty in [1,2,3,4,5,6,7,8,9,10]"
-                ng-change="cart.update()">
-              </select>
+            <div class="col-xs-7">
+              <div ng-repeat="pair in cart.ee.Cart.quantity_array"
+                ng-if="sku.id == pair.sku_id"
+                class="inline-block" style="width: 50px;">
+                <select class="form-control input-sm"
+                  ng-model="pair.quantity"
+                  ng-options="qty for qty in [1,2,3,4,5,6,7,8]"
+                  ng-change="cart.update()">
+                </select>
+              </div>&nbsp;
+              <div class="btn btn-xs btn-link text-dark-blue" ng-click="cart.removeSku(sku.id)">remove</div>
             </div>
           </div>
         </div>
-        <br style="clear: both;">
-        <hr class="vert-5">
       </div>
 
       <div ng-if="!cart.ee.Cart.updating && cart.ee.Cart.skus.length == 0" class="alert vert-10">
         Cart is empty.&nbsp;&nbsp;<a ui-sref="storefront" class="btn btn-themed">Shop now</a>
       </div>
-      <div ng-if="cart.ee.Cart.reading || cart.ee.Cart.updating">Loading...</div>
+
+      <br>
+
     </div>
 
-    <div class="col col-sm-4">
-      <div class="well white-background box-shadow" style="min-width: 225px;">
+    <div class="col col-sm-5">
+      <div class="margin-0-auto" style="width: 280px;">
 
-        <div ng-click="cart.buy()" class="btn btn-lg btn-block btn-themed" ng-disabled="cart.processing || cart.ee.Cart.updating || cart.ee.Cart.skus.length < 1">
-          Buy Now
+        <ee-paypal-button show-button="cart.showPaypalButton"></ee-paypal-button>
+
+        <h4 class="vert-10 text-center text-muted font-weight-200" ng-show="cart.showPaypalButton">
+          OR
+        </h4>
+
+
+        <div ng-click="cart.buy()"
+          class="btn btn-block btn-themed pad-5"
+          style="border: none !important;"
+          ng-disabled="cart.processing || cart.ee.Cart.updating || cart.ee.Cart.skus.length < 1">
+          Proceed to Checkout &raquo;
         </div>
         <div class="vert-10 full-width text-center">
           <img class="width-40" src="//cdn.shopify.com/s/files/1/0269/1895/t/2/assets/cc-visa.png" alt="Visa">&nbsp;<img class="width-40" src="//cdn.shopify.com/s/files/1/0269/1895/t/2/assets/cc-mastercard.png" alt="Mastercard">&nbsp;<img class="width-40" src="//cdn.shopify.com/s/files/1/0269/1895/t/2/assets/cc-amex.png" alt="American Express">&nbsp;<img class="width-40" src="//cdn.shopify.com/s/files/1/0269/1895/t/2/assets/cc-discover.png" alt="Discover">
@@ -81,10 +83,6 @@
         <p class="margin-0">Estimated tax: <span class="pull-right" ng-bind="cart.ee.Cart.summary.taxes_total | centToDollar"></span></p>
         <hr class="vert-5">
         <h4 class="margin-0">Order total: <span class="pull-right" ng-bind="cart.ee.Cart.summary.grand_total | centToDollar"></span></h4>
-
-        <!-- <div class="vert-25 margin-bottom-0 full-width text-center">
-          <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif">
-        </div> -->
       </div>
     </div>
 
