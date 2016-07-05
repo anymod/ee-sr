@@ -46,6 +46,9 @@ angular.module('store.core').factory 'eeCart', ($rootScope, $state, $cookies, ee
     _data.uuid = null
     $cookies.remove 'cart'
 
+  _logoutIfUUID = (uuid) ->
+    if uuid is _uuid() then _logout()
+
   _defineCart = () ->
     return if !_id()? or !_uuid()?
     _data.reading = true
@@ -168,3 +171,4 @@ angular.module('store.core').factory 'eeCart', ($rootScope, $state, $cookies, ee
     removeSku:    _removeSku
     defineCart:   _defineCart
     createOrUpdate: _createOrUpdate
+    logoutIfUUID: _logoutIfUUID

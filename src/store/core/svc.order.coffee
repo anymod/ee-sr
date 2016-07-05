@@ -8,7 +8,7 @@ angular.module('store.core').factory 'eeOrder', (eeBootstrap, eeBack) ->
   ## PRIVATE EXPORT DEFAULTS
   _data =
     reading:  false
-    # order:    eeBootstrap?.order
+    order: {}
 
   ## PRIVATE FUNCTIONS
   _defineOrder = (uuid) ->
