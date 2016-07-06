@@ -22,7 +22,7 @@ module.directive "eePaypalButton", (eeCart, eeBack) ->
 
     loadPaypalButton = () ->
       paypal.checkout.setup 'WJ7QFVAKXGVG8', {
-        # environment: 'sandbox'
+        environment: 'production' # 'sandbox'
         container: 't1'
       }
       scope.showButton = true
