@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('store.core').factory 'eeCart', ($rootScope, $state, $cookies, eeBootstrap, eeBack) ->
+angular.module('store.core').factory 'eeCart', ($q, $rootScope, $state, $cookies, eeBootstrap, eeBack) ->
 
   ## SETUP
   _cookieParts = () ->
@@ -50,7 +50,7 @@ angular.module('store.core').factory 'eeCart', ($rootScope, $state, $cookies, ee
     if uuid is _uuid() then _logout()
 
   _defineCart = () ->
-    return if !_id()? or !_uuid()?
+    return $q.resolve() if !_id()? or !_uuid()?
     _data.reading = true
     eeBack.fns.cartGET _id()
     .then (cart) ->

@@ -8877,6 +8877,9 @@ rzslider.vertical .rz-ticks .tick .tick-value {
 .text-flag:hover {
   color: #6b5c84 !important;
 }
+.text-dark {
+  color: #606060 !important;
+}
 .text-dark-gray {
   color: #474747 !important;
 }
@@ -9810,6 +9813,9 @@ html {
 }
 .line-height-1 {
   line-height: 1em;
+}
+.line-height-1-1 {
+  line-height: 1.1em;
 }
 .line-height-1-5 {
   line-height: 1.5em;

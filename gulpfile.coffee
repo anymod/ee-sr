@@ -68,7 +68,7 @@ gulp.task 'html-prod', () ->
 # ==========================
 # js tasks
 
-copyToSrcJs = (url, secureUrl) ->
+copyToSrcJs = (environment, url, secureUrl) ->
 
   gulp.src ['./src/**/!(constants.coffee)*.coffee'] # ** glob forces dest to same subdir
     .pipe gp.plumber()
@@ -78,6 +78,7 @@ copyToSrcJs = (url, secureUrl) ->
     .pipe gulp.dest './src/js'
 
   gulp.src ['./src/**/constants.coffee'] # ** glob forces dest to same subdir
+    .pipe gp.replace /@@eeEnvironment/g, environment
     .pipe gp.replace /@@eeBackUrl/g, url
     .pipe gp.replace /@@eeSecureUrl/g, secureUrl
     .pipe gp.plumber()
@@ -86,7 +87,7 @@ copyToSrcJs = (url, secureUrl) ->
     .pipe gp.sourcemaps.write './'
     .pipe gulp.dest './src/js'
 
-copyToDist = (url, secureUrl) ->
+copyToDist = (environment, url, secureUrl) ->
   # inline templates; no need for ngAnnotate
   appTemplates = gulp.src './src/ee-shared/components/ee-*.html'
     .pipe gp.htmlmin htmlminOptions
@@ -112,15 +113,16 @@ copyToDist = (url, secureUrl) ->
   # concat: vendorMin before jsMin because vendorMin has angular
   streamqueue objectMode: true, storeVendorMin, storeCustomMin
     .pipe gp.concat 'ee.store.js'
+    .pipe gp.replace /@@eeEnvironment/g, environment
     .pipe gp.replace /@@eeBackUrl/g, url
     .pipe gp.replace /@@eeSecureUrl/g, secureUrl
     .pipe gulp.dest distPath
 
 
-gulp.task 'js-test',  () -> copyToSrcJs 'http://localhost:5555', 'http://localhost:7777'
-gulp.task 'js-dev',   () -> copyToDist 'http://localhost:5000', 'http://localhost:7000'
-gulp.task 'js-prod',  () -> copyToDist 'https://api.eeosk.com', 'https://secure.eeosk.com'
-gulp.task 'js-stage', () -> copyToDist 'https://ee-back-staging.herokuapp.com', 'https://ee-secure-staging.herokuapp.com'
+gulp.task 'js-test',  () -> copyToSrcJs 'test', 'http://localhost:5555', 'http://localhost:7777'
+gulp.task 'js-dev',   () -> copyToDist 'development', 'http://localhost:5000', 'http://localhost:7000'
+gulp.task 'js-stage', () -> copyToDist 'staging', 'https://ee-back-staging.herokuapp.com', 'https://ee-secure-staging.herokuapp.com'
+gulp.task 'js-prod',  () -> copyToDist 'production', 'https://api.eeosk.com', 'https://secure.eeosk.com'
 
 # ==========================
 # other tasks

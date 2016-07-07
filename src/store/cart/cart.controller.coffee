@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('eeStore').controller 'cartCtrl', ($rootScope, $scope, $window, $location, $cookies, eeBootstrap, eeDefiner, eeSecureUrl, eeCart, eeBack) ->
+angular.module('eeStore').controller 'cartCtrl', ($window, $cookies, eeDefiner, eeSecureUrl, eeCart, eeProducts) ->
 
   cart = this
 
@@ -10,6 +10,9 @@ angular.module('eeStore').controller 'cartCtrl', ($rootScope, $scope, $window, $
   ###### OLD
 
   eeCart.fns.defineCart()
+  .then () ->
+    if eeCart.data.skus?.length < 1 then eeProducts.fns.clearSearch()
+
 
   cart.removeSku = (sku_id) -> eeCart.fns.removeSku sku_id
 
