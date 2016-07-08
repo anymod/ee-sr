@@ -164,6 +164,7 @@ angular.module('store.core').factory 'eeCart', ($q, $rootScope, $state, $cookies
 
   ## MESSAGING
   $rootScope.$on 'cart:add:sku', (e, sku) -> _addSku sku
+  $rootScope.$on 'cart:logout', (e, uuid) -> _logoutIfUUID uuid
 
   ## EXPORTS
   data: _data
@@ -171,4 +172,4 @@ angular.module('store.core').factory 'eeCart', ($q, $rootScope, $state, $cookies
     removeSku:    _removeSku
     defineCart:   _defineCart
     createOrUpdate: _createOrUpdate
-    logoutIfUUID: _logoutIfUUID
+    # logoutIfUUID: _logoutIfUUID
