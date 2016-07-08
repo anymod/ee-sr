@@ -168,7 +168,6 @@ angular.module('store.core').factory 'eeBack', ($http, $q, eeBackUrl, eeBootstra
       }
 
     paymentPUT: (uuid, payment_id, payer_id) ->
-      console.log 'paymentPUT', uuid, payment_id, payer_id
       _makeRequest {
         method: 'PUT'
         url: eeBackUrl + 'payments/' + payment_id
