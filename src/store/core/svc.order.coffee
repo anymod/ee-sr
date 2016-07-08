@@ -22,7 +22,6 @@ angular.module('store.core').factory 'eeOrder', ($rootScope, $state, $location, 
     _data.reading = true
     eeBack.fns.paymentPUT $state.params.uuid, $location.search().paymentId, $location.search().PayerID
     .then (ord) ->
-      console.log 'ord', ord
       _data.order = ord
       $rootScope.$broadcast 'cart:logout', ord.cart_uuid
     .finally () -> _data.reading = false
