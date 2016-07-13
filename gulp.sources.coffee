@@ -91,6 +91,10 @@ sources.storeModule = [
   './src/store/product/product.module.coffee'
   './src/store/product/product.route.coffee'
   './src/store/product/product.controller.coffee'
+  # Module - sku
+  './src/store/sku/sku.module.coffee'
+  './src/store/sku/sku.route.coffee'
+  './src/store/sku/sku.controller.coffee'
   # Module - cart
   './src/store/cart/cart.module.coffee'
   './src/store/cart/cart.route.coffee'
@@ -125,6 +129,7 @@ sources.storeDirective = [
   './src/ee-shared/components/ee-button-add-to-cart.coffee'
   './src/ee-shared/components/ee-product-for-store.coffee'
   './src/ee-shared/components/ee-product-card.coffee'
+  './src/ee-shared/components/ee-product-card-compact.coffee'
   './src/ee-shared/components/ee-collection-nav.coffee'
   './src/ee-shared/components/ee-collection-for-store.coffee'
   './src/ee-shared/components/ee-storefront-announcement.coffee'

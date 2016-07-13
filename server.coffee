@@ -67,7 +67,8 @@ app.get ['/'], (req, res, next) ->
 app.get '/products/:id/:title*?', (req, res, next) ->
   { bootstrap, host, path } = utils.setup req
   User.defineStorefront host, bootstrap
-  .then () -> Product.findCompleteById req.params.id, { id: bootstrap.id, pricing: bootstrap.pricing }
+  .then () ->
+    Product.findCompleteById req.params.id, { id: bootstrap.id, pricing: bootstrap.pricing }
   .then (product) ->
     bootstrap.product     = product
     bootstrap.title       = bootstrap.product.title

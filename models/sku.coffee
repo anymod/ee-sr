@@ -6,8 +6,11 @@ constants = require '../server.constants'
 utils     = require './utils'
 
 Customization = require './customization'
+Shared        = require '../copied-from-ee-back/shared'
 
 Sku =
+
+  findCompleteByObfuscatedId: Shared.Sku.findCompleteByObfuscatedId
 
   addAllToProduct: (product) ->
     sequelize.query 'SELECT ' + Sku.attrs.join(',') + ' FROM "Skus" WHERE product_id = ? ORDER BY baseline_price ASC', { type: sequelize.QueryTypes.SELECT, replacements: [product.id] }
