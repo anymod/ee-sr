@@ -8,7 +8,7 @@ angular.module('store.product').config ($stateProvider) ->
       url: '/products/:id/:title?'
       views:
         top:
-          controller: 'productCtrl as product'
+          controller: 'storeCtrl as store'
           templateUrl: 'store/product/product.header.html'
         middle:
           controller: 'productCtrl as product'

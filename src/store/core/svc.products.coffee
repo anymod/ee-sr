@@ -155,17 +155,17 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     _setSearch term
     _runQuery()
 
-  _searchLike = (term, category_id) ->
+  _searchLike = (product) ->
     _clearProducts()
     _setSort null
-    _setCategoryById category_id
-    _data.inputs.search = term
+    _setCategoryById product.category_id
+    _data.inputs.search = product.title
     _data.inputs.size   = _data.inputs.similarSize + 1
     _runQuery(true)
     .then () ->
       products = []
       for prod, i in _data.products
-        if products.length < _data.inputs.similarSize and prod.title isnt term then products.push prod
+        if products.length < _data.inputs.similarSize and prod.id isnt product.id then products.push prod
       _data.products = products
       _data.inputs.size = _inputDefaults.perPage
       return

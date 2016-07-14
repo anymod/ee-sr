@@ -4,19 +4,15 @@ angular.module('eeStore').controller 'productCtrl', ($rootScope, $stateParams, $
 
   product = this
 
-  product.id = parseInt($stateParams.id)
   product.ee = eeDefiner.exports
   product.data = product.ee.Product
   product.currentUrl = $location.absUrl()
 
-  searchLike = () ->
-    return unless product.data.product?.title?
-    eeProducts.fns.searchLike product.data.product.title, product.data.product.category_id
+  id          = parseInt($stateParams.id)
+  title       = $stateParams.title?.replace(/-/g, ' ')
+  category_id = product.data.product?.category_id || null
 
-  if product.ee.Product?.product?.id isnt product.id
-    eeProduct.fns.defineProduct product.id
-    .then () -> searchLike()
-  else
-    searchLike()
+  eeProduct.fns.defineProduct id
+  eeProducts.fns.searchLike { id: id, title: title, category_id: category_id }
 
   return
