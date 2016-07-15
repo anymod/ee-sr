@@ -20,11 +20,11 @@
           </div>
         </a>
       </span><span class="homepage-product full-width inline-block vertical-align-top text-left">
-        <div class="bg-white pad-5 overflow-hidden">
+        <div class="bg-white pad-5 pad-top-0 overflow-hidden">
           <div ng-bind="product.title" class="vert-5 margin-top-0 line-height-1-1"></div>
 
           <!-- Single Sku -->
-          <div ng-if="product.skus.length == 1">
+          <div ng-if="product.skus.length == 1" class="line-height-1-1">
             <h4 ng-bind="currentSku.price | centToDollar"
               class="inline-block margin-0" style="margin-right: 10px !important;">
             </h4>
@@ -38,7 +38,7 @@
 
             <!-- <ee-paypal-button></ee-paypal-button> -->
             <!-- <div class="btn btn-default btn-block vert-5" style="background-color: #FFBA1E;">Express Checkout</div> -->
-            <div class="vert-10">
+            <div class="vert-7">
               <div class="btn btn-block btn-themed"
                 ng-if="currentSku.quantity > 0 && !currentSku.discontinued"
                 ng-disabled="disabled || adding"
@@ -49,7 +49,8 @@
               <div class="btn btn-info btn-block disabled" ng-if="currentSku.discontinued" disabled>Discontinued</div>
             </div>
 
-            <div ng-if="currentSku.length || currentSku.width || currentSku.height">
+            <div ng-if="currentSku.length || currentSku.width || currentSku.height"
+              ng-click="expand()">
               <img src="https://res.cloudinary.com/eeosk/image/upload/c_scale,w_30/v1447453155/ruler.png"
                 class="hidden-xs"/>
               <span ng-if="currentSku.length">{{ currentSku.length }}"L </span>
@@ -133,7 +134,7 @@
             Free Shipping
           </h4>
 
-          <div class="vert-10">
+          <div class="vert-7">
             <div class="btn btn-lg btn-block btn-themed"
               ng-if="currentSku.quantity > 0 && !currentSku.discontinued"
               ng-disabled="disabled || adding"
@@ -176,6 +177,9 @@
             ng-click="setCurrentSku(sku)"
             class="hover-pointer">
           <td>
+            <small ng-bind="sku.selection_text" class="inline-block line-height-1-1"></small>
+          </td>
+          <td>
             <small ng-bind="sku.price | centToDollar" class="inline-block line-height-1-1"></small>
           </td>
           <td>
@@ -183,9 +187,6 @@
               <span class="text-muted"><s>{{ sku.msrp | centToDollar }}</s>&nbsp;</span>
               <span class="text-danger">{{ (sku.msrp - sku.price) / sku.msrp | percentage:0 }} Off</span>
             </small>
-          </td>
-          <td>
-            <small ng-bind="sku.selection_text" class="inline-block line-height-1-1"></small>
           </td>
           <td class="text-right">
             <div class="btn btn-default btn-xs" ng-disabled="disabled || adding">Select</div>

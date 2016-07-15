@@ -10112,14 +10112,14 @@ nav {
   display: inline-block;
   width: 100%;
 }
-a.product {
+.product {
   text-decoration: none;
 }
-a.product .product-title {
+.product .product-title {
   color: #0286c2;
 }
-a.product:hover .product-title,
-a.product:focus .product-title {
+.product:hover .product-title,
+.product:focus .product-title {
   color: #03a9f4;
   text-decoration: underline;
 }

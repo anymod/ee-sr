@@ -10,7 +10,7 @@ angular.module('eeStore').controller 'productCtrl', ($rootScope, $stateParams, $
 
   id          = parseInt($stateParams.id)
   title       = $stateParams.title?.replace(/-/g, ' ')
-  category_id = product.data.product?.category_id || null
+  category_id = $stateParams.c || null
 
   eeProduct.fns.defineProduct id
   eeProducts.fns.searchLike { id: id, title: title, category_id: category_id }
