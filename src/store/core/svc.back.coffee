@@ -159,12 +159,11 @@ angular.module('store.core').factory 'eeBack', ($http, $q, eeBackUrl, eeBootstra
         url: eeBackUrl + 'store/' + eeBootstrap?.tr_uuid + '/orders/' + uuid
       }
 
-    paymentPOST: (uuid) ->
+    paymentPOST: (data) ->
       _makeRequest {
         method: 'POST'
         url: eeBackUrl + 'payments'
-        data:
-          cart_uuid: uuid
+        data: data
       }
 
     paymentPUT: (uuid, payment_id, payer_id) ->
