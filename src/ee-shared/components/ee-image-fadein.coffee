@@ -22,6 +22,7 @@ angular.module('ee-image-fadein').directive "eeImageFadein", ($filter, $timeout)
     loadImage = (url) ->
       element.attr 'style', 'opacity: 0.5;'
       element.attr 'src', loadSrc
+      scope.loadBoolean = true
       element.attr 'src', url
       element.one 'load', () ->
         element.attr 'style', 'opacity: 1;'
