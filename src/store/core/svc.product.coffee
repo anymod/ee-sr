@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('store.core').factory 'eeProduct', (eeBootstrap, eeBack) ->
+angular.module('store.core').factory 'eeProduct', ($rootScope, $state, $filter, eeBootstrap, eeBack) ->
 
   ## SETUP
   # none
@@ -19,7 +19,12 @@ angular.module('store.core').factory 'eeProduct', (eeBootstrap, eeBack) ->
     .finally () -> _data.reading = false
 
   ## MESSAGING
-  # none
+  $rootScope.$on 'product:navigate', (e, prod) ->
+    return $state.go('storefront') unless prod.id
+    title = $filter('urlText')(prod.title )
+    $state.go 'product', { id: prod.id, title: title, c: prod.category_id }, { notify: $state.current.name isnt 'product' }
+    _data.product = prod
+    window.scrollTo(0,0)
 
   ## EXPORTS
   data: _data

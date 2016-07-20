@@ -7,9 +7,10 @@
       <span class="homepage-product inline-block vertical-align-top position-relative">
         <a ng-href="{{ product.image }}" class="product">
           <img ee-image-fadein
-            ee-src="{{ product.image }}"
+            ee-src="product.image"
             ee-w=220 ee-h=220 ee-trim=true
             load-boolean=false
+            watch=true
             class="img-responsive full-width transition-400">
           <div class="position-absolute"
             style="bottom: 0; right: 0; padding: 15px 0 0 15px;">

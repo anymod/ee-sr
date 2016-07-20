@@ -206,6 +206,8 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
       when 'search', 'category', 'collection', 'sale' then _runQuery(true)
     return
 
+  $rootScope.$on 'product:navigate', (e, prod) -> _searchLike prod
+
   ## EXPORTS
   data: _data
   fns:

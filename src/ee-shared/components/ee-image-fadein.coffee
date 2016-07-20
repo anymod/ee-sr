@@ -4,7 +4,7 @@ angular.module 'ee-image-fadein', []
 
 angular.module('ee-image-fadein').directive "eeImageFadein", ($filter, $timeout) ->
   scope:
-    eeSrc: '@'
+    eeSrc: '='
     eeW: '@'
     eeH: '@'
     eeTrim: '@'
@@ -16,10 +16,12 @@ angular.module('ee-image-fadein').directive "eeImageFadein", ($filter, $timeout)
     h = parseInt scope.eeH
     crop = scope.eeCrop || 'pad'
     scope.loadBoolean = false
-    element.attr 'src', 'https://placeholdit.imgix.net/~text?txtsize=40&bg=ffffff&txtclr=ffcccc&txt=loading+image&w=' + w + '&h=' + h
+    loadSrc = 'https://placeholdit.imgix.net/~text?txtsize=40&bg=ffffff&txtclr=ffcccc&txt=loading+image&w=' + w + '&h=' + h
+    element.attr 'src', loadSrc
 
     loadImage = (url) ->
       element.attr 'style', 'opacity: 0.5;'
+      element.attr 'src', loadSrc
       element.attr 'src', url
       element.one 'load', () ->
         element.attr 'style', 'opacity: 1;'
