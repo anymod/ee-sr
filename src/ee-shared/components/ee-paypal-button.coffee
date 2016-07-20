@@ -11,7 +11,6 @@ module.directive "eePaypalButton", ($timeout, eeCart, eeBack, eeEnvironment) ->
   link: (scope, ele, attrs) ->
     uuid = eeCart.data.uuid
     scope.showButton = false
-    console.log 'eeEnvironment', eeEnvironment
 
     scope.initPaypal = () ->
       return unless uuid? or scope.sku?.id?
