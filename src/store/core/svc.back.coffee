@@ -2,6 +2,9 @@
 
 angular.module('store.core').factory 'eeBack', ($http, $q, eeBackUrl, eeBootstrap) ->
 
+  tr_uuid = eeBootstrap.tr_uuid
+  $http.defaults.headers.common.Authorization = 'Basic ' + btoa(tr_uuid + ':store')
+
   _data =
     requesting: false
     requestingArray: []
@@ -39,7 +42,7 @@ angular.module('store.core').factory 'eeBack', ($http, $q, eeBackUrl, eeBootstra
   _productGET = (id) ->
     _makeRequest {
       method: 'GET'
-      url: eeBackUrl + 'store/' + eeBootstrap?.tr_uuid + '/products/' + id
+      url: eeBackUrl + 'store/products/' + id
     }
 
   data: _data
@@ -48,7 +51,7 @@ angular.module('store.core').factory 'eeBack', ($http, $q, eeBackUrl, eeBootstra
     userGET: () ->
       _makeRequest {
         method: 'GET'
-        url: eeBackUrl + 'store/' + eeBootstrap?.tr_uuid
+        url: eeBackUrl + 'store'
       }
 
     productGET: _productGET
@@ -56,7 +59,7 @@ angular.module('store.core').factory 'eeBack', ($http, $q, eeBackUrl, eeBootstra
     productsGET: (query) ->
       _makeRequest {
         method: 'GET'
-        url: eeBackUrl + 'store/' + eeBootstrap?.tr_uuid + '/products' + _formQueryString(query)
+        url: eeBackUrl + 'store/products' + _formQueryString(query)
       }
 
     skuGET: (product_id, sku_id) ->
@@ -74,13 +77,13 @@ angular.module('store.core').factory 'eeBack', ($http, $q, eeBackUrl, eeBootstra
     collectionGET: (id, query) ->
       _makeRequest {
         method: 'GET'
-        url: eeBackUrl + 'store/' + eeBootstrap?.tr_uuid + '/collections/' + id + _formQueryString(query)
+        url: eeBackUrl + 'store/collections/' + id + _formQueryString(query)
       }
 
     collectionsGET: () ->
       _makeRequest {
         method: 'GET'
-        url: eeBackUrl + 'store/' + eeBootstrap?.tr_uuid + '/collections'
+        url: eeBackUrl + 'store/collections'
       }
 
     cartPOST: (quantity_array) ->
@@ -150,13 +153,13 @@ angular.module('store.core').factory 'eeBack', ($http, $q, eeBackUrl, eeBootstra
     favoriteProductsGET: (id) ->
       _makeRequest {
         method: 'GET'
-        url: eeBackUrl + 'store/' + eeBootstrap?.tr_uuid + '/favorites/' + id
+        url: eeBackUrl + 'store/favorites/' + id
       }
 
     orderGET: (uuid) ->
       _makeRequest {
         method: 'GET'
-        url: eeBackUrl + 'store/' + eeBootstrap?.tr_uuid + '/orders/' + uuid
+        url: eeBackUrl + 'store/orders/' + uuid
       }
 
     paymentPOST: (data) ->
