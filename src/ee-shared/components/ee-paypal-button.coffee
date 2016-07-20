@@ -10,11 +10,11 @@ module.directive "eePaypalButton", ($timeout, eeCart, eeBack, eeEnvironment) ->
     buttonSize: '@'
   link: (scope, ele, attrs) ->
     uuid = eeCart.data.uuid
-    return unless uuid?
     scope.showButton = false
     console.log 'eeEnvironment', eeEnvironment
 
     scope.initPaypal = () ->
+      return unless uuid? or scope.sku?.id?
       paypal.checkout.initXO()
       data = if scope.sku?.id? then { sku_id: scope.sku.id } else { cart_uuid: uuid }
       eeBack.fns.paymentPOST data
