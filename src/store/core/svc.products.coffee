@@ -1,13 +1,14 @@
 'use strict'
 
-angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $stateParams, $location, eeBootstrap, eeBack, categories) ->
+angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $stateParams, $location, $filter, eeBootstrap, eeBack, categories, stopWords) ->
 
   ## SETUP
   _inputDefaults =
     perPage:      eeBootstrap?.perPage
     page:         eeBootstrap?.page
     similarSize:  36
-    search:       $stateParams.q || null
+    search:       null
+    searchTokens:  []
     searchLabel:  null
     range:
       min:        null
@@ -104,8 +105,16 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     _setPage null
 
   _setSearch = (term) ->
-    if term? then _data.inputs.search = term
+    if term?
+      term.replace(/[^a-zA-Z0-9-]|^-/gi, '-').replace(/-+/g,'-').toLowerCase()
+      words = term.split(/[ ,]/g)
+      _data.inputs.searchTokens = []
+      for word in words
+        if (word.length > 1 and stopWords.indexOf(word) < 0) or !isNaN(word) then _data.inputs.searchTokens.push(word.charAt(0).toUpperCase() + word.slice(1))
+      _data.inputs.search = term
     _setPage null
+
+  _setSearch $stateParams.q
 
   _setUrlParams = () ->
     str = if _data.inputs.range?.min? or _data.inputs.range?.max? then [_data.inputs.range.min/100, _data.inputs.range.max/100].join('-') else null
@@ -159,8 +168,8 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     _clearProducts()
     _setSort null
     _setCategoryById product.category_id
-    _data.inputs.search = product.title
-    _data.inputs.size   = _data.inputs.similarSize + 1
+    _setSearch product.title
+    _data.inputs.size = _data.inputs.similarSize + 1
     _runQuery(true)
     .then () ->
       products = []
@@ -172,6 +181,7 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
 
   ## MESSAGING
   $rootScope.$on 'reset:page', () -> _setPage null
+  $rootScope.$on 'product:navigate', (e, prod) -> _searchLike prod
 
   $rootScope.$on '$stateChangeStart', (e, toState, toParams, fromState, fromParams) ->
     _setSearch        toParams.q
@@ -205,8 +215,6 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     switch toState.name
       when 'search', 'category', 'collection', 'sale' then _runQuery(true)
     return
-
-  $rootScope.$on 'product:navigate', (e, prod) -> _searchLike prod
 
   ## EXPORTS
   data: _data
