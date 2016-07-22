@@ -21,6 +21,7 @@
     "keen-js": "~3.3.0",
     "zoom.js": "~0.0.1",
     "angulartics": "~1.0.3",
-    "angulartics-google-analytics": "~0.1.4"
+    "angulartics-google-analytics": "~0.1.4",
+    "angularjs-slider": "~5.4.1"
   }
 }

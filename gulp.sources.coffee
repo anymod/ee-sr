@@ -33,6 +33,7 @@ sources.storeVendorMin = [
   './src/bower_components/angulartics-google-analytics/dist/angulartics-google-analytics.min.js'
   './src/bower_components/zoom.js/dist/zoom.min.js'
   './src/bower_components/keen-js/dist/keen.min.js'
+  './src/bower_components/angularjs-slider/dist/rzslider.min.js'
 ]
 sources.storeVendorMaps = [
   './src/bower_components/angulartics-google-analytics/dist/angulartics-google-analytics.min.js.map'

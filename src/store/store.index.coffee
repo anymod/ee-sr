@@ -9,6 +9,7 @@ angular.module 'eeStore', [
   # 'ngSanitize'
   'angulartics'
   'angulartics.google.analytics'
+  'rzModule'
 
   # core
   'app.core'
