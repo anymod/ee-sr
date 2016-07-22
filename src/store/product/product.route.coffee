@@ -5,7 +5,7 @@ angular.module('store.product').config ($stateProvider) ->
   $stateProvider
 
     .state 'product',
-      url: '/products/:id/:title?c'
+      url: '/products/:id/:title?p&s&r&c'
       views:
         top:
           controller: 'storeCtrl as store'
@@ -20,4 +20,7 @@ angular.module('store.product').config ($stateProvider) ->
         title:
           value: null
           squash: true
+        p: null # page
+        s: null # sort
+        r: null # range
         c: null # category

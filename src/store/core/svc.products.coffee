@@ -26,10 +26,10 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     ]
     orderArray: [
       { order: null,  title: 'Most relevant' }
-      { order: 'pa',  title: 'Price, low to high',  use: true } # price ASC (pa)
-      { order: 'pd',  title: 'Price, high to low',  use: true } # price DESC (pd)
-      { order: 'ta',  title: 'A to Z',              use: true } # title ASC (ta)
-      { order: 'td',  title: 'Z to A',              use: true } # title DESC (td)
+      { order: 'pa',  title: 'Lowest Price',  use: true } # price ASC (pa)
+      { order: 'pd',  title: 'Highest Price', use: true } # price DESC (pd)
+      { order: 'ta',  title: 'A to Z',        use: true } # title ASC (ta)
+      { order: 'td',  title: 'Z to A',        use: true } # title DESC (td)
     ]
   if eeBootstrap?.order
     for order in _inputDefaults.orderArray
@@ -105,8 +105,11 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     _setPage null
 
   _addToken = (word) ->
-    return if !word? or word.length < 1 or word is 'null' or _data.inputs.searchTokens.indexOf(word) > -1
-    if (word.length > 1 and stopWords.indexOf(word) < 0) or !isNaN(word) then _data.inputs.searchTokens.push(word.charAt(0).toUpperCase() + word.slice(1))
+    return if !word? or word.length < 1 or word is 'null'
+    capitalized = word.charAt(0).toUpperCase() + word.toLowerCase().slice(1)
+    return if _data.inputs.searchTokens.indexOf(capitalized) > -1 or (word.length is 1 and isNaN(word))
+    return if stopWords.indexOf(word.toLowerCase()) > -1
+    _data.inputs.searchTokens.push capitalized
 
   _tokenizeSearch = (term) ->
     term ||= ''
