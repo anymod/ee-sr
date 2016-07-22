@@ -164,6 +164,10 @@ app.get ['/sitemap', '/sitemap.xml'], (req, res, next) ->
 app.get ['/selections/:id/:title', '/shop', '/shop/:title', '/collections'], (req, res, next) ->
   res.redirect '/'
 
+# FAVICON
+app.get '/favicon.ico', (req, res, next) ->
+  res.send 'Not found'
+
 # CATCHALL (about, help, terms, privacy, favorites)
 app.get '/*', (req, res, next) ->
   { bootstrap, host, path } = utils.setup req

@@ -104,14 +104,20 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
       if order.order is sortStr then return _data.inputs.order = order
     _setPage null
 
+  _addToken = (word) ->
+    return if !word? or word.length < 1 or word is 'null' or _data.inputs.searchTokens.indexOf(word) > -1
+    if (word.length > 1 and stopWords.indexOf(word) < 0) or !isNaN(word) then _data.inputs.searchTokens.push(word.charAt(0).toUpperCase() + word.slice(1))
+
+  _tokenizeSearch = (term) ->
+    term ||= ''
+    term.replace(/[^a-zA-Z0-9-]|^-/gi, '-').replace(/-+/g,'-').toLowerCase()
+    words = term.split(/[ ,]/g)
+    _data.inputs.searchTokens = []
+    _addToken word for word in words
+    _data.inputs.search = _data.inputs.searchTokens.join(' ')
+
   _setSearch = (term) ->
-    if term?
-      term.replace(/[^a-zA-Z0-9-]|^-/gi, '-').replace(/-+/g,'-').toLowerCase()
-      words = term.split(/[ ,]/g)
-      _data.inputs.searchTokens = []
-      for word in words
-        if (word.length > 1 and stopWords.indexOf(word) < 0) or !isNaN(word) then _data.inputs.searchTokens.push(word.charAt(0).toUpperCase() + word.slice(1))
-      _data.inputs.search = term
+    if term? then _tokenizeSearch term
     _setPage null
 
   _setSearch $stateParams.q
@@ -179,6 +185,14 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
       _data.inputs.size = _inputDefaults.perPage
       return
 
+  _addToSearch = (term) ->
+    _search '' + _data.inputs.search + ' ' + term
+
+  _removeFromSearch = (token) ->
+    index = _data.inputs.searchTokens?.indexOf token
+    if index > -1 then _data.inputs.searchTokens.splice(index, 1)
+    _search _data.inputs.searchTokens.join(' ')
+
   ## MESSAGING
   $rootScope.$on 'reset:page', () -> _setPage null
   $rootScope.$on 'product:navigate', (e, prod) -> _searchLike prod
@@ -222,6 +236,8 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     runQuery: _runQuery
     search: _search
     searchLike: _searchLike
+    addToSearch: _addToSearch
+    removeFromSearch: _removeFromSearch
     clearSearch: () -> _search ''
     setCategory: (category) ->
       _clearProducts()
