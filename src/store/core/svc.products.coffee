@@ -26,18 +26,20 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     ]
     orderArray: [
       { order: null,  title: 'Most relevant' }
-      { order: 'pa',  title: 'Lowest Price',  use: true } # price ASC (pa)
-      { order: 'pd',  title: 'Highest Price', use: true } # price DESC (pd)
-      { order: 'ta',  title: 'A to Z',        use: true } # title ASC (ta)
-      { order: 'td',  title: 'Z to A',        use: true } # title DESC (td)
+      { order: 'pa',  title: '$ - $$$', use: true } # price ASC (pa)
+      { order: 'pd',  title: '$$$ - $', use: true } # price DESC (pd)
+      { order: 'ta',  title: 'A to Z',  use: true } # title ASC (ta)
+      { order: 'td',  title: 'Z to A',  use: true } # title DESC (td)
     ]
   if eeBootstrap?.order
     for order in _inputDefaults.orderArray
       if order.order is eeBootstrap.order then _inputDefaults.order = angular.copy order
   if eeBootstrap?.range
     [min, max] = eeBootstrap?.range.split('-')
-    for range in _inputDefaults.rangeArray
-      if range.min is parseInt(min)*100 then _inputDefaults.range = angular.copy range
+    if min? then _inputDefaults.range.min = parseInt(min) * 100
+    if max? then _inputDefaults.range.max = parseInt(max) * 100
+    # for range in _inputDefaults.rangeArray
+      # if range.min is parseInt(min)*100 then _inputDefaults.range = angular.copy range
   if eeBootstrap?.categorization_ids
     cats = []
     for category in _inputDefaults.categories

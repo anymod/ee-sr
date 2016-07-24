@@ -82,7 +82,7 @@
         </li>
         <!-- categories -->
         <li ng-repeat="category in categories">
-          <a ui-sref="category({ id: category.id, title: (category.title | urlText) })"
+        <a ui-sref="category({ id: category.id, title: (category.title | urlText) })"
             class="text-muted"
             ng-bind="category.title">
           </a>

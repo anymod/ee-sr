@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('eeStore').controller 'productCtrl', ($stateParams, $location, eeDefiner, eeProduct, eeProducts, eeModal) ->
+angular.module('eeStore').controller 'productCtrl', ($stateParams, $location, eeDefiner, eeProduct, eeProducts) ->
 
   product = this
 
@@ -14,7 +14,5 @@ angular.module('eeStore').controller 'productCtrl', ($stateParams, $location, ee
 
   eeProduct.fns.defineProduct id
   eeProducts.fns.searchLike { id: id, title: title, category_id: category_id }
-
-  eeModal.fns.open 'search'
 
   return

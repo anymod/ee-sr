@@ -55,13 +55,13 @@
       class="text-muted hover-pointer"
       style="margin-right: 2px;">
       <i class="fa fa-fw fa-sliders"></i>
-      <span ng-if="data.inputs.category">Category: {{ data.inputs.category.title }}</span>
-      <span ng-if="data.inputs.category && data.inputs.order.order"><br></span>
-      <span ng-if="data.inputs.order.order">Order: {{ data.inputs.order.title }}&nbsp;</span>
-      <span ng-if="data.inputs.order.order && (data.inputs.range.min || data.inputs.range.max)"><br></span>
+      <span ng-if="data.inputs.category.title">Category: {{ data.inputs.category.title }}</span>
+      <br ng-if="data.inputs.category.title && data.inputs.order.order">
+      <span ng-if="data.inputs.order.order">Order: {{ data.inputs.order.title }}</span>
+      <br ng-if="(data.inputs.range.min || data.inputs.range.max) && (data.inputs.order.order || data.inputs.category.title)">
       <span ng-if="data.inputs.range.min || data.inputs.range.max">Price: {{ data.inputs.range | rangeToText }}</span>
       <!-- <i class="fa fa-fw fa-sliders"></i>&nbsp;options&nbsp; -->
-      <span ng-if="!data.inputs.category && ! data.inputs.order.order && !data.inputs.range.min && !data.inputs.range.max">
+      <span ng-if="!data.inputs.category.title && ! data.inputs.order.order && !data.inputs.range.min && !data.inputs.range.max">
         search options
       </span>
     </small>

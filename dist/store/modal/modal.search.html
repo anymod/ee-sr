@@ -20,21 +20,24 @@
   </div>
 
   <div class="btn-group btn-group-justified">
-    <div class="btn btn-default">$ - $$$</div>
-    <div class="btn btn-default">$$$ - $</div>
-    <div class="btn btn-default">A - Z</div>
-    <div class="btn btn-default">Z - A</div>
+    <div class="btn"
+      ng-repeat="order in modal.search.orderArray"
+      ng-if="order.use"
+      ng-bind="order.title"
+      ng-click="modal.setOrder(order)"
+      ng-class="modal.search.order.title == order.title ? 'active btn-themed' : 'btn-default'">
+    </div>
   </div>
 
   <div class="vert-10">
     <a href class="list-group-item"
-        ng-repeat="category in modal.categories"
-        ng-click="toggleCategory(category)">
+        ng-repeat="category in modal.search.categories"
+        ng-click="modal.setCategory(category)">
       <span class="full-width margin-0">
         <span ng-bind="category.title"></span>
         <h4 class="pull-right margin-0">
-          <i class="fa fa-lg fa-toggle-off text-muted"></i>
-          <i ng-if="edit.ee.User.user.categorization_ids.indexOf(category.id) > -1" class="fa fa-lg fa-toggle-on text-success pull-right"></i>
+          <i ng-if="modal.search.category.id != category.id" class="fa fa-lg fa-toggle-off text-muted"></i>
+          <i ng-if="modal.search.category.id == category.id" class="fa fa-lg fa-toggle-on text-themed"></i>
         </h4>
       </span>
     </a>
