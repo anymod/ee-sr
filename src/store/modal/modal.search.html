@@ -19,42 +19,28 @@
     </rzslider>
   </div>
 
-  <div class="btn-group btn-group-justified">
-    <div class="btn"
-      ng-repeat="order in modal.search.orderArray"
-      ng-if="order.use"
-      ng-bind="order.title"
-      ng-click="modal.setOrder(order)"
-      ng-class="modal.search.order.title == order.title ? 'active btn-themed' : 'btn-default'">
-    </div>
-  </div>
-
-  <div class="vert-10">
+  <div>
     <a href class="list-group-item"
         ng-repeat="category in modal.search.categories"
-        ng-click="modal.setCategory(category)">
+        ng-click="modal.setCategoryById(category.id)">
       <span class="full-width margin-0">
         <span ng-bind="category.title"></span>
         <h4 class="pull-right margin-0">
-          <i ng-if="modal.search.category.id != category.id" class="fa fa-lg fa-toggle-off text-muted"></i>
-          <i ng-if="modal.search.category.id == category.id" class="fa fa-lg fa-toggle-on text-themed"></i>
+          <i ng-if="modal.search.params.c != category.id" class="fa fa-lg fa-toggle-off text-muted"></i>
+          <i ng-if="modal.search.params.c == category.id" class="fa fa-lg fa-toggle-on text-themed"></i>
         </h4>
       </span>
     </a>
   </div>
 
-
-</div>
-
-
-<!-- Categories -->
-<div class="container">
-  <div class="vert-50">
-    <div class="margin-0-auto max-width-300">
-      <div class="list-group margin-0 text-left">
-
-      </div>
+  <div class="btn-group btn-group-justified vert-10">
+    <div class="btn"
+      ng-repeat="order in modal.search.orderArray"
+      ng-if="order.use"
+      ng-bind="order.title"
+      ng-click="modal.setOrder(order)"
+      ng-class="modal.search.params.s == order.order ? 'active btn-themed' : 'btn-default'">
     </div>
   </div>
+
 </div>
-<!-- /Categories -->

@@ -5,11 +5,11 @@
 <div ng-if="search.ee.Products.products.length > 0" ng-hide="search.ee.Products.reading"
   class="container container-narrow vert-5 text-center">
 
-  <div ng-if="search.ee.Products.count > search.ee.Products.inputs.perPage" class="margin-10">
+  <div ng-if="search.ee.Products.count > search.ee.Products.fromParams.perPage" class="margin-10">
     <uib-pagination
       total-items="search.ee.Products.count"
-      items-per-page="search.ee.Products.inputs.perPage"
-      ng-model="search.ee.Products.inputs.page"
+      items-per-page="search.ee.Products.fromParams.perPage"
+      ng-model="search.ee.Products.params.p"
       max-size="5"
       class="pagination-sm margin-0 vertical-align-top"
       previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
@@ -19,24 +19,24 @@
     </uib-pagination>
   </div>
 
-  <ee-storefront-announcement
+  <!-- <ee-storefront-announcement
     ng-if="search.ee.User.user"
     user="search.ee.User.user"
     show-favorites-message=true
     hide-buttons=true>
-  </ee-storefront-announcement>
+  </ee-storefront-announcement> -->
 
   <ee-products-list
     products="search.ee.Products.products"
     show-signup=true>
   </ee-products-list>
 
-  <div ng-if="search.ee.Products.count > search.ee.Products.inputs.perPage"
+  <div ng-if="search.ee.Products.count > search.ee.Products.fromParams.perPage"
     class="pad-20 vert-20">
     <uib-pagination
       total-items="search.ee.Products.count"
-      items-per-page="search.ee.Products.inputs.perPage"
-      ng-model="search.ee.Products.inputs.page"
+      items-per-page="search.ee.Products.fromParams.perPage"
+      ng-model="search.ee.Products.params.p"
       max-size="5"
       class="pagination-sm margin-0 vertical-align-top"
       previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"

@@ -2,14 +2,13 @@
   class="container container-narrow vert-5 text-center">
 
   <div class="margin-10">
-    <uib-pagination ng-if="search.ee.Products.count > search.ee.Products.inputs.perPage"
+    <uib-pagination ng-if="search.ee.Products.count > search.ee.Products.fromParams.perPage"
       total-items="search.ee.Products.count"
-      items-per-page="search.ee.Products.inputs.perPage"
-      ng-model="search.ee.Products.inputs.page"
+      items-per-page="search.ee.Products.fromParams.perPage"
+      ng-model="search.ee.Products.params.p"
       max-size="5"
       class="pagination-sm margin-0 vertical-align-top"
-      previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-      boundary-links="true"
+      previous-text="&lsaquo;" next-text="&rsaquo;"
       rotate="false"
       ng-change="search.update()">
     </uib-pagination>
@@ -21,14 +20,13 @@
   </ee-products-list>
 
   <div class="pad-20 vert-20">
-    <uib-pagination ng-if="search.ee.Products.count > search.ee.Products.inputs.perPage"
+    <uib-pagination ng-if="search.ee.Products.count > search.ee.Products.fromParams.perPage"
       total-items="search.ee.Products.count"
-      items-per-page="search.ee.Products.inputs.perPage"
-      ng-model="search.ee.Products.inputs.page"
+      items-per-page="search.ee.Products.fromParams.perPage"
+      ng-model="search.ee.Products.params.p"
       max-size="5"
       class="pagination-sm margin-0 vertical-align-top"
-      previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-      boundary-links="true"
+      previous-text="&lsaquo;" next-text="&rsaquo;"
       rotate="false"
       ng-change="search.update()">
     </uib-pagination>

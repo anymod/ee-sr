@@ -108,6 +108,7 @@ esqSetExclusions = (esq, opts) ->
 
 esqSetPrice = (esq, opts) ->
   return unless opts?.min_price? or opts?.max_price
+  return if opts.min_price is 0 and opts.max_price is 0
   nested_match =
     nested:
       path: 'skus'

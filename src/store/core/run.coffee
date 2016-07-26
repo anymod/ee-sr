@@ -26,7 +26,7 @@ angular.module('store.core').run ($rootScope, $cookies, $location, $window, eeMo
   $rootScope.$on 'favorites:toggle', (e, favorited, sku_id) ->
     eeAnalytics.fns.addKeenEvent 'favorites', { toggledOn: favorited, toggledOff: !favorited, sku_id: sku_id }
 
-  # Broadcast page reset on stateChangeStart and stateChangeSuccess to remove page param
+  # # Broadcast page reset on stateChangeStart and stateChangeSuccess to remove page param
   $rootScope.$on '$stateChangeStart', (e, toState, toParams, fromState, fromParams) ->
     if eeAnalytics.data.pageDepth > 1 and (toState.name isnt fromState.name or toParams.id isnt fromParams.id) then $rootScope.$broadcast 'reset:page'
 

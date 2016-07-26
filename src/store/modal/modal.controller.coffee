@@ -9,9 +9,11 @@ angular.module('eeStore').controller 'modalCtrl', ($rootScope, $state, eeDefiner
   modal.search =
     minValue: 0
     maxValue: 300
-    order: {}
-    orderArray: eeProducts.data.inputs.orderArray
-    category: null
+    params:
+      s: angular.copy eeProducts.data.params.s
+      c: angular.copy eeProducts.data.params.c
+    orderArray: eeProducts.data.orderArray
+    categoryTitle: eeProducts.data.fromParams.categoryTitle
     categories: categories
     options:
       floor: 0
@@ -27,22 +29,36 @@ angular.module('eeStore').controller 'modalCtrl', ($rootScope, $state, eeDefiner
       eeModal.fns.close 'search'
       eeProducts.fns.runQuery()
 
-  modal.setOrder = (order) -> modal.search.order = if modal.search.order?.title is order.title then {} else order
-  modal.setCategory = (category) -> modal.search.category = if modal.search.category?.title is category.title then {} else category
+  modal.setOrder = (order) ->
+    console.log order, modal.search.params
+    modal.search.params.s = if modal.search.params.s is order.order then null else order.order
+
+  modal.setCategoryById = (categoryId) ->
+    if categoryId is modal.search.params.c
+      modal.search.params.c = null
+      modal.search.categoryTitle = null
+    for category in categories
+      if category.id is parseInt(categoryId)
+        modal.search.params.c = category.id
+        modal.search.categoryTitle = category.title
 
   setModalFromSearch = () ->
-    if eeProducts.data.inputs.range.min then modal.search.minValue = parseInt(eeProducts.data.inputs.range.min / 100)
-    if eeProducts.data.inputs.range.max then modal.search.maxValue = parseInt(eeProducts.data.inputs.range.max / 100)
+    if eeProducts.data.params.r?
+      [min, max] = eeProducts.data.params.r.split('-')
+      modal.search.minValue = parseInt min
+      modal.search.maxValue = parseInt max
     if modal.search.minValue < 0 then modal.search.minValue = 0
     if modal.search.maxValue > 300 then modal.search.maxValue = 300
-    if eeProducts.data.inputs.order then modal.search.order = eeProducts.data.inputs.order
-    if eeProducts.data.inputs.category then modal.search.category = eeProducts.data.inputs.category
+    if eeProducts.data.params.s? then modal.search.orderTitle = eeProducts.data.fromParams.orderTitle
+    if eeProducts.data.params.c? then modal.search.categoryTitle = eeProducts.data.fromParams.categoryTitle
 
   setSearchFromModal = () ->
-    eeProducts.data.inputs.range.min = if modal.search.minValue <= 0 then 0 else modal.search.minValue * 100
-    eeProducts.data.inputs.range.max = if modal.search.maxValue >= 300 then null else modal.search.maxValue * 100
-    eeProducts.data.inputs.order = modal.search.order
-    eeProducts.data.inputs.category = modal.search.category
+    if modal.search.minValue? and modal.search.maxValue?
+      min = if modal.search.minValue < 0 then 0 else modal.search.minValue
+      max = if modal.search.maxValue >= 300 then 0 else modal.search.maxValue
+      eeProducts.fns.setParam 'r', [min, max].join('-')
+    if modal.search.params.s? then eeProducts.fns.setParam 's', modal.search.params.s
+    if modal.search.params.c? then eeProducts.fns.setParam 'c', modal.search.params.c
 
   setModalFromSearch()
 
