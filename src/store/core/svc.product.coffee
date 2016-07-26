@@ -19,12 +19,7 @@ angular.module('store.core').factory 'eeProduct', ($rootScope, $state, $filter, 
     .finally () -> _data.reading = false
 
   ## MESSAGING
-  $rootScope.$on 'product:navigate', (e, prod) ->
-    return $state.go('storefront') unless prod.id
-    title = $filter('urlText')(prod.title )
-    $state.go 'product', { id: prod.id, title: title, c: prod.category_id }, { notify: $state.current.name isnt 'product' }
-    _data.product = prod
-    window.scrollTo(0,0)
+  $rootScope.$on 'product:navigate', (e, prod) -> _data.product = prod
 
   ## EXPORTS
   data: _data

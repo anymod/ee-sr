@@ -15,6 +15,9 @@ angular.module('ee-search-token').directive 'eeSearchToken', ($state, eeProducts
     scope.fns   = eeProducts.fns
     scope.boxWidth = minBoxWidth
     scope.boxValue = ''
+
+    # scope.$watch 'boxValue', (e, data) -> scope.$emit 'search:boxValue', data
+
     # scope.collectionData = eeCollection.data
     # scope.state = $state
 
@@ -46,13 +49,13 @@ angular.module('ee-search-token').directive 'eeSearchToken', ($state, eeProducts
 
     scope.addToQuery = () ->
       eeProducts.fns.setParam 'p', 1
-      eeProducts.fns.addToQuery scope.boxValue
+      eeProducts.fns.addToQuery eeProducts.data.fromParams.queryTokens.join(' ') + ' ' + scope.boxValue
       scope.boxValue = ''
-
-    # scope.removeFromSearch = (token) -> eeProducts.fns.removeFromSearch token
 
     scope.clearSearchQuery = () ->
       eeProducts.fns.setParam 'q', null
       eeProducts.fns.setParam 'p', 1
+
+    scope.$on 'search:submit', () -> scope.addToQuery()
 
     return

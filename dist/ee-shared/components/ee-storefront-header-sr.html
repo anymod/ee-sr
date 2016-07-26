@@ -94,6 +94,14 @@
         <li ng-if="categories.length > 0">
           <hr class="vert-5">
         </li>
+        <!-- cart -->
+        <li>
+          <a ui-sref="cart" class="text-muted">Cart</a>
+        </li>
+        <!-- /cart -->
+        <li>
+          <hr class="vert-5">
+        </li>
         <!-- blog -->
         <li ng-if="user.storefront_meta.blog.url">
           <a href="{{ user.storefront_meta.blog.url | addHttp }}" target="_blank" class="text-muted">Blog</a>

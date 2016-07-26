@@ -26,8 +26,8 @@
       <span class="full-width margin-0">
         <span ng-bind="category.title"></span>
         <h4 class="pull-right margin-0">
-          <i ng-if="modal.search.params.c != category.id" class="fa fa-lg fa-toggle-off text-muted"></i>
-          <i ng-if="modal.search.params.c == category.id" class="fa fa-lg fa-toggle-on text-themed"></i>
+          <i ng-if="modal.search.data.params.c != category.id" class="fa fa-lg fa-toggle-off text-muted"></i>
+          <i ng-if="modal.search.data.params.c == category.id" class="fa fa-lg fa-toggle-on text-themed"></i>
         </h4>
       </span>
     </a>
@@ -35,11 +35,11 @@
 
   <div class="btn-group btn-group-justified vert-10">
     <div class="btn"
-      ng-repeat="order in modal.search.orderArray"
+      ng-repeat="order in modal.search.data.orderArray"
       ng-if="order.use"
       ng-bind="order.title"
       ng-click="modal.setOrder(order)"
-      ng-class="modal.search.params.s == order.order ? 'active btn-themed' : 'btn-default'">
+      ng-class="modal.search.data.params.s == order.order ? 'active btn-themed' : 'btn-default'">
     </div>
   </div>
 

@@ -34,6 +34,7 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     reading:      false
     params:       _params
     fromParams:   angular.copy _fromParams
+    # searchBoxVal: ''
     products:     eeBootstrap?.products
     count:        eeBootstrap?.count
     categories:   categories
@@ -46,7 +47,10 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     $location.search key, value
     $stateParams[key] = value
 
-  _setParams = (obj) -> _setParam key, obj[key] for key in Object.keys(obj)
+  _setParams = (obj) ->
+    obj ||= {}
+    _setParam key, obj[key] for key in Object.keys(obj)
+
   _clearParams = () -> _setParam(key, null) for key in Object.keys($stateParams)
 
   _formQuery = () ->
@@ -207,11 +211,10 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     .catch (err) -> _data.count = null
     .finally () -> _data.reading = false
 
-  _search = (term) ->
-    if $state.current.name is 'storefront' then $state.go 'search', $stateParams
-    _clearProducts()
-    _setSearch term
-    # _runQuery()
+  # _search = (term) ->
+  #   if $state.current.name is 'storefront' then $state.go 'search', $stateParams
+  #   _clearProducts()
+  #   _setSearch term
 
   _searchLike = (product) ->
     _clearProducts()
@@ -228,14 +231,20 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
       _setParam 'sz', null
       return
 
-  _addToQuery = (term) ->
-    return unless term?
-    _setParam 'q', _data.params.q + ' ' + term
+  _addToQuery = (term, opts) ->
+    term ||= ''
+    opts ||= {}
+    prefix = if opts.overwrite then '' else (_data.params.q || '') + ' '
+    _tokenizeQuery prefix + term
+    # _setParam 'q',
 
-  _removeFromSearch = (token) ->
-    index = _data.fromParams.queryTokens?.indexOf token
-    if index > -1 then _data.fromParams.queryTokens.splice(index, 1)
-    _search _data.fromParams.queryTokens.join(' ')
+
+  # _removeFromSearch = (token) ->
+  #   index = _data.fromParams.queryTokens?.indexOf token
+  #   if index > -1 then _data.fromParams.queryTokens.splice(index, 1)
+  #   _search _data.fromParams.queryTokens.join(' ')
+
+  _formatTitleForSearch = (title) -> $filter('urlText')(title)
 
   ## Set initial values from URL
   _formQuery()
@@ -247,11 +256,19 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
       when 'category' then params.c = $stateParams.id
       when 'collection', 'sale' then params.coll = $stateParams.id
       # when 'product' then params.q = $
-    console.log params
     _setParams params
     _runQuery()
 
-  $rootScope.$on 'product:navigate', (e, prod) -> _searchLike prod
+  $rootScope.$on 'product:navigate', (e, prod) ->
+    return $state.go('storefront') unless prod.id
+    title = _formatTitleForSearch prod.title
+    $state.go 'product', { id: prod.id, title: title, c: prod.category_id }, { notify: $state.current.name isnt 'product' }
+    _searchLike prod
+    window.scrollTo(0,0)
+
+  # $rootScope.$on 'search:boxValue', (e, value) ->
+  #   _data.searchBoxVal = value
+
 
   # $rootScope.$on '$stateChangeStart', (e, toState, toParams, fromState, fromParams) ->
   #   _setSearch        toParams.q
