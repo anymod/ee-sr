@@ -7,16 +7,13 @@ angular.module('store.search').controller 'searchCtrl', ($location, $state, eeDe
   search.params = $location.search()
   search.ee = eeDefiner.exports
 
-  search.update = () ->
-    eeProducts.fns.setParam 'p', search.ee.Products.params.p
-    eeProducts.fns.runQuery()
+  search.update = () -> eeProducts.fns.setParam 'p', search.ee.Products.params.p
 
   if eeAnalytics.data.pageDepth > 1
     switch $state.current.name
       when 'collection', 'sale'
         eeCollection.fns.defineCollection $state.params.id, true
-        eeProducts.fns.clearParams()
-        eeProducts.fns.setParam 'coll', $state.params.id
-        eeProducts.fns.runQuery()
+        # eeProducts.fns.clearParams()
+        # eeProducts.fns.setParam 'coll', $state.params.id
 
   return

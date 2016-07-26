@@ -16,11 +16,11 @@ angular.module('store.core').factory 'eeCollection', ($rootScope, $q, $state, $s
     products:   eeBootstrap?.products
 
   ## PRIVATE FUNCTIONS
-  _resetPage = () ->
-    _data.inputs.page = null
-    _data.inputs.category = parseInt $stateParams.id
-    $stateParams.p = null
-    $location.search 'p', null
+  # _resetPage = () ->
+  #   _data.inputs.page = null
+  #   _data.inputs.category = parseInt $stateParams.id
+  #   $stateParams.p = null
+  #   $location.search 'p', null
 
   _formQuery = () ->
     query = {}
@@ -41,7 +41,7 @@ angular.module('store.core').factory 'eeCollection', ($rootScope, $q, $state, $s
     .finally () -> _data.reading = false
 
   # MESSAGING
-  $rootScope.$on 'reset:page', () -> _resetPage()
+  # $rootScope.$on 'reset:page', () -> _resetPage()
 
   ## EXPORTS
   data: _data

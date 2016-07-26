@@ -11,9 +11,7 @@ angular.module('eeStore').controller 'cartCtrl', ($window, $cookies, eeDefiner, 
 
   eeCart.fns.defineCart()
   .then () ->
-    if eeCart.data.skus?.length < 1
-      eeProducts.fns.clearParams()
-      eeProducts.fns.runQuery()
+    if eeCart.data.skus?.length < 1 then eeProducts.fns.clearParams()
 
 
   cart.removeSku = (sku_id) -> eeCart.fns.removeSku sku_id

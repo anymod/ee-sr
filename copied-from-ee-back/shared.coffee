@@ -108,18 +108,20 @@ esqSetExclusions = (esq, opts) ->
 
 esqSetPrice = (esq, opts) ->
   return unless opts?.min_price? or opts?.max_price
-  return if opts.min_price is 0 and opts.max_price is 0
+  min_price = parseInt opts.min_price
+  max_price = parseInt opts.max_price
+  return if min_price is 0 and max_price is 0
+  if max_price <= min_price then max_price = null
   nested_match =
     nested:
       path: 'skus'
       query:
         bool:
           must: [
-            # match: { 'skus.material': 'Canvas' }
             range:
               baseline_price:
-                gte: opts.min_price
-                lte: opts.max_price
+                gte: min_price || null
+                lte: max_price || null
           ]
   esq.query 'query', 'bool', ['must'], nested_match
 

@@ -2,7 +2,7 @@
 
 angular.module 'ee-search-token', []
 
-angular.module('ee-search-token').directive 'eeSearchToken', ($state, $window, eeProducts, eeModal) ->
+angular.module('ee-search-token').directive 'eeSearchToken', ($state, eeProducts, eeModal) ->
   templateUrl: 'ee-shared/components/ee-search-token.html'
   restrict: 'EA'
   scope:
@@ -30,9 +30,9 @@ angular.module('ee-search-token').directive 'eeSearchToken', ($state, $window, e
     scope.openSearchModal = () -> eeModal.fns.open 'search'
 
     scope.searchToken = (token) ->
+      eeProducts.fns.setParam 'p', 1
       eeProducts.fns.setParam 'q', token
-      eeProducts.fns.runQuery()
-      $state.go 'search', { q: token }
+      # $state.go 'search', { p: 1, q: token }
 
     scope.focusBox = () ->
       box.focus()
@@ -45,14 +45,14 @@ angular.module('ee-search-token').directive 'eeSearchToken', ($state, $window, e
       if scope.boxWidth > maxBoxWidth then scope.boxWidth = maxBoxWidth
 
     scope.addToQuery = () ->
+      eeProducts.fns.setParam 'p', 1
       eeProducts.fns.addToQuery scope.boxValue
       scope.boxValue = ''
-      eeProducts.fns.runQuery()
 
     # scope.removeFromSearch = (token) -> eeProducts.fns.removeFromSearch token
 
     scope.clearSearchQuery = () ->
       eeProducts.fns.setParam 'q', null
-      eeProducts.fns.runQuery()
+      eeProducts.fns.setParam 'p', 1
 
     return

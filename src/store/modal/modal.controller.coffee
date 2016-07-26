@@ -27,20 +27,22 @@ angular.module('eeStore').controller 'modalCtrl', ($rootScope, $state, eeDefiner
       setSearchFromModal()
       $state.go 'search'
       eeModal.fns.close 'search'
-      eeProducts.fns.runQuery()
+      # eeProducts.fns.runQuery()
 
   modal.setOrder = (order) ->
     console.log order, modal.search.params
     modal.search.params.s = if modal.search.params.s is order.order then null else order.order
 
   modal.setCategoryById = (categoryId) ->
-    if categoryId is modal.search.params.c
+    console.log categoryId, parseInt(modal.search.params.c)
+    if categoryId is parseInt(modal.search.params.c)
       modal.search.params.c = null
       modal.search.categoryTitle = null
-    for category in categories
-      if category.id is parseInt(categoryId)
-        modal.search.params.c = category.id
-        modal.search.categoryTitle = category.title
+    else
+      for category in categories
+        if category.id is parseInt(categoryId)
+          modal.search.params.c = category.id
+          modal.search.categoryTitle = category.title
 
   setModalFromSearch = () ->
     if eeProducts.data.params.r?
@@ -53,12 +55,13 @@ angular.module('eeStore').controller 'modalCtrl', ($rootScope, $state, eeDefiner
     if eeProducts.data.params.c? then modal.search.categoryTitle = eeProducts.data.fromParams.categoryTitle
 
   setSearchFromModal = () ->
+    eeProducts.fns.setParam 'p', 1
     if modal.search.minValue? and modal.search.maxValue?
       min = if modal.search.minValue < 0 then 0 else modal.search.minValue
       max = if modal.search.maxValue >= 300 then 0 else modal.search.maxValue
       eeProducts.fns.setParam 'r', [min, max].join('-')
-    if modal.search.params.s? then eeProducts.fns.setParam 's', modal.search.params.s
-    if modal.search.params.c? then eeProducts.fns.setParam 'c', modal.search.params.c
+    eeProducts.fns.setParam 's', modal.search.params.s
+    eeProducts.fns.setParam 'c', modal.search.params.c
 
   setModalFromSearch()
 

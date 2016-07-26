@@ -47,6 +47,7 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     $stateParams[key] = value
 
   _setParams = (obj) -> _setParam key, obj[key] for key in Object.keys(obj)
+  _clearParams = () -> _setParam(key, null) for key in Object.keys($stateParams)
 
   _formQuery = () ->
     query = {}
@@ -64,10 +65,7 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     if $stateParams.coll? then query.collection_id  = parseInt $stateParams.coll
     _data.params = $stateParams
     _setFromParams()
-    # console.log '_formQuery', $stateParams, query
     query
-
-  _clearParams = () -> _setParam(key, null) for key in Object.keys($stateParams)
 
   _setFromParams = () ->
     _data.fromParams = angular.copy _fromParams
@@ -100,7 +98,6 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     _setParam 'sz', null
     _data.products = []
     _data.count    = 0
-
 
   # _setPage = (p) ->
   #   if p then return _data.inputs.page = p
@@ -201,14 +198,12 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
   _runQuery = () ->
     if _data.reading then return $q.when()
     _data.reading = true
-    # _setUrlParams() unless skipUrl
     eeBack.fns.productsGET _formQuery()
     .then (res) ->
       { rows, count, took } = res
       _data.products  = rows
       _data.count     = count
       _data.took      = took
-      # _data.inputs.searchLabel = _data.inputs.search
     .catch (err) -> _data.count = null
     .finally () -> _data.reading = false
 
@@ -216,7 +211,7 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     if $state.current.name is 'storefront' then $state.go 'search', $stateParams
     _clearProducts()
     _setSearch term
-    _runQuery()
+    # _runQuery()
 
   _searchLike = (product) ->
     _clearProducts()
@@ -242,34 +237,20 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     if index > -1 then _data.fromParams.queryTokens.splice(index, 1)
     _search _data.fromParams.queryTokens.join(' ')
 
-  ## SET INITIAL VALUES FROM URL
+  ## Set initial values from URL
   _formQuery()
-  # if eeBootstrap?
-  #   # Order
-  #   if eeBootstrap.order? then _setSort eeBootstrap.order
-  #   # Categories
-  #   if eeBootstrap.categorization_ids?
-  #     cats = []
-  #     for category in _inputDefaults.categories
-  #       if eeBootstrap.categorization_ids.indexOf(category.id) > -1 then cats.push category
-  #     _inputDefaults.categories = cats
-  #   # Category
-  #   if eeBootstrap.category?
-  #     eeBootstrap.category = parseInt eeBootstrap.category
-  #     _setCategoryById eeBootstrap.category
-  #   # Collection
-  #   if eeBootstrap.collection_id? then eeBootstrap.collection_id = parseInt eeBootstrap.collection_id
-  #   # Price Range
-  #   if eeBootstrap.range? then _setRangeByString eeBootstrap.range
-  #   # Page
-  #   if eeBootstrap.page? then _inputDefaults.page = parseInt eeBootstrap.page
-  # # Query
-  # _setSearch $stateParams.q
-  # _lastQuery = angular.copy _data.inputs
-  # _formQuery()
 
   ## MESSAGING
-  # $rootScope.$on 'reset:page', () -> _setPage()
+  $rootScope.$on '$locationChangeStart', (e, newUrl, oldUrl) ->
+    params = angular.copy $location.search()
+    switch $state.current.name
+      when 'category' then params.c = $stateParams.id
+      when 'collection', 'sale' then params.coll = $stateParams.id
+      # when 'product' then params.q = $
+    console.log params
+    _setParams params
+    _runQuery()
+
   $rootScope.$on 'product:navigate', (e, prod) -> _searchLike prod
 
   # $rootScope.$on '$stateChangeStart', (e, toState, toParams, fromState, fromParams) ->
@@ -312,20 +293,5 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     setParam: _setParam
     setParams: _setParams
     clearParams: _clearParams
-    # runQuery: _runQuery
-    # search: _search
     addToQuery: _addToQuery
     searchLike: _searchLike
-    # removeFromSearch: _removeFromSearch
-    # setCategory: (category) ->
-    #   _clearProducts()
-    #   _setCategoryById category.id
-    #   _runQuery()
-    # setOrder: (order) ->
-    #   _clearProducts()
-    #   _setSort order
-    #   _runQuery()
-    # setRange: (range) ->
-    #   _clearProducts()
-    #   _setRange range
-    #   _runQuery()
