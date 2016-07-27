@@ -215,7 +215,6 @@ fns.Product.search = (user, opts) ->
       _source: fns.Product.elasticsearch_findall_attrs
       body: esq.getQuery()
   .then (res) ->
-    # console.log 'res', res.hits.hits[0]._source
     omitSkuAttrs = (prod) ->
       prod.skus = _.map prod.skus, (sku) -> _.omit sku, ['discontinued', 'hide_from_catalog']
       prod
