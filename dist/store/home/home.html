@@ -23,3 +23,40 @@
 <!-- /Arranged -->
 
 <ee-loading loading="home.ee.User.reading" ee-min-height="600"></ee-loading>
+
+<!-- SR press section -->
+<div ng-show="home.ee.User.user.username == 'stylishrustic'"
+  class="container container-narrow white-background vert-20 pad-5">
+  <h3 class="full-width text-center text-muted font-weight-200 vert-10 margin-top-0">As seen on...</h3>
+  <div class="row">
+    <div class="col col-sm-3 text-center">
+      <a href="http://www.mysweetsavannahblog.com/2016/07/stylish-rustic-giveaway.html">
+        <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1469580980/my-sweet-savannah.jpg' | cloudinaryResizeTo:300:80:'pad' }}"
+          alt="My Sweet Savannah"
+          class="full-width max-width-300 margin-0-auto hover-color">
+      </a>
+    </div>
+    <div class="col col-sm-3 text-center">
+      <a href="http://simplestylings.com/dining-room-update-giveaway-stylish-rustic/">
+        <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1469580962/simple-stylings.jpg' | cloudinaryResizeTo:300:80:'pad' }}"
+          alt="Simple Stylings"
+          class="full-width max-width-300 margin-0-auto hover-color">
+      </a>
+    </div>
+    <div class="col col-sm-3 text-center">
+      <a href="http://carriebradshawlied.com/2015/06/paris-stamped-ottoman.html">
+        <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1469580902/carrie-bradshaw-lied.jpg' | cloudinaryResizeTo:300:80:'pad' }}"
+          alt="Carrie Bradshaw Lied"
+          class="full-width max-width-300 margin-0-auto hover-color">
+      </a>
+    </div>
+    <div class="col col-sm-3 text-center">
+      <a href="http://bliss-athome.com/decor-love-pineapple-giveaway/">
+        <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1469582891/bliss-at-home-2.png' | cloudinaryResizeTo:300:60:'pad' }}"
+          alt="Bliss at Home"
+          class="full-width max-width-300 margin-0-auto hover-color">
+      </a>
+    </div>
+  </div>
+</div>
+<!-- /SR press section -->
