@@ -88,7 +88,7 @@
         </div>
 
         <h4>Order Summary</h4>
-        <p class="margin-0">Items: <span class="pull-right" ng-bind="cart.ee.Cart.summary.cumulative_price | centToDollar"></span></p>
+        <p class="margin-0">Items: <span class="pull-right" ng-bind="cart.ee.Cart.cart.cumulative_price | centToDollar"></span></p>
         <p class="margin-0">Shipping & handling: <span class="pull-right"><span ng-hide="cart.ee.Cart.summary.free_shipping" ng-bind="cart.ee.Cart.summary.shipping_total | centToDollar"></span><span ng-show="cart.ee.Cart.summary.free_shipping">Free</span></span></p>
         <hr class="vert-5">
         <p class="margin-0">Total before tax: <span class="pull-right" ng-bind="cart.ee.Cart.summary.subtotal | centToDollar"></span></p>

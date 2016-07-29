@@ -14,7 +14,7 @@ angular.module('store.favorites').config ($stateProvider) ->
     #       controller: 'favoritesCtrl as favorites'
     #       templateUrl: 'store/favorites/favorites.html'
     #     footer:
-    #       controller: 'storeCtrl as storefront'
+    #       controller: 'footerCtrl as storefront'
     #       templateUrl: 'ee-shared/storefront/storefront.footer.html'
 
     .state 'favorite',
@@ -27,5 +27,5 @@ angular.module('store.favorites').config ($stateProvider) ->
           controller: 'favoriteCtrl as favorite'
           templateUrl: 'store/favorites/favorite.html'
         footer:
-          controller: 'storeCtrl as storefront'
+          controller: 'footerCtrl as storefront'
           templateUrl: 'ee-shared/storefront/storefront.footer.html'

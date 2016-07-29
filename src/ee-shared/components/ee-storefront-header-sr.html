@@ -15,6 +15,16 @@
   }
 </style>
 
+<!-- Coupon Header -->
+<div ng-if="couponData.coupon.uuid"
+  class="full-width pad-5 text-center">
+  Welcome!&nbsp;
+  <strong ng-if="couponData.coupon.percentage_off"><span ng-bind="couponData.coupon.percentage_off | percentage"></span>&nbsp;Off</strong>
+  <strong ng-if="couponData.coupon.dollars_off"><span ng-bind="couponData.coupon.dollars_off | centToDollar"></span>&nbsp;Off</strong>
+  &nbsp;Applied at Checkout&nbsp;
+</div>
+<!-- /Coupon Header -->
+
 <!-- SR Nav -->
 <nav class="navbar navbar-default bg-white round-0 margin-0 no-side-border" style="border-top: none;">
   <div class="container container-narrow">

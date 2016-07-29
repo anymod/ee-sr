@@ -17,5 +17,5 @@ angular.module('store.home').config ($stateProvider) ->
         #   controller: 'storeCtrl as storefront'
         #   templateUrl: 'ee-shared/storefront/storefront.carousel.html'
         footer:
-          controller: 'storeCtrl as storefront'
+          controller: 'footerCtrl as storefront'
           templateUrl: 'ee-shared/storefront/storefront.footer.html'

@@ -73,6 +73,7 @@ sources.storeModule = [
   './src/store/core/svc.cart.coffee'
   './src/store/core/svc.favorites.coffee'
   './src/store/core/svc.order.coffee'
+  './src/store/core/svc.coupon.coffee'
   # Module - store
   './src/store/store.controller.coffee'
   # Module - home
@@ -116,6 +117,8 @@ sources.storeModule = [
   './src/store/search/search.module.coffee'
   './src/store/search/search.route.coffee'
   './src/store/search/search.controller.coffee'
+  # Module - footer
+  './src/store/footer.controller.coffee'
   # Module - modal
   './src/store/modal/modal.controller.coffee'
   # Module - favorites
@@ -123,6 +126,9 @@ sources.storeModule = [
   './src/store/favorites/favorites.route.coffee'
   # './src/store/favorites/favorites.controller.coffee'
   './src/store/favorites/favorite.controller.coffee'
+  # Module - coupons
+  './src/store/coupons/coupons.module.coffee'
+  './src/store/coupons/coupons.route.coffee'
 ]
 
 ### DIRECTIVES ###

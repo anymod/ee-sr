@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('store.core').factory 'eeDefiner', (eeUser, eeProduct, eeProducts, eeCollection, eeCollections, eeCart, eeFavorites, eeOrder) ->
+angular.module('store.core').factory 'eeDefiner', (eeUser, eeProduct, eeProducts, eeCollection, eeCollections, eeCart, eeFavorites, eeOrder, eeCoupon) ->
 
   ## SETUP
   _exports =
@@ -12,6 +12,7 @@ angular.module('store.core').factory 'eeDefiner', (eeUser, eeProduct, eeProducts
     Cart:         eeCart.data
     Favorites:    eeFavorites.data
     Order:        eeOrder.data
+    Coupon:       eeCoupon.data
 
   ## PRIVATE FUNCTIONS
   # none

@@ -14,7 +14,7 @@ angular.module('store.product').config ($stateProvider) ->
           controller: 'productCtrl as product'
           templateUrl: 'store/product/product.html'
         footer:
-          controller: 'storeCtrl as storefront'
+          controller: 'footerCtrl as storefront'
           templateUrl: 'ee-shared/storefront/storefront.footer.html'
       params:
         title:

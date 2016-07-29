@@ -28,6 +28,7 @@ angular.module 'eeStore', [
   'store.help'
   'store.search'
   'store.favorites'
+  'store.coupons'
 
   # custom
   'ee-storefront-announcement'

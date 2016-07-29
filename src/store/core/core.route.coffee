@@ -10,7 +10,7 @@ angular.module('store.core').config ($stateProvider, $urlRouterProvider) ->
       controller: 'storeCtrl as storefront'
       templateUrl: 'ee-shared/storefront/storefront.about.html'
     footer:
-      controller: 'storeCtrl as storefront'
+      controller: 'footerCtrl as storefront'
       templateUrl: 'ee-shared/storefront/storefront.footer.html'
 
   $stateProvider
@@ -29,7 +29,7 @@ angular.module('store.core').config ($stateProvider, $urlRouterProvider) ->
           controller: 'storeCtrl as storefront'
           templateUrl: 'store/store.terms.html'
         footer:
-          controller: 'storeCtrl as storefront'
+          controller: 'footerCtrl as storefront'
           templateUrl: 'ee-shared/storefront/storefront.footer.html'
 
     .state 'privacy',
@@ -42,7 +42,7 @@ angular.module('store.core').config ($stateProvider, $urlRouterProvider) ->
           controller: 'storeCtrl as storefront'
           templateUrl: 'store/store.privacy.html'
         footer:
-          controller: 'storeCtrl as storefront'
+          controller: 'footerCtrl as storefront'
           templateUrl: 'ee-shared/storefront/storefront.footer.html'
 
 

@@ -6,6 +6,6 @@ angular.module('store.home').controller 'homeCtrl', (eeDefiner, eeUser, eeAnalyt
 
   home.ee = eeDefiner.exports
 
-  if eeAnalytics.data.pageDepth > 1 then eeUser.fns.getUser()
+  # if eeAnalytics.data.pageDepth > 1 then eeUser.fns.getUser()
 
   return

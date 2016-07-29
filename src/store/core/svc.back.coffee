@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('store.core').factory 'eeBack', ($http, $q, eeBackUrl, eeBootstrap) ->
+angular.module('store.core').factory 'eeBack', ($http, $q, $cookies, eeBackUrl, eeBootstrap) ->
 
   tr_uuid = eeBootstrap.tr_uuid
   $http.defaults.headers.common.Authorization = 'Basic ' + btoa(tr_uuid + ':store')
@@ -38,6 +38,10 @@ angular.module('store.core').factory 'eeBack', ($http, $q, eeBackUrl, eeBootstra
     addQuery = (key) -> parts.push(encodeURIComponent(key) + '=' + encodeURIComponent(query[key]))
     addQuery(key) for key in keys
     '?' + parts.join('&')
+
+  _coupon = () ->
+    uuid = $cookies.get 'coupon'
+    if uuid? and uuid isnt '' then uuid else null
 
   _productGET = (id) ->
     _makeRequest {
@@ -94,6 +98,7 @@ angular.module('store.core').factory 'eeBack', ($http, $q, eeBackUrl, eeBootstra
           quantity_array: quantity_array
           seller_id: eeBootstrap?.id
           domain: eeBootstrap?.url
+          coupon_uuid: _coupon()
       }
 
     cartGET: (cart_id) ->
@@ -103,6 +108,8 @@ angular.module('store.core').factory 'eeBack', ($http, $q, eeBackUrl, eeBootstra
       }
 
     cartPUT: (cart_id, data) ->
+      data ||= {}
+      data.coupon_uuid = _coupon()
       _makeRequest {
         method: 'PUT'
         url: eeBackUrl + 'carts/' + cart_id
@@ -163,6 +170,8 @@ angular.module('store.core').factory 'eeBack', ($http, $q, eeBackUrl, eeBootstra
       }
 
     paymentPOST: (data) ->
+      data ||= {}
+      data.coupon_uuid = _coupon()
       _makeRequest {
         method: 'POST'
         url: eeBackUrl + 'payments'
@@ -176,4 +185,11 @@ angular.module('store.core').factory 'eeBack', ($http, $q, eeBackUrl, eeBootstra
         data:
           order_uuid: uuid
           payer_id: payer_id
+          coupon_uuid: _coupon()
+      }
+
+    couponGET: (code_or_uuid) ->
+      _makeRequest {
+        method: 'GET'
+        url: eeBackUrl + 'store/coupons/' + code_or_uuid
       }

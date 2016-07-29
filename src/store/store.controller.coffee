@@ -1,20 +1,23 @@
 'use strict'
 
-angular.module('eeStore').controller 'storeCtrl', ($state, $location, eeDefiner, eeUser, eeAnalytics, categories) ->
+angular.module('eeStore').controller 'storeCtrl', ($state, $location, eeDefiner, eeUser, eeCoupon, eeAnalytics, categories) ->
 
   storefront = this
 
   storefront.ee = eeDefiner.exports
   storefront.categories = categories
   storefront.state = $state.current.name
-
-  if $state.current.name is 'storefront' and eeAnalytics.data.pageDepth > 1 then eeUser.fns.getUser()
-
   storefront.params = $location.search()
-  if storefront.params
-    storefront.query = storefront.params.q
+  if storefront.params then storefront.query = storefront.params.q
 
   storefront.productsUpdate = () ->
     $state.go 'storefront', { p: storefront.ee.Products.storefront.page }
+
+  switch $state.current.name
+    when 'storefront'
+      if eeAnalytics.data.pageDepth > 1 then eeUser.fns.getUser()
+    when 'coupon'
+      if !$state.params.uuid? or $state.params.uuid is '' then return $state.go 'storefront'
+      if !eeCoupon.data.coupon?.id then eeCoupon.fns.defineCoupon $state.params.uuid
 
   return

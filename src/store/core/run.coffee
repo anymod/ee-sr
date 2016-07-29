@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('store.core').run ($rootScope, $cookies, $location, $window, eeModal, eeAnalytics) ->
+angular.module('store.core').run ($rootScope, $cookies, $location, $window, eeModal, eeCoupon, eeAnalytics) ->
 
   ## SETUP
   $rootScope.isStore = true
@@ -18,6 +18,8 @@ angular.module('store.core').run ($rootScope, $cookies, $location, $window, eeMo
         if $window.pageYOffset > 1999
           $rootScope.openSignupModal()
           win.unbind 'scroll'
+
+  if $cookies.get('coupon')? then eeCoupon.fns.defineCoupon()
 
   ## MESSAGING
   $rootScope.$on 'keen:addEvent', (e, title) ->

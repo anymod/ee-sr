@@ -14,7 +14,7 @@ angular.module('store.search').config ($stateProvider) ->
           controller: 'searchCtrl as search'
           templateUrl: 'store/search/search.html'
         footer:
-          controller: 'storeCtrl as storefront'
+          controller: 'footerCtrl as storefront'
           templateUrl: 'ee-shared/storefront/storefront.footer.html'
       params:
         q: null # query
