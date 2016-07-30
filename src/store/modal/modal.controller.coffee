@@ -10,10 +10,6 @@ angular.module('eeStore').controller 'modalCtrl', ($rootScope, $state, $statePar
     minValue: 0
     maxValue: 300
     data: eeProducts.data
-    #   s: angular.copy .params.s
-    #   c: angular.copy eeProducts.data.params.c
-    # orderArray: eeProducts.data.orderArray
-    # categoryTitle: eeProducts.data.fromParams.categoryTitle
     categories: categories
     options:
       floor: 0
@@ -27,7 +23,6 @@ angular.module('eeStore').controller 'modalCtrl', ($rootScope, $state, $statePar
       setSearchFromModal()
       $state.go 'search', $stateParams # , { notify: $state.current.name isnt 'search' }
       eeModal.fns.close 'search'
-      # eeProducts.fns.runQuery()
 
   modal.setOrder = (order) ->
     modal.search.data.params.s = if modal.search.data.params.s is order.order then null else order.order
@@ -54,14 +49,13 @@ angular.module('eeStore').controller 'modalCtrl', ($rootScope, $state, $statePar
 
   setSearchFromModal = () ->
     $rootScope.$broadcast 'search:submit'
-    # eeProducts.fns.addToQuery eeProducts.data.searchBoxVal, { overwrite: true }
     eeProducts.fns.setParam 'p', 1
     if modal.search.minValue? and modal.search.maxValue?
       min = if modal.search.minValue < 0 then 0 else modal.search.minValue
       max = if modal.search.maxValue >= 300 then 0 else modal.search.maxValue
       eeProducts.fns.setParam 'r', [min, max].join('-')
     eeProducts.fns.setParam 's', modal.search.data.params.s
-    eeProducts.fns.setParam 'c', modal.search.data.params.c
+    eeProducts.fns.setParam 'c', modal.search.data.params.c, { goTo: 'search' }
 
   setModalFromSearch()
 

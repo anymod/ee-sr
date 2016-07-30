@@ -1,13 +1,13 @@
 'use strict'
 
-angular.module('eeStore').controller 'storeCtrl', ($state, $location, eeDefiner, eeUser, eeCoupon, eeAnalytics, categories) ->
+angular.module('eeStore').controller 'storeCtrl', ($state, $stateParams, eeDefiner, eeUser, eeCoupon, eeAnalytics, categories) ->
 
   storefront = this
 
   storefront.ee = eeDefiner.exports
   storefront.categories = categories
   storefront.state = $state.current.name
-  storefront.params = $location.search()
+  storefront.params = $stateParams
   if storefront.params then storefront.query = storefront.params.q
 
   storefront.productsUpdate = () ->

@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $stateParams, $location, $filter, eeBootstrap, eeBack, categories, stopWords) ->
+angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $stateParams, $filter, eeBootstrap, eeBack, categories, stopWords) ->
 
   ## SETUP
   _params = $stateParams
@@ -30,11 +30,9 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
 
   ## PRIVATE EXPORT DEFAULTS
   _data =
-    # inputs:   angular.copy _inputDefaults
     reading:      false
     params:       _params
     fromParams:   angular.copy _fromParams
-    # searchBoxVal: ''
     products:     eeBootstrap?.products
     count:        eeBootstrap?.count
     categories:   categories
@@ -43,13 +41,19 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     similarSize:  48
 
   ## PRIVATE FUNCTIONS
-  _setParam = (key, value) ->
-    $location.search key, value
+  _setParam = (key, value, opts) ->
+    opts ||= {}
+    if opts.resetParams? then $stateParams = {}
     $stateParams[key] = value
+    if opts.goTo? then return $state.go opts.goTo, $stateParams
+    return
 
-  _setParams = (obj) ->
+  _setParams = (obj, opts) ->
     obj ||= {}
+    opts ||= {}
     _setParam key, obj[key] for key in Object.keys(obj)
+    if opts.goTo? then return $state.go opts.goTo, $stateParams
+    return
 
   _clearParams = () -> _setParam(key, null) for key in Object.keys($stateParams)
 
@@ -103,102 +107,6 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     _data.products = []
     _data.count    = 0
 
-  # _setPage = (p) ->
-  #   if p then return _data.inputs.page = p
-  #   for attr in ['search', 'range', 'order', 'page', 'category_id']
-  #   if _lastQuery.search isnt _data.inputs.search or
-  #   _lastQuery.range?.min isnt _data.inputs.range?.min or
-  #   _lastQuery.range?.max isnt _data.inputs.range?.max or
-  #   _lastQuery.order?.title isnt _data.inputs.order?.title or
-  #   _lastQuery.category_id isnt _data.inputs.category_id
-  #     _data.inputs.page = 1
-  #
-  # _setRange = (range) ->
-  #   range ||= {}
-  #   if (_data.inputs.range.min is range.min and _data.inputs.range.max is range.max) or (range.min is 0 and range.max is 0)
-  #     _data.inputs.range.min = null
-  #     _data.inputs.range.max = null
-  #   else
-  #     _data.inputs.range.min = range.min
-  #     _data.inputs.range.max = range.max
-  #
-  # _setRangeByString = (rangeStr) ->
-  #   # '0-50'
-  #   return unless rangeStr?
-  #   [min, max] = rangeStr.split('-').map((n) -> parseInt(n) * 100)
-  #   _setRange { min: min, max: max }
-  #
-  # _setCategoryById = (category_id) ->
-  #   if !category_id?
-  #     _data.inputs.category_id = null
-  #     _data.inputs.category.title = null
-  #   for cat in _data.inputs.categories
-  #     if cat.id is parseInt(category_id)
-  #       _data.inputs.category_id = cat.id
-  #       _data.inputs.categoryTitle = cat.title
-  #
-  # _setCollectionById = (collection_id) ->
-  #   _data.inputs.collection_id = if collection_id? then parseInt(collection_id) else null
-  #
-  # _setSort = (order) ->
-  #   if !order? then order = _data.inputs.orderArray[0]
-  #   _data.inputs.order = order
-  #
-  # _setSortByString = (sortStr) ->
-  #   # 'pa'
-  #   return unless sortStr?
-  #   for order in _data.inputs.orderArray
-  #     if order.order is sortStr then return _data.inputs.order = order
-  #
-  # _addToken = (word) ->
-  #   return if !word? or word.length < 1 or word is 'null'
-  #   capitalized = word.charAt(0).toUpperCase() + word.toLowerCase().slice(1)
-  #   return if _data.inputs.searchTokens.indexOf(capitalized) > -1 or (word.length is 1 and isNaN(word))
-  #   return if stopWords.indexOf(word.toLowerCase()) > -1
-  #   _data.inputs.searchTokens.push capitalized
-  #
-  # _tokenizeSearch = (term) ->
-  #   term ||= ''
-  #   term.replace(/[^a-zA-Z0-9-]|^-/gi, '-').replace(/-+/g,'-').toLowerCase()
-  #   words = term.split(/[ ,]/g)
-  #   _data.inputs.searchTokens = []
-  #   _addToken word for word in words
-  #   _data.inputs.search = _data.inputs.searchTokens.join(' ')
-  #
-  # _setSearch = (term) ->
-  #   return unless term?
-  #   _tokenizeSearch term
-  #
-  # _setUrlParams = () ->
-  #   str = if _data.inputs.range?.min? or _data.inputs.range?.max? then [_data.inputs.range.min/100, _data.inputs.range.max/100].join('-') else null
-  #   $stateParams.r = str
-  #   $stateParams.p = _data.inputs.page
-  #   $stateParams.c = _data.inputs.category_id
-  #   $stateParams.s = _data.inputs.order?.order
-  #   $stateParams.q = _data.inputs.search
-  #   $stateParams.coll = _data.inputs.collection_id
-  #   $location.search 'r', str
-  #   $location.search 'p', _data.inputs.page
-  #   $location.search 'c', _data.inputs.category_id
-  #   $location.search 's', _data.inputs.order?.order
-  #   $location.search 'q', _data.inputs.search
-  #   $location.search 'coll', _data.inputs.collection_id
-  #
-  # _formQuery = () ->
-  #   _setPage()
-  #   _lastQuery = angular.copy _data.inputs
-  #   query = {}
-  #   query.size = _data.inputs.perPage
-  #   if _data.inputs.page?         then query.page           = _data.inputs.page
-  #   if _data.inputs.size?         then query.size           = _data.inputs.size
-  #   if _data.inputs.search?       then query.search         = _data.inputs.search
-  #   if _data.inputs.range.min?    then query.min_price      = _data.inputs.range.min
-  #   if _data.inputs.range.max?    then query.max_price      = _data.inputs.range.max
-  #   if _data.inputs.order.use?    then query.order          = _data.inputs.order.order
-  #   if _data.inputs.category_id?  then query.category_ids   = [_data.inputs.category_id]
-  #   if _data.inputs.collection_id? then query.collection_id  = _data.inputs.collection_id
-  #   query
-
   _runQuery = () ->
     if _data.reading then return $q.when()
     _data.reading = true
@@ -211,14 +119,10 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     .catch (err) -> _data.count = null
     .finally () -> _data.reading = false
 
-  # _search = (term) ->
-  #   if $state.current.name is 'storefront' then $state.go 'search', $stateParams
-  #   _clearProducts()
-  #   _setSearch term
-
-  _searchLike = (product) ->
+  _searchLike = (product, opts) ->
+    opts ||= {}
     _clearProducts()
-    _clearParams()
+    _clearParams() unless opts.silent?
     _setParam 'c', product.category_id
     _setParam 'q', product.title
     _setParam 'sz', _data.similarSize + 1
@@ -236,72 +140,20 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     opts ||= {}
     prefix = if opts.overwrite then '' else (_data.params.q || '') + ' '
     _tokenizeQuery prefix + term
-    # _setParam 'q',
-
-
-  # _removeFromSearch = (token) ->
-  #   index = _data.fromParams.queryTokens?.indexOf token
-  #   if index > -1 then _data.fromParams.queryTokens.splice(index, 1)
-  #   _search _data.fromParams.queryTokens.join(' ')
-
-  _formatTitleForSearch = (title) -> $filter('urlText')(title)
 
   ## Set initial values from URL
   _formQuery()
 
   ## MESSAGING
-  $rootScope.$on '$locationChangeStart', (e, newUrl, oldUrl) ->
-    params = angular.copy $location.search()
-    switch $state.current.name
-      when 'category' then params.c = $stateParams.id
-      when 'collection', 'sale' then params.coll = $stateParams.id
-      # when 'product' then params.q = $
-    _setParams params
+  $rootScope.$on '$stateChangeStart', (e, toState, toParams, fromState, fromParams) ->
+    switch toState.name
+      when 'category' then toParams.c = toParams.id
+      when 'collection', 'sale' then toParams.coll = toParams.id
+    _setParams toParams
     _runQuery()
+    return
 
-  $rootScope.$on 'product:navigate', (e, prod) ->
-    return $state.go('storefront') unless prod.id
-    title = _formatTitleForSearch prod.title
-    $state.go 'product', { id: prod.id, title: title, c: prod.category_id }, { notify: $state.current.name isnt 'product' }
-    _searchLike prod
-    window.scrollTo(0,0)
-
-  # $rootScope.$on 'search:boxValue', (e, value) ->
-  #   _data.searchBoxVal = value
-
-
-  # $rootScope.$on '$stateChangeStart', (e, toState, toParams, fromState, fromParams) ->
-  #   _setSearch        toParams.q
-  #   _setPage          toParams.p
-  #   _setSortByString  toParams.s
-  #   _setRangeByString toParams.r
-  #   _setCategoryById  toParams.c
-  #   _setCollectionById toParams.coll
-  #   switch toState.name
-  #     when 'storefront'
-  #       _setSearch ''
-  #       _setSort null
-  #       _setRange null
-  #       _setCategoryById null
-  #       _setCollectionById null
-  #     when 'category'
-  #       _setCategoryById toParams.id
-  #       _setCollectionById null
-  #     when 'collection'
-  #       _setCollectionById toParams.id
-  #       _setCategoryById null
-  #     when 'search'
-  #       _setCollectionById null
-  #     when 'sale'
-  #       _setCollectionById toParams.id
-  #       if fromState.name isnt 'sale'
-  #         _setSearch ''
-  #         _setSort null
-  #         _setRange null
-  #         _setCategoryById null
-  #   switch toState.name
-  #     when 'search', 'category', 'collection', 'sale' then _runQuery(true)
-  #   return
+  $rootScope.$on 'product:navigate', (e, prod) -> _searchLike prod, { silent: true }
 
   ## EXPORTS
   data: _data

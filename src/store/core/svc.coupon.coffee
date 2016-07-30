@@ -13,7 +13,6 @@ angular.module('store.core').factory 'eeCoupon', ($q, $cookies, eeBack) ->
   ## PRIVATE FUNCTIONS
   _defineCoupon = (uuid) ->
     uuid ||= _uuid()
-    console.log '_defineCoupon', uuid
     return $q.resolve() if !uuid?
     _data.reading = true
     eeBack.fns.couponGET uuid

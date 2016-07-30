@@ -1,6 +1,6 @@
 # 'use strict'
 #
-# angular.module('store.categories').controller 'categoryCtrl', ($rootScope, $location, $state, $stateParams, eeDefiner, eeProducts) ->
+# angular.module('store.categories').controller 'categoryCtrl', ($rootScope, $state, $stateParams, eeDefiner, eeProducts) ->
 #
 #   category = this
 #

@@ -26,6 +26,7 @@ angular.module('store.core').factory 'eeProduct', ($rootScope, $state, $filter, 
     return unless prod?.id? and prod.skus?.length > 0
     if !prod.skus[0].selection_text? then _defineProduct prod.id, { silent: true }
     _data.product = prod
+    return
 
   ## EXPORTS
   data: _data
