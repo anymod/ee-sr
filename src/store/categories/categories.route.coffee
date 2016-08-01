@@ -5,7 +5,7 @@ angular.module('store.categories').config ($stateProvider) ->
   $stateProvider
 
     .state 'category',
-      url: '/categories/:id/:title?q&p&s&r&c'
+      url: '/categories/:id/:title?q&p&s&r&c&coll'
       views:
         top:
           controller: 'storeCtrl as storefront'
@@ -22,6 +22,7 @@ angular.module('store.categories').config ($stateProvider) ->
         s: null # sort
         r: null # range
         c: null # category
+        coll: null # collection
       data:
         pageTitle:        'Search'
         pageDescription:  'Search our products'

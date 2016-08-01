@@ -52,6 +52,9 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     obj ||= {}
     opts ||= {}
     _setParam key, obj[key] for key in Object.keys(obj)
+    console.log '_setParams'
+    for key in Object.keys($stateParams)
+      console.log key, $stateParams[key]
     if opts.goTo? then return $state.go opts.goTo, $stateParams
     return
 
@@ -59,6 +62,9 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
 
   _formQuery = () ->
     query = {}
+    console.log '_formQuery'
+    for key in Object.keys($stateParams)
+      console.log key, $stateParams[key]
     if $stateParams.q?
       _tokenizeQuery $stateParams.q
       query.search = $stateParams.q
@@ -125,6 +131,7 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     _clearParams() unless opts.silent?
     _setParam 'c', product.category_id
     _setParam 'q', product.title
+    _setParam 'coll', null
     _setParam 'sz', _data.similarSize + 1
     _runQuery()
     .then () ->
@@ -141,17 +148,24 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     prefix = if opts.overwrite then '' else (_data.params.q || '') + ' '
     _tokenizeQuery prefix + term
 
+  _pageResetNeeded = (toState, toParams, fromState, fromParams) ->
+    switch toState.name
+      when 'category'
+        if toParams.id isnt fromParams.id then return true
+    false
+
   ## Set initial values from URL
   _formQuery()
 
   ## MESSAGING
   $rootScope.$on '$stateChangeStart', (e, toState, toParams, fromState, fromParams) ->
-    switch toState.name
-      when 'category' then toParams.c = toParams.id
-      when 'collection', 'sale' then toParams.coll = toParams.id
+    if toState.name is 'category' then toParams.c = toParams.id
+    toParams.coll = if toState.name is 'collection' or toState.name is 'sale' then toParams.id else null
+    if _pageResetNeeded(toState, toParams, fromState, fromParams) then toParams.p = null
     _setParams toParams
-    _runQuery()
-    return
+    switch toState.name
+      when 'product', 'storefront', 'help' then return
+      else _runQuery()
 
   $rootScope.$on 'product:navigate', (e, prod) -> _searchLike prod, { silent: true }
 

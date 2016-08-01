@@ -43,7 +43,7 @@ angular.module('eeStore').controller 'modalCtrl', ($rootScope, $state, $statePar
       modal.search.minValue = parseInt min
       modal.search.maxValue = parseInt max
     if modal.search.minValue < 0 then modal.search.minValue = 0
-    if modal.search.maxValue > 300 then modal.search.maxValue = 300
+    if modal.search.maxValue > 300 or modal.search.maxValue <= modal.search.minValue then modal.search.maxValue = 300
     if eeProducts.data.params.s? then modal.search.orderTitle = eeProducts.data.fromParams.orderTitle
     if eeProducts.data.params.c? then modal.search.data.categoryTitle = eeProducts.data.fromParams.categoryTitle
 

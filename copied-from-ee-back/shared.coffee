@@ -191,7 +191,6 @@ fns.Product.search = (user, opts) ->
 
   # Defaults
   opts.size ||= 48
-  category_ids = if opts.category_ids then ('' + opts.category_ids).split(',') else user.categorization_ids
 
   # Form query
   esq.query 'size', opts.size
