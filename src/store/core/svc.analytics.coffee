@@ -10,8 +10,8 @@ angular.module('store.core').factory 'eeAnalytics', ($window, $cookies, $locatio
 
   _signupTextArray = [
     'Follow us for sales and exclusive offers'
-    'Follow us for decor ideas'
-    'Stay in the know on the latest home furnishings'
+    # 'Follow us for decor ideas'
+    # 'Stay in the know on the latest home furnishings'
   ]
 
   ## PRIVATE EXPORT DEFAULTS
