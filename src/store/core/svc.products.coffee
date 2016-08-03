@@ -52,9 +52,6 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     obj ||= {}
     opts ||= {}
     _setParam key, obj[key] for key in Object.keys(obj)
-    console.log '_setParams'
-    for key in Object.keys($stateParams)
-      console.log key, $stateParams[key]
     if opts.goTo? then return $state.go opts.goTo, $stateParams
     return
 
@@ -62,9 +59,6 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
 
   _formQuery = () ->
     query = {}
-    console.log '_formQuery'
-    for key in Object.keys($stateParams)
-      console.log key, $stateParams[key]
     if $stateParams.q?
       _tokenizeQuery $stateParams.q
       query.search = $stateParams.q
