@@ -33,8 +33,8 @@ angular.module('store.home').controller 'favoriteCtrl', ($window, $state, $locat
     return
 
   favorite.openEmail = (refUrl) ->
-    subject = 'My favorites on Stylish Rustic'
-    body = "Hi!\n\nI'd like to share my list of Stylish Rustic favorites with you:" +
+    subject = 'My favorites on ' + favorite.ee.User.user?.storefront_meta?.name
+    body = "Hi!\n\nI'd like to share my list of " + favorite.ee.User.user?.storefront_meta?.name + " favorites with you:" +
     '\n\n' + refUrl +
     '\n\n' + 'Enjoy!'
     mailto = 'mailto:?Subject=' + encodeURI(subject) + '&body=' + encodeURI(body).replace(/\&/g, '%26')
