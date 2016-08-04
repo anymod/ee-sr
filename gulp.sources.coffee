@@ -158,6 +158,7 @@ sources.storeDirective = [
   './src/ee-shared/components/ee-image-fadein.coffee'
   './src/ee-shared/components/ee-products-list.coffee'
   './src/ee-shared/components/ee-paypal-button.coffee'
+  './src/ee-shared/components/ee-coupon-box.coffee'
 ]
 
 module.exports = sources

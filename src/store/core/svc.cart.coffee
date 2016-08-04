@@ -169,6 +169,14 @@ angular.module('store.core').factory 'eeCart', ($q, $rootScope, $state, $cookies
   ## MESSAGING
   $rootScope.$on 'cart:add:sku', (e, sku) -> _addSku sku
   $rootScope.$on 'cart:logout', (e, uuid) -> _logoutIfUUID uuid
+  $rootScope.$on 'coupon:added', (e, coupon) ->
+    if _data.cart?.uuid? and coupon?.uuid?
+      _data.cart.coupon_uuid = coupon.uuid
+      _createOrUpdate()
+  $rootScope.$on 'coupon:removed', (e) ->
+    if _data.cart?.uuid?
+      _data.cart.coupon_uuid = null
+      _createOrUpdate()
 
   ## EXPORTS
   data: _data

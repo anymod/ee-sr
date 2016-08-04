@@ -89,13 +89,20 @@
 
         <h4>Order Summary</h4>
         <p class="margin-0">Items: <span class="pull-right" ng-bind="cart.ee.Cart.cart.cumulative_price | centToDollar"></span></p>
-        <p class="margin-0" ng-if="cart.ee.Cart.cart.coupon_total > 0">Discount: <span class="pull-right text-success" ng-bind="'-' + cart.ee.Cart.cart.coupon_total | centToDollar"></span></p>
+        <p class="margin-0" ng-if="cart.ee.Cart.cart.coupon_total > 0">
+          <span ng-bind="cart.ee.Coupon.coupon.off_text || 'Discount'"></span>:
+          <span class="pull-right text-success" ng-bind="'-' + cart.ee.Cart.cart.coupon_total | centToDollar"></span>
+        </p>
         <p class="margin-0">Shipping & handling: <span class="pull-right"><span ng-hide="cart.ee.Cart.cart.shipping_total == 0" ng-bind="cart.ee.Cart.cart.shipping_total | centToDollar"></span><span ng-show="cart.ee.Cart.cart.shipping_total == 0" class="text-success">Free</span></span></p>
         <hr class="vert-5">
         <p class="margin-0">Total before tax: <span class="pull-right" ng-bind="cart.ee.Cart.cart.cumulative_price - cart.ee.Cart.cart.coupon_total + cart.ee.Cart.cart.shipping_total | centToDollar"></span></p>
         <p class="margin-0">Estimated tax: <span class="pull-right" ng-bind="cart.ee.Cart.cart.taxes_total | centToDollar"></span></p>
         <hr class="vert-5">
         <h4 class="margin-0">Order total: <span class="pull-right" ng-bind="cart.ee.Cart.cart.grand_total | centToDollar"></span></h4>
+
+        <div class="vert-20">
+          <ee-coupon-box></ee-coupon-box>
+        </div>
       </div>
     </div>
 

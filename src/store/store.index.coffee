@@ -54,5 +54,6 @@ angular.module 'eeStore', [
   'ee-image-fadein'
   'ee-products-list'
   'ee-paypal-button'
+  'ee-coupon-box'
   # 'ee.templates' # commented out during build step for inline templates
 ]
