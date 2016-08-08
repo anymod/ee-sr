@@ -187,6 +187,8 @@ fns.Product.search = (user, opts) ->
   user  ||= {}
   opts  ||= {}
 
+  if !opts.order? and !opts.search? and !opts.collection_id? then opts.order = 'cd'
+
   esq = new ESQ()
 
   # Defaults
