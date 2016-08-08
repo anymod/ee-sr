@@ -3,10 +3,6 @@ elasticsearch = require '../config/elasticsearch/setup'
 ESQ           = require 'esq'
 Promise       = require 'bluebird'
 _             = require 'lodash'
-# argv          = require('yargs').argv
-
-# Temporary for printing
-# util = require 'util'
 
 shared =
   defaults: require './shared.defaults'
