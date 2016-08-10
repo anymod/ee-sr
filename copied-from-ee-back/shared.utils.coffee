@@ -48,6 +48,15 @@ fns.luminance = (hex, lum) ->
     rgb += ("00" + c).substr(c.length)
   rgb
 
+fns.resizeCloudinaryImageTo = (url, w, h, c) ->
+  if !!url and url.indexOf("image/upload") > -1
+    regex = /\/v\d{8,12}\//g
+    id = url.match(regex)[0]
+    crop = if c then c else 'pad'
+    url.split(regex).join('/c_' + crop + ',w_' + w + ',h_' + h + id)
+  else
+    url
+
 # https://github.com/ivanakimov/hashids.node.js
 fns.obfuscateId = (id) -> hashids.encode id
 fns.unobfuscateId = (obfuscatedId) ->

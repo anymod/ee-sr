@@ -24,6 +24,9 @@ fns.User.addAccentColors = (obj) ->
     obj.storefront_meta.brand.color[attr + 'Accent'] = shared.utils.luminance(obj.storefront_meta.brand.color[attr], -0.1)
   obj
 
+fns.User.trimDesignBand = (obj, w, h, crop) ->
+  obj.design_band_image = shared.utils.resizeCloudinaryImageTo obj.design_band_image, w, h, crop
+
 fns.User.addPricing = (obj) ->
   defaultMargins = shared.defaults.marginRows
   if !obj?.pricing

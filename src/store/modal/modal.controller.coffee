@@ -17,8 +17,6 @@ angular.module('eeStore').controller 'modalCtrl', ($rootScope, $state, $statePar
       step: 5
       hideLimitLabels: true
       translate: (value) -> if value < 300 then '$' + value else '>$' + value
-      getSelectionBarColor: () -> '#F99'
-      getPointerColor: () -> '#F99'
     update: () ->
       setSearchFromModal()
       $state.go 'search', $stateParams # , { notify: $state.current.name isnt 'search' }

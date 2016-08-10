@@ -1,0 +1,111 @@
+<% if (!bootstrap.colors) { bootstrap.colors = {}; } %>
+<% colors = {
+  primary_background:           bootstrap.colors.primary_background || '#2C68A2',
+  primary_text:                 bootstrap.colors.primary_text || '#FFFFFF',
+  primary_border:               bootstrap.colors.primary_border || '#0A3258',
+  secondary_background:         bootstrap.colors.secondary_background || '#164F86',
+  secondary_text:               bootstrap.colors.secondary_text || '#FFFFFF',
+  secondary_text_highlight:     bootstrap.colors.secondary_text_highlight || 'indigo',
+  footer_background:            bootstrap.colors.footer_background || '#E6E6E6',
+  footer_text:                  bootstrap.colors.footer_text || '#333333',
+  footer_link:                  bootstrap.colors.footer_link || '#03A9F4',
+  white_text_primary:           bootstrap.colors.white_text_primary || '#40A397',
+  white_text_primary_shadow:    bootstrap.colors.white_text_primary_shadow || '#2E6D65',
+  white_text_secondary:         bootstrap.colors.white_text_secondary || '#6B5C84',
+  white_link:                   bootstrap.colors.white_link || '#03A9F4'
+} %>
+
+<style>
+  .text-primary { color: <%= colors.primary_text %> !important; }
+  .text-secondary { color: <%= colors.secondary_text %> !important; }
+  .text-success { color: <%= colors.white_text_primary %> !important; }
+  .text-info { color: <%= colors.white_text_secondary %> !important; }
+
+  .bg-primary { background: <%= colors.primary_background %>; }
+  .bg-secondary { background: <%= colors.secondary_background %>; }
+
+  .dropdown-menu > .active > a,
+  .dropdown-menu > .active > a:hover,
+  .dropdown-menu > .active > a:focus {
+    background-color: <%= colors.primary_background %>;
+    color: <%= colors.primary_text %>;
+  }
+  .navbar.ee-store-subnav {
+    background-color: <%= colors.primary_background %>;
+    border-bottom: 2px solid <%= bootstrap.colors.primary_border %>;
+  }
+  .navbar.ee-store-subnav .nav > li > a {
+    color: <%= colors.white_text_primary %>;
+    text-shadow: 1px 1px <%= colors.white_text_primary_shadow %>;
+  }
+  .ee-store-subnav .store-subnav-btn:hover,
+  .ee-store-subnav .store-subnav-btn:focus,
+  .ee-store-subnav .store-subnav-btn.active {
+    background: <%= colors.primary_border %> !important;
+  }
+  /*.ee-scroll-to-top { background-color: <%= colors.primary_background %>; }
+  .ee-scroll-to-top i { color: <%= bootstrap.storefront_meta.brand.color.tertiary %>; }*/
+  .text-themed-secondary { color: <%= colors.primary_background %>; }
+  .text-themed-secondary-accent { color: <%= colors.primary_border %>; }
+  .btn-themed,
+  .bg-themed {
+    background-color: <%= colors.primary_background %>;
+    color: <%= colors.primary_text %>;
+    border-color: <%= colors.primary_border %> !important;
+    border-bottom: 2px solid <%= colors.primary_border %> !important;
+  }
+  .btn-themed {
+    text-shadow: 1px 1px <%= colors.primary_border %>;
+  }
+  .btn-themed:hover,
+  .btn-themed:focus,
+  .btn-themed:active,
+  .tooltip-inner {
+    background: <%= colors.primary_border %> !important;
+    color: <%= colors.primary_text %> !important;
+  }
+  .tooltip-arrow { border-bottom-color: <%= colors.primary_border %> !important; }
+  .btn-themed.btn-lg { font-weight: bold; }
+  .btn-themed.btn-arrow {
+    border-top: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+  }
+  .btn-themed.btn-arrow:after {
+    border-color: <%= colors.primary_background %> transparent;
+  }
+  .btn-themed.btn-arrow:hover,
+  .btn-themed.btn-arrow:hover:after {
+    border-color: <%= colors.primary_border %> transparent !important;
+  }
+
+  .design-band {
+    height: 48px;
+    width: 100%;
+    background: <%= colors.primary_background %>;
+  }
+  <% if (!!bootstrap.design_band_image) { %>
+    .design-band {
+      background: url("<%= bootstrap.design_band_image %>") no-repeat center center !important;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+  <% } %>
+
+  #store-footer-region li > a { color: <%= colors.footer_link %>; }
+  .text-footer { color: <%= colors.footer_text %>; }
+  .bg-footer { background-color: <%= colors.footer_background %>; }
+
+  .alert-themed {
+    background-color: <%= colors.secondary_background %>;
+    border-color: <%= colors.secondary_border %>;
+    color: <%= colors.secondary_text %>;
+  }
+
+  .rzslider .rz-pointer,
+  .rzslider .rz-bar.rz-selection {
+    background: <%= colors.primary_background %> !important;
+  }
+</style>

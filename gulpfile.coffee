@@ -155,6 +155,11 @@ gulp.task "copy-prod", () ->
     .pipe gp.changed distPath
     .pipe gulp.dest distPath + '/ee-shared/stylesheets'
 
+  gulp.src './src/ejs/**/*.ejs'
+    .pipe gp.plumber()
+    .pipe gp.changed distPath
+    .pipe gulp.dest distPath + '/ejs'
+
 
 # ==========================
 # protractors

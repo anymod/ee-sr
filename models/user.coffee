@@ -15,10 +15,10 @@ Shared    = require '../copied-from-ee-back/shared'
 User =
 
   storeByDomain: (host) ->
-    sequelize.query 'SELECT id, tr_uuid, username, logo, storefront_meta, home_carousel, home_arranged, categorization_ids, pricing FROM "Users" WHERE domain = ? AND deleted_at IS NULL', { type: sequelize.QueryTypes.SELECT, replacements: [host] }
+    sequelize.query 'SELECT id, tr_uuid, username, store_name, logo, storefront_meta, colors, design_band_image, home_carousel, home_arranged, categorization_ids, pricing FROM "Users" WHERE domain = ? AND deleted_at IS NULL', { type: sequelize.QueryTypes.SELECT, replacements: [host] }
 
   storeByUsername: (username) ->
-    sequelize.query 'SELECT id, tr_uuid, username, logo, storefront_meta, home_carousel, home_arranged, categorization_ids, pricing FROM "Users" WHERE username = ? AND deleted_at IS NULL', { type: sequelize.QueryTypes.SELECT, replacements: [username] }
+    sequelize.query 'SELECT id, tr_uuid, username, store_name, logo, storefront_meta, colors, design_band_image, home_carousel, home_arranged, categorization_ids, pricing FROM "Users" WHERE username = ? AND deleted_at IS NULL', { type: sequelize.QueryTypes.SELECT, replacements: [username] }
 
   findByHost: (host) ->
     host  = host.replace 'www.', ''
@@ -37,6 +37,7 @@ User =
     .then (data) ->
       user = data[0]
       Shared.User.addAccentColors user
+      Shared.User.trimDesignBand user, 1200, 50, 'fill'
       utils.assignBootstrap bootstrap, user
 
   defineHomepage: (bootstrap) ->

@@ -1,0 +1,21 @@
+<% if (!!bootstrap.product) { %>
+  <!-- Schema.org markup for Google+ -->
+  <meta itemprop="name" content="<%= bootstrap.product.title %>">
+  <meta itemprop="description" content="<%= bootstrap.product.content %>">
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary">
+  <!-- <meta name="twitter:site" content="@publisher_handle"> -->
+  <!-- <meta name="twitter:creator" content="@author_handle"> -->
+  <meta name="twitter:title" content="<%= bootstrap.product.title %>">
+  <meta name="twitter:description" content="<%= bootstrap.product.content %>">
+
+  <!-- Open Graph data -->
+  <meta property="og:title" content="<%= bootstrap.product.title %>" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="<%= bootstrap.url %>" />
+  <meta property="og:description" content="<%= bootstrap.product.content %>" />
+  <meta property="og:site_name" content="<%= bootstrap.site_name %>" />
+  <meta property="og:price:amount" content="<%= parseInt(bootstrap.product.selling_price) / 100 %>" />
+  <meta property="og:price:currency" content="USD" />
+<% } %>

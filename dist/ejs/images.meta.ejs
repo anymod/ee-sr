@@ -1,0 +1,7 @@
+<% if (!!bootstrap.images) { %>
+  <% for(var i=0; i<bootstrap.images.length; i++) {%>
+    <meta itemprop="image" content="<%= bootstrap.images[i] %>">
+    <meta name="twitter:image" content="<%= bootstrap.images[i] %>">
+    <meta property="og:image" content="<%= bootstrap.images[i] %>" />
+  <% } %>
+<% } %>
