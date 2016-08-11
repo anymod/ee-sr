@@ -11,7 +11,6 @@ angular.module('store.core').factory 'eeUser', ($location, eeBootstrap, eeBack, 
 
   if eeBootstrap
     _data.user[attr] = eeBootstrap[attr] for attr in ['username', 'storefront_meta', 'logo', 'categorization_ids', 'home_carousel', 'home_arranged', 'colors', 'design_band_image', 'store_name']
-    console.log _data.user
 
   ## PRIVATE FUNCTIONS
   _getUser = () ->

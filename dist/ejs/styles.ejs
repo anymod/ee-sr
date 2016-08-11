@@ -24,6 +24,8 @@
   .bg-primary { background: <%= colors.primary_background %>; }
   .bg-secondary { background: <%= colors.secondary_background %>; }
 
+  .bg-primary .text-primary { text-shadow: 0 1px <%= colors.primary_background %>; }
+
   .dropdown-menu > .active > a,
   .dropdown-menu > .active > a:hover,
   .dropdown-menu > .active > a:focus {
@@ -86,7 +88,9 @@
   }
   <% if (!!bootstrap.design_band_image) { %>
     .design-band {
-      background: url("<%= bootstrap.design_band_image %>") no-repeat center center !important;
+      background-image: url("<%= bootstrap.design_band_image %>");
+      background-repeat: no-repeat;
+      background-position: center center;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
