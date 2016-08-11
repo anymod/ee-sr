@@ -10377,6 +10377,7 @@ img.logo {
 @media (max-width: 767px) {
   img.logo {
     max-height: 50px;
+    max-width: 200px;
   }
 }
 .nav-side {
