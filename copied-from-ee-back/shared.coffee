@@ -42,16 +42,16 @@ fns.User.addPricing = (obj) ->
 
 ### PRODUCT ###
 esqSetPagination = (esq, opts) ->
-  if opts?.size? and opts?.page?
+  if opts?.size and opts?.page
     opts.size = parseInt opts.size
     opts.page = parseInt opts.page
     esq.query 'from', parseInt(opts.size) * (parseInt(opts.page) - 1)
 
 esqSetSearch = (esq, opts) ->
-  if opts?.search? then esq.query 'query', 'bool', ['must'], 'match', title: { query: opts.search, fuzziness: 1, prefix_length: 3 }
+  if opts?.search then esq.query 'query', 'bool', ['must'], 'match', title: { query: opts.search, fuzziness: 1, prefix_length: 3 }
 
 esqSetSort = (esq, opts) ->
-  return unless opts?.order?
+  return unless opts?.order
   order = if opts.order.slice(-1) is 'a' then 'asc' else 'desc'
   sku_sort_order =
     nested_path: 'skus'
@@ -92,7 +92,7 @@ esqSetSort = (esq, opts) ->
     #   order = "profit ASC"
 
 esqSetExclusions = (esq, opts) ->
-  return if opts?.admin?
+  return if opts?.admin
   nested_match =
     nested:
       path: 'skus'
@@ -106,7 +106,7 @@ esqSetExclusions = (esq, opts) ->
   esq.query 'query', 'bool', ['must'], nested_match
 
 esqSetPrice = (esq, opts) ->
-  return unless opts?.min_price? or opts?.max_price
+  return unless opts?.min_price or opts?.max_price
   min_price = parseInt opts.min_price
   max_price = parseInt opts.max_price
   return if min_price is 0 and max_price is 0
@@ -125,14 +125,14 @@ esqSetPrice = (esq, opts) ->
   esq.query 'query', 'bool', ['must'], nested_match
 
 esqSetCategories = (esq, opts) ->
-  return unless opts?.category_ids? and opts.category_ids.split(',').length > 0
+  return unless opts?.category_ids and opts.category_ids.split(',').length > 0
   id_match =
     terms:
       category_id: opts.category_ids.split(',')
   esq.query 'query', 'bool', ['must'], id_match
 
 esqSetTag = (esq, opts) ->
-  return unless opts?.tag?
+  return unless opts?.tag
   tag_match =
     nested:
       path: 'skus'
@@ -144,14 +144,14 @@ esqSetTag = (esq, opts) ->
   esq.query 'query', 'bool', ['must'], tag_match
 
 esqSetProductIds = (esq, opts) ->
-  return unless opts?.product_ids? and opts.product_ids.split(',').length > 0
+  return unless opts?.product_ids and opts.product_ids.split(',').length > 0
   id_match =
     terms:
       id: opts.product_ids.split(',')
   esq.query 'query', 'bool', ['must'], id_match
 
 esqSetSkuIds = (esq, opts) ->
-  return if !opts?.sku_ids? or opts.sku_ids.split(',').length < 1
+  return if !opts?.sku_ids or opts.sku_ids.split(',').length < 1
   sku_ids = _.map opts.sku_ids.split(','), (id) -> parseInt(id) || 999999999999
   nested_match =
     nested:
@@ -182,7 +182,7 @@ esqSetNoDimensions = (esq, opts) ->
 
 esqSetCollectionId = (esq, opts) ->
   new Promise (resolve, reject) ->
-    return resolve(true) unless opts?.collection_id?
+    return resolve(true) unless opts?.collection_id
     sequelize.query 'SELECT product_ids FROM "Collections" WHERE id = ?', { type: sequelize.QueryTypes.SELECT, replacements: [opts.collection_id] }
     .then (data) ->
       opts.product_ids = data[0].product_ids.join(',')
