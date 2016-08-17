@@ -25,7 +25,7 @@ fns.User.addAccentColors = (obj) ->
   obj
 
 fns.User.trimDesignBand = (obj) ->
-  obj.design_band_image = shared.utils.resizeCloudinaryImageTo obj.design_band_image
+  obj.design_band_image = shared.utils.resizeCloudinaryImageTo obj.design_band_image, 1200, 50, 'fill'
 
 fns.User.addPricing = (obj) ->
   defaultMargins = shared.defaults.marginRows
