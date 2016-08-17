@@ -24,8 +24,8 @@ fns.User.addAccentColors = (obj) ->
     obj.storefront_meta.brand.color[attr + 'Accent'] = shared.utils.luminance(obj.storefront_meta.brand.color[attr], -0.1)
   obj
 
-fns.User.trimDesignBand = (obj, w, h, crop) ->
-  obj.design_band_image = shared.utils.resizeCloudinaryImageTo obj.design_band_image, w, h, crop
+fns.User.trimDesignBand = (obj) ->
+  obj.design_band_image = shared.utils.resizeCloudinaryImageTo obj.design_band_image
 
 fns.User.addPricing = (obj) ->
   defaultMargins = shared.defaults.marginRows
@@ -42,13 +42,13 @@ fns.User.addPricing = (obj) ->
 
 ### PRODUCT ###
 esqSetPagination = (esq, opts) ->
-  if opts?.size and opts?.page
+  if opts?.size? and opts?.page?
     opts.size = parseInt opts.size
     opts.page = parseInt opts.page
     esq.query 'from', parseInt(opts.size) * (parseInt(opts.page) - 1)
 
 esqSetSearch = (esq, opts) ->
-  if opts?.search then esq.query 'query', 'bool', ['must'], 'match', title: { query: opts.search, fuzziness: 1, prefix_length: 3 }
+  if opts?.search? then esq.query 'query', 'bool', ['must'], 'match', title: { query: opts.search, fuzziness: 1, prefix_length: 3 }
 
 esqSetSort = (esq, opts) ->
   return unless opts?.order?
@@ -131,6 +131,18 @@ esqSetCategories = (esq, opts) ->
       category_id: opts.category_ids.split(',')
   esq.query 'query', 'bool', ['must'], id_match
 
+esqSetTag = (esq, opts) ->
+  return unless opts?.tag?
+  tag_match =
+    nested:
+      path: 'skus'
+      query:
+        bool:
+          must: [
+            match: { 'skus.tags': opts.tag }
+          ]
+  esq.query 'query', 'bool', ['must'], tag_match
+
 esqSetProductIds = (esq, opts) ->
   return unless opts?.product_ids? and opts.product_ids.split(',').length > 0
   id_match =
@@ -153,7 +165,6 @@ esqSetSkuIds = (esq, opts) ->
   esq.query 'query', 'bool', ['must'], nested_match
 
 esqSetNoDimensions = (esq, opts) ->
-  # console.log esq, opts
   return unless opts?.no_dimensions
   nested_match =
     nested:
@@ -202,6 +213,7 @@ fns.Product.search = (user, opts) ->
   esqSetPrice esq, opts         # Price:      opts.min_price, opts.max_price
   # esqSetMaterial esq, opts      # Material: opts.material
   esqSetCategories esq, opts    # Categorization: opts.category_ids
+  esqSetTag esq, opts           # Tag:        opts.tag
   esqSetProductIds esq, opts    # Product ids: opts.product_ids
   esqSetSkuIds esq, opts        # Sku ids: opts.sku_ids
   # esqSetSupplierId esq, opts    # Supplier (admin only): opts.supplier_id
@@ -209,9 +221,9 @@ fns.Product.search = (user, opts) ->
   esqSetCollectionId esq, opts  # Collection: opts.collection_id (Promise-based)
   .then () ->
     # console.log 'esq.getQuery() -------------------------------'
-    # console.log esq.getQuery().query.bool.must[0].nested.query.bool.must[0]
+    # console.log esq.getQuery().query.bool.must
     elasticsearch.client.search
-      index: 'nested_search'
+      index: 'nested_search' # 'test_search'
       _source: fns.Product.elasticsearch_findall_attrs
       body: esq.getQuery()
   .then (res) ->
@@ -270,7 +282,7 @@ fns.Product.findAllByIds = (ids, opts) ->
   sequelize.query q, { type: sequelize.QueryTypes.SELECT }
 
 fns.Product.addCustomizationsFor = (user, products) ->
-  if !products or products.length < 1 then return
+  if !user?.id? or !products or products.length < 1 then return products
   product_ids = _.map products, 'id'
   for product in products
     if product.baseline_prices

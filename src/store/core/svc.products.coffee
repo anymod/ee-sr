@@ -71,6 +71,7 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     if $stateParams.s?    then query.order          = $stateParams.s
     if $stateParams.c?    then query.category_ids   = [$stateParams.c]
     if $stateParams.coll? then query.collection_id  = parseInt $stateParams.coll
+    query.tag = 'Mirrors'
     _data.params = $stateParams
     _setFromParams()
     query
