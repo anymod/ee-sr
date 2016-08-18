@@ -24,7 +24,6 @@ angular.module('store.core').factory 'eeProduct', ($rootScope, $state, $filter, 
   ## MESSAGING
   $rootScope.$on 'product:navigate', (e, prod) ->
     return unless prod?.id? and prod.skus?.length > 0
-    console.log 'product:navigate', prod
     if !prod.skus[0].selection_text? then _defineProduct prod.id, { silent: true }
     _data.product = prod
     return

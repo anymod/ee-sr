@@ -46,12 +46,12 @@
     </a>
   </div> -->
   <div ng-if="product.discounted"
-    ng-hide="hideSale"
     class="position-absolute"
     style="bottom: 44px; left: -1px;">
     <a ui-sref="sale({ id: product.discounted })"
       class="btn btn-themed btn-arrow">
-      Sale
+      <span ng-hide="hideSale">Sale</span>
+      <span ng-show="hideSale" ng-bind="1 - (product.prices[0] / product.msrps[0]) | percentage:0"></span>
     </a>
   </div>
   <!-- <div ng-hide="hideHeart"
