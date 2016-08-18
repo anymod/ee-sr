@@ -43,10 +43,10 @@ User =
   defineHomepage: (bootstrap) ->
     bootstrap.home_carousel ||= []
     bootstrap.home_arranged ||= []
-    Collection.findHomeCarousel bootstrap.home_carousel.join(','), { id: bootstrap.id, pricing: bootstrap.pricing }
+    Collection.findHomeCarousel bootstrap.home_carousel.join(','), { id: bootstrap.id, pricing: bootstrap.pricing, alpha: bootstrap.alpha }
     .then (collections) ->
       bootstrap.home_carousel = collections
-      Collection.findHomeArranged bootstrap.home_arranged.join(','), { id: bootstrap.id, pricing: bootstrap.pricing }
+      Collection.findHomeArranged bootstrap.home_arranged.join(','), { id: bootstrap.id, pricing: bootstrap.pricing, alpha: bootstrap.alpha }
     .then (collections) ->
       bootstrap.home_arranged = collections
       # console.log 'bootstrap', bootstrap
