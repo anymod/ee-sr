@@ -3,7 +3,7 @@
 angular.module 'eeStore', [
   # vendor
   'ngCookies'
-  'ngAnimate'
+  # 'ngAnimate'
   'ui.router'
   'ui.bootstrap'
   # 'ngSanitize'
