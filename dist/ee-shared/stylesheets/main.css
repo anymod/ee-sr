@@ -743,9 +743,9 @@ h2.title:before{
 }
 
 .category-products .badge {
-  background:none;
+  background:none !important;
   border-radius: 10px;
-  color: #696763;
+  color: #696763 !important;
   display: inline-block;
   font-size: 12px;
   font-weight: bold;
