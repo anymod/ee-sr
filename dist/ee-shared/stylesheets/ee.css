@@ -1,4 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two);
+@import "../stylesheets/price-range.css";
+@import "../stylesheets/animate.css";
+@import "../stylesheets/main.css";
+@import "../stylesheets/responsive.css";
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
