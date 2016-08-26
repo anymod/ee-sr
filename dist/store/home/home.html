@@ -4,7 +4,7 @@
     <uib-carousel interval="5000" no-wrap="false" no-transition="false" class="margin-0">
       <uib-slide ng-repeat="collection in home.ee.User.user.home_carousel" active="collection.active">
         <a ui-sref="collection({ id: collection.id })">
-          <img ng-src="{{ collection.banner }}" class="full-width gray-border" style="margin:auto;">
+          <img ng-src="{{ collection.banner | cloudinaryResizeTo:1140:480:'fill' }}" class="full-width gray-border" style="margin:auto;">
         </a>
       </uib-slide>
     </uib-carousel>
@@ -13,7 +13,7 @@
 <!-- /Carousel -->
 
 <!-- ~~~~~~~~~~~~~~~~~~ -->
-<section>
+<section class="vert-20">
   <div class="container">
     <div class="row">
       <div class="col-sm-3">
@@ -698,11 +698,11 @@
 <!-- / ~~~~~~~~~~~~~~~~~~ -->
 
 <!-- Arranged -->
-<div ng-if="home.ee.User.user.home_arranged.length > 0" class="container container-narrow">
+<!-- <div ng-if="home.ee.User.user.home_arranged.length > 0" class="container container-narrow">
   <div ng-repeat="collection in home.ee.User.user.home_arranged">
     <ee-collection-for-store collection="collection"></ee-collection-for-store>
   </div>
-</div>
+</div> -->
 <!-- /Arranged -->
 
 <ee-loading loading="home.ee.User.reading" ee-min-height="600"></ee-loading>
