@@ -2,10 +2,10 @@
 <div ng-if="home.ee.User.user.home_carousel.length > 0" class="container container-narrow">
   <div class="vert-10">
     <div class="margin-0-auto">
-      <div uib-carousel interval="5000" no-wrap="false" no-transition="false" class="margin-0">
-        <div uib-slide ng-repeat="collection in home.ee.User.user.home_carousel" active="active" index="$index">
+      <div uib-carousel interval=6000 active="active" class="collection-carousel margin-0">
+        <div uib-slide ng-repeat="collection in home.ee.User.user.home_carousel" index="$index">
           <a ui-sref="collection({ id: collection.id })">
-            <img ng-src="{{ collection.banner }}" class="full-width gray-border" style="margin:auto;">
+            <img ng-src="{{ collection.banner | cloudinaryResizeTo:800:420:'fill' }}" class="full-width" style="margin:auto;">
           </a>
         </div>
       </div>
