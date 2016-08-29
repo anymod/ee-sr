@@ -8864,6 +8864,67 @@ button.close {
 .carousel-control:hover {
   cursor: pointer;
 }
+.collection-carousel a.carousel-control {
+  position: absolute;
+  top: 50%;
+  bottom: inherit;
+  width: auto;
+  background: none;
+  opacity: 1;
+  font-size: 40px;
+  width: 65px;
+  height: 80px;
+  padding: 20px;
+  margin-top: -40px;
+  color: #C2C2C1;
+}
+.collection-carousel a.carousel-control .glyphicon {
+  color: #CCCCC6;
+  text-shadow: none;
+  width: 40px;
+  height: 40px;
+  font-size: 40px;
+  padding: 0 !important;
+}
+.collection-carousel a.carousel-control .glyphicon:hover {
+  color: #B6405F;
+}
+.collection-carousel a.left {
+  margin-left: -35px;
+}
+.collection-carousel a.right {
+  margin-right: -35px;
+}
+.collection-carousel .carousel-indicators {
+  display: none;
+}
+.product-carousel a.carousel-control {
+  position: absolute;
+  top: 41%;
+  bottom: inherit;
+  width: auto;
+  background: none;
+  opacity: 1;
+}
+.product-carousel a.carousel-control .glyphicon {
+  background: none repeat scroll 0 0 #B6405F;
+  color: #FFFFFF;
+  font-size: 15px;
+  text-shadow: none;
+  padding: 7px 9px;
+}
+.product-carousel a.carousel-control .glyphicon:hover {
+  background: #ccccc6;
+}
+.product-carousel a.left {
+  left: 15px;
+}
+.product-carousel a.right {
+  right: 15px;
+}
+.product-carousel .carousel-indicators {
+  display: none;
+}
 .bg-white,
 .white-background {
   background: white !important;
@@ -9193,40 +9254,6 @@ body.modal-open {
   border-radius: 0;
   overflow-y: scroll;
   overflow-x: hidden;
-}
-.carousel {
-  margin-bottom: 30px;
-}
-.carousel-control {
-  background: none !important;
-}
-.carousel-indicators {
-  display: none;
-}
-.carousel-caption {
-  left: 0;
-  right: 0;
-  bottom: -60px;
-  height: 60px;
-  padding: 0 3px;
-  color: #474747;
-  text-shadow: none;
-  text-align: left;
-}
-.carousel-caption h4 {
-  font-weight: 200;
-  font-size: 24px;
-  line-height: 24px;
-}
-@media (max-width: 600px) {
-  .carousel {
-    margin-bottom: 0;
-  }
-  .carousel-control .glyphicon {
-    padding: 8px;
-    margin-top: -18px;
-    background: #474747;
-  }
 }
 .pagination > li > a,
 .pagination > li > span {

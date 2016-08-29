@@ -3,7 +3,7 @@
 angular.module 'eeStore', [
   # vendor
   'ngCookies'
-  # 'ngAnimate'
+  'ngAnimate'
   'ui.router'
   'ui.bootstrap'
   # 'ngSanitize'
@@ -55,5 +55,6 @@ angular.module 'eeStore', [
   'ee-products-list'
   'ee-paypal-button'
   'ee-coupon-box'
+  'ee-product-single'
   # 'ee.templates' # commented out during build step for inline templates
 ]

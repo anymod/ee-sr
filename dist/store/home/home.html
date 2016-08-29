@@ -1,13 +1,13 @@
 <!-- Carousel -->
 <div ng-if="home.ee.User.user.home_carousel.length > 0" class="container">
   <div class="margin-0-auto">
-    <uib-carousel interval="5000" no-wrap="false" no-transition="false" class="margin-0">
-      <uib-slide ng-repeat="collection in home.ee.User.user.home_carousel" active="collection.active">
+    <div uib-carousel interval=6000 class="collection-carousel margin-0">
+      <div uib-slide ng-repeat="collection in home.ee.User.user.home_carousel" active="active" index="$index">
         <a ui-sref="collection({ id: collection.id })">
-          <img ng-src="{{ collection.banner | cloudinaryResizeTo:1140:480:'fill' }}" class="full-width gray-border" style="margin:auto;">
+          <img ng-src="{{ collection.banner | cloudinaryResizeTo:1140:480:'fill' }}" class="full-width" style="margin:auto;">
         </a>
-      </uib-slide>
-    </uib-carousel>
+      </div>
+    </div>
   </div>
 </div>
 <!-- /Carousel -->
@@ -156,19 +156,12 @@
           <div class="col-sm-4">
             <div class="product-image-wrapper">
               <div class="single-products">
-                  <div class="productinfo text-center">
-                    <img src="https://res.cloudinary.com/eeosk/image/upload/e_trim/c_pad,w_220,h_220/v1433891080/rpflywcmyrsyxnhytmv5.jpg" alt="" />
-                    <h2>$56</h2>
-                    <p>Easy Polo Black Edition</p>
-                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                  </div>
-                  <div class="product-overlay">
-                    <div class="overlay-content">
-                      <h2>$56</h2>
-                      <p>Easy Polo Black Edition</p>
-                      <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                    </div>
-                  </div>
+                <div class="productinfo text-center">
+                  <img src="https://res.cloudinary.com/eeosk/image/upload/e_trim/c_pad,w_220,h_220/v1433891080/rpflywcmyrsyxnhytmv5.jpg" alt="" />
+                  <h2>$56</h2>
+                  <p>Easy Polo Black Edition</p>
+                  <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                </div>
               </div>
               <div class="choose">
                 <ul class="nav nav-pills nav-justified">
@@ -587,7 +580,6 @@
                       <p>Easy Polo Black Edition</p>
                       <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                     </div>
-
                   </div>
                 </div>
               </div>
@@ -595,102 +587,18 @@
           </div>
         </div><!--/category-tab-->
 
-        <div class="recommended_items"><!--recommended_items-->
+        <!--recommended_items-->
+        <div class="recommended_items">
           <h2 class="title text-center">recommended items</h2>
-
-          <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-              <div class="item active">
-                <div class="col-sm-4">
-                  <div class="product-image-wrapper">
-                    <div class="single-products">
-                      <div class="productinfo text-center">
-                        <img src="https://res.cloudinary.com/eeosk/image/upload/e_trim/c_pad,w_220,h_220/v1471443473/6650.jpg" alt="" />
-                        <h2>$56</h2>
-                        <p>Easy Polo Black Edition</p>
-                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="product-image-wrapper">
-                    <div class="single-products">
-                      <div class="productinfo text-center">
-                        <img src="https://res.cloudinary.com/eeosk/image/upload/e_trim/c_pad,w_220,h_220/v1471443512/6658.jpg" alt="" />
-                        <h2>$56</h2>
-                        <p>Easy Polo Black Edition</p>
-                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="product-image-wrapper">
-                    <div class="single-products">
-                      <div class="productinfo text-center">
-                        <img src="https://res.cloudinary.com/eeosk/image/upload/e_trim/c_pad,w_220,h_220/v1471443446/6647.jpg" alt="" />
-                        <h2>$56</h2>
-                        <p>Easy Polo Black Edition</p>
-                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="col-sm-4">
-                  <div class="product-image-wrapper">
-                    <div class="single-products">
-                      <div class="productinfo text-center">
-                        <img src="https://res.cloudinary.com/eeosk/image/upload/e_trim/c_pad,w_220,h_220/v1471942191/7346.jpg" alt="" />
-                        <h2>$56</h2>
-                        <p>Easy Polo Black Edition</p>
-                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="product-image-wrapper">
-                    <div class="single-products">
-                      <div class="productinfo text-center">
-                        <img src="https://res.cloudinary.com/eeosk/image/upload/e_trim/c_pad,w_220,h_220/v1471942166/7366.jpg" alt="" />
-                        <h2>$56</h2>
-                        <p>Easy Polo Black Edition</p>
-                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="product-image-wrapper">
-                    <div class="single-products">
-                      <div class="productinfo text-center">
-                        <img src="https://res.cloudinary.com/eeosk/image/upload/e_trim/c_pad,w_220,h_220/v1471943183/7398.jpg" alt="" />
-                        <h2>$56</h2>
-                        <p>Easy Polo Black Edition</p>
-                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
+          <div uib-carousel interval="3000" class="product-carousel" active="active" no-wrap="noWrapSlides">
+            <div uib-slide ng-repeat="group in home.ee.User.user.home_recommended" active="group.active" class="carousel slide" index="$index">
+              <div class="col-sm-4" ng-repeat="product in group">
+                <ee-product-single product="product"></ee-product-single>
               </div>
             </div>
-             <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
-              <i class="fa fa-angle-left"></i>
-              </a>
-              <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
-              <i class="fa fa-angle-right"></i>
-              </a>
           </div>
-        </div><!--/recommended_items-->
-
+        </div>
+        <!--/recommended_items-->
       </div>
     </div>
   </div>
