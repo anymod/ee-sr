@@ -1,4 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two);
+@import "../stylesheets/price-range.css";
+@import "../stylesheets/animate.css";
+@import "../stylesheets/main.css";
+@import "../stylesheets/responsive.css";
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -1077,7 +1081,7 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   color: #555459;
-  background-color: #fcfcfc;
+  background-color: #ffffff;
 }
 input,
 button,
@@ -1122,7 +1126,7 @@ img {
 .img-thumbnail {
   padding: 4px;
   line-height: 1.42857143;
-  background-color: #fcfcfc;
+  background-color: #ffffff;
   border: 1px solid #dddddd;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
@@ -2272,7 +2276,7 @@ th {
   border-top: 2px solid #dddddd;
 }
 .table .table {
-  background-color: #fcfcfc;
+  background-color: #ffffff;
 }
 .table-condensed > thead > tr > th,
 .table-condensed > tbody > tr > th,
@@ -3918,7 +3922,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
   color: #555555;
-  background-color: #fcfcfc;
+  background-color: #ffffff;
   border: 1px solid #dddddd;
   border-bottom-color: transparent;
   cursor: default;
@@ -3964,7 +3968,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   .nav-tabs.nav-justified > .active > a,
   .nav-tabs.nav-justified > .active > a:hover,
   .nav-tabs.nav-justified > .active > a:focus {
-    border-bottom-color: #fcfcfc;
+    border-bottom-color: #ffffff;
   }
 }
 .nav-pills > li {
@@ -4032,7 +4036,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   .nav-tabs-justified > .active > a,
   .nav-tabs-justified > .active > a:hover,
   .nav-tabs-justified > .active > a:focus {
-    border-bottom-color: #fcfcfc;
+    border-bottom-color: #ffffff;
   }
 }
 .tab-content > .tab-pane {
@@ -4878,7 +4882,7 @@ a.badge:focus {
   padding: 4px;
   margin-bottom: 20px;
   line-height: 1.42857143;
-  background-color: #fcfcfc;
+  background-color: #ffffff;
   border: 1px solid #dddddd;
   border-radius: 4px;
   -webkit-transition: border 0.2s ease-in-out;
@@ -8860,6 +8864,67 @@ button.close {
 .carousel-control:hover {
   cursor: pointer;
 }
+.collection-carousel a.carousel-control {
+  position: absolute;
+  top: 50%;
+  bottom: inherit;
+  width: auto;
+  background: none;
+  opacity: 1;
+  font-size: 40px;
+  width: 65px;
+  height: 80px;
+  padding: 20px;
+  margin-top: -40px;
+  color: #C2C2C1;
+}
+.collection-carousel a.carousel-control .glyphicon {
+  color: #CCCCC6;
+  text-shadow: none;
+  width: 40px;
+  height: 40px;
+  font-size: 40px;
+  padding: 0 !important;
+}
+.collection-carousel a.carousel-control .glyphicon:hover {
+  color: #B6405F;
+}
+.collection-carousel a.left {
+  margin-left: -35px;
+}
+.collection-carousel a.right {
+  margin-right: -35px;
+}
+.collection-carousel .carousel-indicators {
+  display: none;
+}
+.product-carousel a.carousel-control {
+  position: absolute;
+  top: 41%;
+  bottom: inherit;
+  width: auto;
+  background: none;
+  opacity: 1;
+}
+.product-carousel a.carousel-control .glyphicon {
+  background: none repeat scroll 0 0 #B6405F;
+  color: #FFFFFF;
+  font-size: 15px;
+  text-shadow: none;
+  padding: 7px 9px;
+}
+.product-carousel a.carousel-control .glyphicon:hover {
+  background: #ccccc6;
+}
+.product-carousel a.left {
+  left: 15px;
+}
+.product-carousel a.right {
+  right: 15px;
+}
+.product-carousel .carousel-indicators {
+  display: none;
+}
 .bg-white,
 .white-background {
   background: white !important;
@@ -9190,40 +9255,6 @@ body.modal-open {
   overflow-y: scroll;
   overflow-x: hidden;
 }
-.carousel {
-  margin-bottom: 30px;
-}
-.carousel-control {
-  background: none !important;
-}
-.carousel-indicators {
-  display: none;
-}
-.carousel-caption {
-  left: 0;
-  right: 0;
-  bottom: -60px;
-  height: 60px;
-  padding: 0 3px;
-  color: #474747;
-  text-shadow: none;
-  text-align: left;
-}
-.carousel-caption h4 {
-  font-weight: 200;
-  font-size: 24px;
-  line-height: 24px;
-}
-@media (max-width: 600px) {
-  .carousel {
-    margin-bottom: 0;
-  }
-  .carousel-control .glyphicon {
-    padding: 8px;
-    margin-top: -18px;
-    background: #474747;
-  }
-}
 .pagination > li > a,
 .pagination > li > span {
   color: #777777;
@@ -9424,7 +9455,7 @@ html {
 .supranav {
   height: 30px;
   max-height: 30px;
-  background: #fcfcfc;
+  background: #ffffff;
 }
 .slid-up .supranav {
   margin-top: -30px;
@@ -10394,6 +10425,12 @@ img.logo {
 }
 .nav-side.open {
   left: 0;
+}
+.product-overlay {
+  display: none !important;
+}
+.productinfo img {
+  padding: 20px;
 }
 
 /*# sourceMappingURL=ee.css.map */
