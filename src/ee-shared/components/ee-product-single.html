@@ -16,10 +16,10 @@
           white-space: nowrap;
           margin: 0 auto 10px;">
       </p>
-      <a ui-sref="product({ id: product.id, title: (product.title | urlText) })"
+      <div ng-click="addToCart(product.skus[0])"
         class="btn btn-default add-to-cart">
         <i class="fa fa-shopping-cart"></i>Add to cart
-      </a>
+      </div>
     </div>
   </div>
   <div class="choose">

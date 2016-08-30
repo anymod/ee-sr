@@ -39,6 +39,21 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     orderArray:   _orderArray
     defaultSize:  eeBootstrap?.perPage || 48
     similarSize:  48
+    searchInputs:
+      minValue: 0
+      maxValue: 300
+      # data: eeProducts.data
+      categories: categories
+      options:
+        floor: 0
+        ceil: 300
+        step: 5
+        hideLimitLabels: true
+        translate: (value) -> if value < 300 then '$' + value else '>$' + value
+      update: () ->
+        setSearchFromModal()
+        $state.go 'search', $stateParams # , { notify: $state.current.name isnt 'search' }
+        eeModal.fns.close 'search'
 
   ## PRIVATE FUNCTIONS
   _setParam = (key, value, opts) ->

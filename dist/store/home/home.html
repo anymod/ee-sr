@@ -1,8 +1,8 @@
 <!-- Carousel -->
 <div ng-if="home.ee.User.user.home_carousel.length > 0" class="container">
   <div class="margin-0-auto">
-    <div uib-carousel interval=6000 class="collection-carousel margin-0">
-      <div uib-slide ng-repeat="collection in home.ee.User.user.home_carousel" active="active" index="$index">
+    <div uib-carousel interval=6000 active="active" class="collection-carousel margin-0">
+      <div uib-slide ng-repeat="collection in home.ee.User.user.home_carousel" index="$index">
         <a ui-sref="collection({ id: collection.id })">
           <img ng-src="{{ collection.banner | cloudinaryResizeTo:1140:480:'fill' }}" class="full-width" style="margin:auto;">
         </a>
@@ -78,13 +78,19 @@
             </div>
           </div><!--/brands_products-->
 
-          <div class="price-range"><!--price-range-->
+          <!--price-range-->
+          <div class="price-range">
             <h2>Price Range</h2>
-            <div class="well text-center">
+            <!-- <div class="well text-center">
                <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[0,600]" id="sl2" ><br />
                <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
-            </div>
-          </div><!--/price-range-->
+            </div> -->
+            <rzslider rz-slider-model="home.ee.Products.searchInputs.minValue"
+              rz-slider-high="home.ee.Products.searchInputs.maxValue"
+              rz-slider-options="home.ee.Products.searchInputs.options">
+            </rzslider>
+          </div>
+          <!--/price-range-->
 
           <div class="shipping text-center"><!--shipping-->
             <img src="../ee-shared/img/shipping.jpg" alt="" />
