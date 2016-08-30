@@ -6,7 +6,7 @@
   class="container container-narrow vert-5 text-center">
 
   <div ng-if="search.ee.Products.count > search.ee.Products.fromParams.perPage" class="margin-10">
-    <uib-pagination
+    <div uib-pagination
       total-items="search.ee.Products.count"
       items-per-page="search.ee.Products.fromParams.perPage"
       ng-model="search.ee.Products.params.p"
@@ -15,7 +15,7 @@
       previous-text="&lsaquo;" next-text="&rsaquo;"
       rotate="false"
       ng-change="search.update()">
-    </uib-pagination>
+    </div>
   </div>
 
   <!-- <ee-storefront-announcement
@@ -32,7 +32,7 @@
 
   <div ng-if="search.ee.Products.count > search.ee.Products.fromParams.perPage"
     class="pad-20 vert-20">
-    <uib-pagination
+    <div uib-pagination
       total-items="search.ee.Products.count"
       items-per-page="search.ee.Products.fromParams.perPage"
       ng-model="search.ee.Products.params.p"
@@ -41,7 +41,7 @@
       previous-text="&lsaquo;" next-text="&rsaquo;"
       rotate="false"
       ng-change="search.update()">
-    </uib-pagination>
+    </div>
   </div>
 </div>
 

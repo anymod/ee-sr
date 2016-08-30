@@ -2,16 +2,16 @@
   .help-page li.active > a > uib-tab-heading { color: #555; }
 </style>
 
-<div class="container container-narrow vert-20 help-page">
-  <uib-tabset>
+<div class="container vert-20 help-page">
+  <div uib-tabset active="home.active">
     <!-- Returns -->
-    <uib-tab active="help.returnsTab">
-      <uib-tab-heading class="text-muted">Returns</uib-tab-heading>
+    <div uib-tab index=1>
+      <div uib-tab-heading class="text-muted">Returns</div>
       <div class="pad-10">
         <h4>Customer satisfaction is our #1 goal</h4>
         <p>Because we want you to have the best possible experience, we make returning your items simple and easy.</p>
         <p>
-          To initiate a return, simply submit your order number here and we will send you instructions on how to return your order.  To find your order number, please refer to your confirmation email you received when you placed your order. Having trouble locating the order number? Send us a note in the <a href ng-click="help.contactTab = true">Contact Us</a> tab.
+          To initiate a return, simply submit your order number here and we will send you instructions on how to return your order.  To find your order number, please refer to your confirmation email you received when you placed your order. Having trouble locating the order number? Send us a note in the <span class="text-underline hover-pointer" ng-click="home.active = 3">Contact Us</span> tab.
           <form ng-submit="help.initiateReturn()" class="form-inline max-width-300">
             <small>Order Number</small>
             <br>
@@ -39,12 +39,12 @@
         <p>There may be a 25% restocking fee if items are not returned in original packaging. This includes "refused", "unclaimed", or "undeliverable” items returned by the shipping company.</p>
         <p>If you have multiple orders to return, please fill out an individual form for each order and keep the items in original packaging.</p>
       </div>
-    </uib-tab>
+    </div>
     <!-- /Returns -->
 
     <!-- Shipping -->
-    <uib-tab active="help.shippingTab">
-      <uib-tab-heading class="text-muted">Shipping</uib-tab-heading>
+    <div uib-tab index=2>
+      <div uib-tab-heading class="text-muted">Shipping</div>
       <div class="pad-10">
         <h4>We typically ship within 1-2 business days</h4>
         <p>We strive to have fast turnaround times so that you can receive your order quickly.</p>
@@ -56,12 +56,12 @@
         <h4>Shipping outside of the United States</h4>
         <p>We do not currently offer shipping outside of the United States.</p>
       </div>
-    </uib-tab>
+    </div>
     <!-- /Shipping -->
 
     <!-- Contact -->
-    <uib-tab active="help.contactTab">
-      <uib-tab-heading class="text-muted">Contact Us</uib-tab-heading>
+    <div uib-tab index=3>
+      <div uib-tab-heading class="text-muted">Contact Us</div>
       <div class="pad-10">
         <h4>Contact Us</h4>
         <p>Use the form below to contact us with questions, comments, or feedback.</p>
@@ -89,7 +89,7 @@
       <div ng-show="help.success" class="alert alert-success max-width-300">
         Your message was sent. Thanks!
       </div>
-    </uib-tab>
+    </div>
     <!-- /Contact -->
-  </uib-tabset>
+  </div>
 </div>
