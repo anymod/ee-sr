@@ -9279,11 +9279,6 @@ body.modal-open {
 .ng-cloak {
   display: none;
 }
-.container-narrow {
-  max-width: 900px;
-  padding-left: 2px;
-  padding-right: 2px;
-}
 html,
 body {
   height: 100%;
