@@ -6,14 +6,9 @@ angular.module('store.help').controller 'helpCtrl', ($location, eeDefiner, eeBac
 
   help.ee = eeDefiner.exports
 
-  help.returnsTab = true
-  help.contactTab = false
-
   setBtnText    = (txt) -> help.btnText = txt
   resetBtnText  = ()    -> setBtnText 'Send'
   resetBtnText()
-  # setTab = (setTo) ->
-    # for tab in ['returnsTab', '']
 
   help.initiateReturn = () ->
     if !help.orderNumber then return help.returnAlert = 'Please enter your order number'
