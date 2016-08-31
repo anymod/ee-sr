@@ -8,7 +8,7 @@
         ng-click="imageClick()"
         alt="{{ product.title }}"
         class="hover-pointer img-responsive full-width transition-400" />
-      <h2 ng-bind="product.price | centToDollar"></h2>
+      <h2 ng-bind="product.prices | priceRange"></h2>
       <p ng-bind="product.title"
         style="width: 90%;
           text-overflow: ellipsis;
@@ -24,7 +24,8 @@
   </div>
   <div class="choose">
     <ul class="nav nav-pills nav-justified">
-      <li><a href="#"><i class="fa fa-heart"></i>Add to favorites</a></li>
+      <!-- <li><a href="#"><i class="fa fa-heart"></i>Add to favorites</a></li> -->
+      <li><ee-favorites-heart product-skus="product.skus"></ee-favorites-heart></li>
       <li><a ui-sref="search({ q: product.title, c: product.category_id })"><i class="fa fa-search"></i>More like this</a></li>
     </ul>
   </div>

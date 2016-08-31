@@ -104,7 +104,11 @@
       <div class="col-sm-9 padding-right">
         <div class="featured_items"><!--featured_items-->
           <h2 class="title text-center">Featured Items</h2>
-          <div class="col-sm-4">
+          <div class="col-sm-4" ng-repeat="product in home.ee.User.user.home_featured">
+            <ee-product-single product="product"></ee-product-single>
+          </div>
+
+          <!-- <div class="col-sm-4">
             <div class="product-image-wrapper">
               <div class="single-products">
                 <div class="productinfo text-center">
@@ -247,7 +251,7 @@
                 </ul>
               </div>
             </div>
-          </div>
+          </div> -->
 
         </div><!--featured_items-->
 

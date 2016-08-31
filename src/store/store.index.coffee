@@ -39,7 +39,7 @@ angular.module 'eeStore', [
   # 'ee-scroll-show'
   'ee-collection-nav'
   'ee-collection-for-store'
-  'ee-product-for-store'
+  # 'ee-product-for-store'
   'ee-product-card'
   # 'ee-product-card-compact'
   'ee-product-images'

@@ -135,7 +135,7 @@ sources.storeModule = [
 ### DIRECTIVES ###
 sources.storeDirective = [
   './src/ee-shared/components/ee-button-add-to-cart.coffee'
-  './src/ee-shared/components/ee-product-for-store.coffee'
+  # './src/ee-shared/components/ee-product-for-store.coffee'
   './src/ee-shared/components/ee-product-card.coffee'
   # './src/ee-shared/components/ee-product-card-compact.coffee'
   './src/ee-shared/components/ee-collection-nav.coffee'
