@@ -21,6 +21,10 @@
         <i class="fa fa-shopping-cart"></i>Add to cart
       </div>
     </div>
+    <a ui-sref="sale({ id: product.discounted })"
+      ng-if="product.discounted">
+      <img src="ee-shared/img/sale.png" class="new" alt="Sale">
+    </a>
   </div>
   <div class="choose">
     <ul class="nav nav-pills nav-justified">
