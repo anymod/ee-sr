@@ -1,7 +1,7 @@
 <!-- Carousel -->
 <div ng-if="home.ee.User.user.home_carousel.length > 0" class="container">
   <div class="margin-0-auto">
-    <div uib-carousel interval=6000 active="active" class="collection-carousel margin-0">
+    <div uib-carousel interval=6000 active="home.carouselActive" class="collection-carousel margin-0">
       <div uib-slide ng-repeat="collection in home.ee.User.user.home_carousel" index="$index">
         <a ui-sref="collection({ id: collection.id })">
           <img ng-src="{{ collection.banner | cloudinaryResizeTo:1140:480:'fill' }}" class="full-width" style="margin:auto;">
@@ -545,8 +545,8 @@
         <!--recommended_items-->
         <div class="recommended_items">
           <h2 class="title text-center">recommended items</h2>
-          <div uib-carousel interval="3000" class="product-carousel" active="active" no-wrap="noWrapSlides">
-            <div uib-slide ng-repeat="group in home.ee.User.user.home_recommended" active="group.active" class="carousel slide" index="$index">
+          <div uib-carousel interval="3000" class="product-carousel" active="home.recommendedActive" no-wrap="noWrapSlides">
+            <div uib-slide ng-repeat="group in home.ee.User.user.home_recommended" class="carousel slide" index="$index">
               <div class="col-sm-4" ng-repeat="product in group">
                 <ee-product-single product="product"></ee-product-single>
               </div>
