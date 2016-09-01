@@ -315,6 +315,764 @@ fns.Product.elasticsearch_findall_attrs = [
   'skus'
   # 'msrps'
 ]
+
+fns.Product.findHomeFeatured = (product_ids, user) ->
+  product_ids ||= '0'
+  fns.Product.search user, { product_ids: product_ids }
+
+fns.Product.findHomeRecommended = (product_ids, user) ->
+  product_ids ||= '0'
+  fns.Product.search user, { product_ids: product_ids }
+  .then (res) ->
+    recommended =
+      groups: []
+    i = 0
+    while i < res.rows.length && i <= 48
+      recommended.groups.push res.rows.slice(i, i + 3)
+      i += 3
+    recommended
+
+fns.Product.findSubtag = (subtags, tagName, user) ->
+  fns.Product.search user, { size: 4, search: tagName }
+  .then (res) ->
+    for subtag in subtags
+      if subtag.name is tagName then subtag.products = res.rows
+
+fns.Product.findSubtags = (user) ->
+  # tagNames = ['Mirror', 'Lamp', 'Chair', 'Bookend', 'Candle Holder']
+  # subtags = []
+  # for tag in tagNames
+  #   subtags.push { name: tag }
+  # Promise.reduce tagNames, ((total, tagName) -> fns.Product.findSubtag(subtags, tagName, user)), 0
+  # .then () -> subtags
+  [
+    {
+      "name": "Mirror",
+      "products": [
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1463156174/4321.jpg",
+          "skus": [
+            {
+              "shipping_price": 0,
+              "quantity": 59,
+              "color": null,
+              "length": 1,
+              "weight": null,
+              "tags": [
+                "Home, garden & living",
+                "Home decor",
+                "Mirrors"
+              ],
+              "material": null,
+              "size": null,
+              "product_id": 4321,
+              "msrp": 27800,
+              "width": 36,
+              "style": null,
+              "id": 6496,
+              "height": 36,
+              "price": 29900
+            }
+          ],
+          "category_id": 4,
+          "id": 4321,
+          "title": "Mirrored Frame Circular Mirror",
+          "msrps": [
+            27800
+          ],
+          "prices": [
+            29900
+          ]
+        },
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1429115291/k6bzllhhgdftiscmxlry.jpg",
+          "skus": [
+            {
+              "shipping_price": 0,
+              "quantity": 84,
+              "color": null,
+              "length": 1,
+              "weight": 28.95,
+              "tags": [
+                "Home, garden & living",
+                "Home decor",
+                "Mirrors"
+              ],
+              "material": "",
+              "size": null,
+              "product_id": 107,
+              "msrp": 13800,
+              "width": 23.5,
+              "style": null,
+              "id": 372,
+              "height": 23.5,
+              "price": 11100
+            }
+          ],
+          "category_id": 4,
+          "id": 107,
+          "title": "Warner Mirror",
+          "msrps": [
+            13800
+          ],
+          "prices": [
+            11100
+          ]
+        },
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1433891077/raugagdkubzhfzbr1zjg.jpg",
+          "skus": [
+            {
+              "shipping_price": 0,
+              "quantity": 34,
+              "color": null,
+              "length": 1,
+              "weight": 90.36,
+              "tags": [
+                "Home, garden & living",
+                "Home decor",
+                "Mirrors"
+              ],
+              "material": "",
+              "size": null,
+              "product_id": 308,
+              "msrp": 37800,
+              "width": 43,
+              "style": null,
+              "id": 834,
+              "height": 43,
+              "price": 35400
+            }
+          ],
+          "category_id": 4,
+          "id": 308,
+          "title": "Comran Mirror",
+          "msrps": [
+            37800
+          ],
+          "prices": [
+            35400
+          ]
+        },
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1433891078/fhs6zb6u53sykextolfs.jpg",
+          "skus": [
+            {
+              "shipping_price": 0,
+              "quantity": 27,
+              "color": null,
+              "length": 2,
+              "weight": 203.61,
+              "tags": [
+                "Home, garden & living",
+                "Home decor",
+                "Mirrors"
+              ],
+              "material": "",
+              "size": null,
+              "product_id": 312,
+              "msrp": 54600,
+              "width": 54,
+              "style": null,
+              "id": 838,
+              "height": 54,
+              "price": 46000
+            }
+          ],
+          "category_id": 4,
+          "id": 312,
+          "title": "Sunburst Mirror",
+          "msrps": [
+            54600
+          ],
+          "prices": [
+            46000
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Lamp",
+      "products": [
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1463157627/5089.jpg",
+          "skus": [
+            {
+              "shipping_price": 0,
+              "quantity": 10,
+              "color": null,
+              "length": 17,
+              "weight": null,
+              "tags": [
+                "Home, garden & living",
+                "Lamps & lighting",
+                "Lamps, bases & shades"
+              ],
+              "material": null,
+              "size": null,
+              "product_id": 5089,
+              "msrp": 25932,
+              "width": 12,
+              "style": null,
+              "id": 7277,
+              "height": 31,
+              "price": 23600
+            }
+          ],
+          "category_id": 4,
+          "id": 5089,
+          "title": "Pure Essence Table Lamp",
+          "msrps": [
+            25932
+          ],
+          "prices": [
+            23600
+          ]
+        },
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1463157588/5073.jpg",
+          "skus": [
+            {
+              "shipping_price": 0,
+              "quantity": 10,
+              "color": null,
+              "length": 2.8,
+              "weight": null,
+              "tags": [
+                "Home, garden & living",
+                "Collectibles",
+                "Lamps, lighting"
+              ],
+              "material": null,
+              "size": null,
+              "product_id": 5073,
+              "msrp": 2754,
+              "width": 2.8,
+              "style": null,
+              "id": 7261,
+              "height": 7.5,
+              "price": 2600
+            }
+          ],
+          "category_id": 4,
+          "id": 5073,
+          "title": "Mini Glitter Lamp",
+          "msrps": [
+            2754
+          ],
+          "prices": [
+            2600
+          ]
+        },
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1463157602/5080.jpg",
+          "skus": [
+            {
+              "shipping_price": 0,
+              "quantity": 10,
+              "color": null,
+              "length": 21,
+              "weight": null,
+              "tags": [
+                "Home, garden & living",
+                "Lamps & lighting",
+                "Lamps, bases & shades"
+              ],
+              "material": null,
+              "size": null,
+              "product_id": 5080,
+              "msrp": 23771,
+              "width": 21,
+              "style": null,
+              "id": 7268,
+              "height": 20.5,
+              "price": 21700
+            }
+          ],
+          "category_id": 4,
+          "id": 5080,
+          "title": "Moon Jewel Ceiling Lamp",
+          "msrps": [
+            23771
+          ],
+          "prices": [
+            21700
+          ]
+        },
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1463157614/5084.jpg",
+          "skus": [
+            {
+              "shipping_price": 0,
+              "quantity": 10,
+              "color": null,
+              "length": 16,
+              "weight": null,
+              "tags": [
+                "Home, garden & living",
+                "Lamps & lighting",
+                "Lamps, bases & shades"
+              ],
+              "material": null,
+              "size": null,
+              "product_id": 5084,
+              "msrp": 20362,
+              "width": 16,
+              "style": null,
+              "id": 7272,
+              "height": 63.5,
+              "price": 18600
+            }
+          ],
+          "category_id": 4,
+          "id": 5084,
+          "title": "Crystal Rose Floor Lamp",
+          "msrps": [
+            20362
+          ],
+          "prices": [
+            18600
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Chair",
+      "products": [
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1471943211/7422.jpg",
+          "skus": [
+            {
+              "shipping_price": 0,
+              "quantity": 79,
+              "color": null,
+              "length": 82.5,
+              "weight": null,
+              "tags": [
+                "Home, garden & living",
+                "Patio",
+                "Chairs"
+              ],
+              "material": null,
+              "size": null,
+              "product_id": 7422,
+              "msrp": 95700,
+              "width": 25,
+              "style": null,
+              "id": 9677,
+              "height": 26.5,
+              "price": 45800
+            }
+          ],
+          "category_id": 6,
+          "id": 7422,
+          "title": "BIARRITZ CHAISE LOUNGE ESPRESSO",
+          "msrps": [
+            95700
+          ],
+          "prices": [
+            45800
+          ]
+        },
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1471943215/7423.jpg",
+          "skus": [
+            {
+              "shipping_price": 0,
+              "quantity": 44,
+              "color": null,
+              "length": 72.5,
+              "weight": null,
+              "tags": [
+                "Home, garden & living",
+                "Patio",
+                "Chairs"
+              ],
+              "material": null,
+              "size": null,
+              "product_id": 7423,
+              "msrp": 80700,
+              "width": 25.5,
+              "style": null,
+              "id": 9678,
+              "height": 18.5,
+              "price": 40300
+            }
+          ],
+          "category_id": 6,
+          "id": 7423,
+          "title": "SYDNEY CHAISE LOUNGE ESPRESSO",
+          "msrps": [
+            80700
+          ],
+          "prices": [
+            40300
+          ]
+        },
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1471943216/7424.jpg",
+          "skus": [
+            {
+              "shipping_price": 0,
+              "quantity": 1,
+              "color": null,
+              "length": 24.4,
+              "weight": null,
+              "tags": [
+                "Home, garden & living",
+                "Patio",
+                "Chairs"
+              ],
+              "material": null,
+              "size": null,
+              "product_id": 7424,
+              "msrp": 95700,
+              "width": 68.9,
+              "style": null,
+              "id": 9679,
+              "height": 39.4,
+              "price": 45800
+            }
+          ],
+          "category_id": 6,
+          "id": 7424,
+          "title": "LIDO CHAISE LOUNGE BROWN",
+          "msrps": [
+            95700
+          ],
+          "prices": [
+            45800
+          ]
+        },
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1471943861/7444.jpg",
+          "skus": [
+            {
+              "shipping_price": 0,
+              "quantity": 76,
+              "color": null,
+              "length": 38,
+              "weight": null,
+              "tags": [
+                "Home, garden & living",
+                "Patio",
+                "Chairs"
+              ],
+              "material": null,
+              "size": null,
+              "product_id": 7444,
+              "msrp": 124700,
+              "width": 79,
+              "style": null,
+              "id": 9699,
+              "height": 13.8,
+              "price": 49100
+            }
+          ],
+          "category_id": 6,
+          "id": 7444,
+          "title": "STARBOARD CHAISE LOUNGE NATURAL",
+          "msrps": [
+            124700
+          ],
+          "prices": [
+            49100
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bookend",
+      "products": [
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1433891088/jnhtycg4secjaackwcjg.jpg",
+          "skus": [
+            {
+              "shipping_price": 799,
+              "quantity": 20,
+              "color": null,
+              "length": 3,
+              "weight": 5,
+              "tags": [
+                "Home, garden & living",
+                "Outdoor decor",
+                "General"
+              ],
+              "material": "",
+              "size": null,
+              "product_id": 762,
+              "msrp": 2420,
+              "width": 7,
+              "style": null,
+              "id": 1290,
+              "height": 10,
+              "price": 2300
+            }
+          ],
+          "category_id": 4,
+          "id": 762,
+          "title": "Cycle Bookends",
+          "msrps": [
+            2420
+          ],
+          "prices": [
+            2300
+          ]
+        },
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1433891138/m6vvycfx4m3bdn15qkra.jpg",
+          "skus": [
+            {
+              "shipping_price": 799,
+              "quantity": 11,
+              "color": null,
+              "length": 4,
+              "weight": 8,
+              "tags": [
+                "Home, garden & living",
+                "Home decor",
+                "Home decor accents"
+              ],
+              "material": "",
+              "size": null,
+              "product_id": 829,
+              "msrp": 4922,
+              "width": 6,
+              "style": null,
+              "id": 1358,
+              "height": 7,
+              "price": 4000
+            }
+          ],
+          "category_id": 4,
+          "id": 829,
+          "title": "Rhino Bookends",
+          "msrps": [
+            4922
+          ],
+          "prices": [
+            4000
+          ]
+        },
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1433891126/cgrv1jjcacfbcvgbr6dw.jpg",
+          "skus": [
+            {
+              "shipping_price": 799,
+              "quantity": 20,
+              "color": null,
+              "length": 6,
+              "weight": 8,
+              "tags": [
+                "Home, garden & living",
+                "Home decor",
+                "Home decor accents"
+              ],
+              "material": "Polystone",
+              "size": null,
+              "product_id": 2207,
+              "msrp": 3299,
+              "width": 6,
+              "style": null,
+              "id": 3111,
+              "height": 8,
+              "price": 2900
+            }
+          ],
+          "category_id": 4,
+          "id": 2207,
+          "title": "Dog Bookends",
+          "msrps": [
+            3299
+          ],
+          "prices": [
+            2900
+          ]
+        },
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1433891109/mibqdsqoig1wxockhida.jpg",
+          "skus": [
+            {
+              "shipping_price": 799,
+              "quantity": 20,
+              "color": null,
+              "length": 5,
+              "weight": 5,
+              "tags": [
+                "Home, garden & living",
+                "Home decor",
+                "Home decor accents"
+              ],
+              "material": "",
+              "size": null,
+              "product_id": 2187,
+              "msrp": 2682,
+              "width": 5,
+              "style": null,
+              "id": 3091,
+              "height": 9,
+              "price": 2200
+            }
+          ],
+          "category_id": 4,
+          "id": 2187,
+          "title": "Dog Bookends",
+          "msrps": [
+            2682
+          ],
+          "prices": [
+            2200
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Candle Holder",
+      "products": [
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1433891137/ht1ligyswje1xr1qmmoa.jpg",
+          "skus": [
+            {
+              "shipping_price": 799,
+              "quantity": 20,
+              "color": null,
+              "length": 3,
+              "weight": 12,
+              "tags": [
+                "Home, garden & living",
+                "Home decor",
+                "Home decor accents"
+              ],
+              "material": "Metal, Polystone",
+              "size": null,
+              "product_id": 2310,
+              "msrp": 4529,
+              "width": 19,
+              "style": null,
+              "id": 3214,
+              "height": 11,
+              "price": 4000
+            }
+          ],
+          "category_id": 4,
+          "id": 2310,
+          "title": "Coral Candle Holder",
+          "msrps": [
+            4529
+          ],
+          "prices": [
+            4000
+          ]
+        },
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1433891141/vsefpmrkr1kh5dcddtko.jpg",
+          "skus": [
+            {
+              "shipping_price": 0,
+              "quantity": 20,
+              "color": null,
+              "length": 7,
+              "weight": 13,
+              "tags": [
+                "Home, garden & living",
+                "Furniture",
+                "Living room"
+              ],
+              "material": "Wood",
+              "size": null,
+              "product_id": 2276,
+              "msrp": 8570,
+              "width": 18,
+              "style": null,
+              "id": 3180,
+              "height": 10,
+              "price": 7800
+            }
+          ],
+          "category_id": 4,
+          "id": 2276,
+          "title": "Mirrored Candle Holder",
+          "msrps": [
+            8570
+          ],
+          "prices": [
+            7800
+          ]
+        },
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1463156649/4522.jpg",
+          "skus": [
+            {
+              "shipping_price": 799,
+              "quantity": 20,
+              "color": null,
+              "length": 10,
+              "weight": null,
+              "tags": [
+                "Home, garden & living",
+                "Home decor",
+                "Home decor accents"
+              ],
+              "material": null,
+              "size": null,
+              "product_id": 4522,
+              "msrp": 3474,
+              "width": 10,
+              "style": null,
+              "id": 6710,
+              "height": 10,
+              "price": 3000
+            }
+          ],
+          "category_id": 4,
+          "id": 4522,
+          "title": "Clear Glass Candle Holder",
+          "msrps": [
+            3474
+          ],
+          "prices": [
+            3000
+          ]
+        },
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1463156865/4626.jpg",
+          "skus": [
+            {
+              "shipping_price": 799,
+              "quantity": 20,
+              "color": null,
+              "length": 4,
+              "weight": null,
+              "tags": [
+                "Home, garden & living",
+                "Home decor",
+                "Home decor accents"
+              ],
+              "material": null,
+              "size": null,
+              "product_id": 4626,
+              "msrp": 3033,
+              "width": 23,
+              "style": null,
+              "id": 6814,
+              "height": 11,
+              "price": 2500
+            }
+          ],
+          "category_id": 4,
+          "id": 4626,
+          "title": "Metal Candle Holder",
+          "msrps": [
+            3033
+          ],
+          "prices": [
+            2500
+          ]
+        }
+      ]
+    }
+  ]
+
 ### /PRODUCT ###
 
 ### SKU ###

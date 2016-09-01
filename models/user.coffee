@@ -43,12 +43,24 @@ User =
   defineHomepage: (bootstrap) ->
     bootstrap.home_carousel ||= []
     bootstrap.home_arranged ||= []
+    bootstrap.home_featured ||= []
+    bootstrap.home_recommended ||= []
+    bootstrap.home_subtags ||= {}
     Collection.findHomeCarousel bootstrap.home_carousel.join(','), { id: bootstrap.id, pricing: bootstrap.pricing, alpha: bootstrap.alpha }
     .then (collections) ->
       bootstrap.home_carousel = collections
       Collection.findHomeArranged bootstrap.home_arranged.join(','), { id: bootstrap.id, pricing: bootstrap.pricing, alpha: bootstrap.alpha }
     .then (collections) ->
       bootstrap.home_arranged = collections
+      Shared.Product.findHomeFeatured '2422,2208,2191,2182,2160,2068', { id: bootstrap.id, pricing: bootstrap.pricing, alpha: bootstrap.alpha }
+    .then (products) ->
+      bootstrap.home_featured = products
+      Shared.Product.findHomeRecommended '665,1373,2028,1207,2019,2047,2029,1670,392,1624,2024,1392,558,2040,722,717,1742,2118,805,739,2123,762,2137,761,2168,2166,796,2231,2220,2258,2275,820,2395', { id: bootstrap.id, pricing: bootstrap.pricing, alpha: bootstrap.alpha }
+    .then (products) ->
+      bootstrap.home_recommended = products
+      Shared.Product.findSubtags { id: bootstrap.id, pricing: bootstrap.pricing, alpha: bootstrap.alpha }
+    .then (subtags) ->
+      bootstrap.home_subtags = subtags
       # console.log 'bootstrap', bootstrap
       bootstrap
 
