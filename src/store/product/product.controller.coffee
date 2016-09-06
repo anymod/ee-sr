@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('eeStore').controller 'productCtrl', ($stateParams, $location, eeDefiner, eeProduct, eeProducts) ->
+angular.module('eeStore').controller 'productCtrl', ($stateParams, $location, eeDefiner, eeProduct, eeProducts, eeAnalytics) ->
 
   product = this
 
@@ -12,7 +12,7 @@ angular.module('eeStore').controller 'productCtrl', ($stateParams, $location, ee
   title       = $stateParams.title?.replace(/-/g, ' ')
   category_id = $stateParams.c || null
 
-  eeProduct.fns.defineProduct id
+  if eeAnalytics.data.pageDepth > 1 then eeProduct.fns.defineProduct id
   eeProducts.fns.searchLike { id: id, title: title, category_id: category_id }
 
   return

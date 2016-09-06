@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $stateParams, $filter, eeBootstrap, eeBack, categories, stopWords) ->
+angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $stateParams, eeBootstrap, eeBack, categories, stopWords) ->
 
   ## SETUP
   _params = $stateParams
@@ -39,6 +39,24 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     orderArray:   _orderArray
     defaultSize:  eeBootstrap?.perPage || 48
     similarSize:  48
+    searchInputs:
+      minValue: 0
+      maxValue: 300
+      # data: eeProducts.data
+      # categories: categories
+      options:
+        floor: 0
+        ceil: 300
+        step: 5
+        hideLimitLabels: true
+        translate: (value) -> if value < 300 then '$' + value else '>$' + value
+        onEnd: (id, min, max) ->
+          min ||= 0
+          max ||= 300
+          _setParam 'r', '' + min + '-' + max, { goTo: 'search'}
+      # update: () ->
+      #   # setSearchFromModal()
+      #   $state.go 'search', $stateParams # , { notify: $state.current.name isnt 'search' }
 
   ## PRIVATE FUNCTIONS
   _setParam = (key, value, opts) ->
@@ -86,6 +104,13 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     if $stateParams.c?
       for category in categories
         if category.id is parseInt($stateParams.c) then _data.fromParams.categoryTitle = category.title
+    if $stateParams.r?
+      [min, max] = $stateParams.r.split('-').map((v) -> parseInt(v))
+      _data.searchInputs.maxValue = if max > 0 and max < 300 then max else 300
+      _data.searchInputs.minValue = if min > 0 and min < 300 and min <= max then min else 0
+    else
+      _data.searchInputs.maxValue = 300
+      _data.searchInputs.minValue = 0
 
   _tokenizeQuery = (query) ->
     query ||= ''
@@ -166,6 +191,9 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
       else _runQuery()
 
   $rootScope.$on 'product:navigate', (e, prod) -> _searchLike prod, { silent: true }
+
+  # $rootScope.$on '$stateChangeSuccess', (e, toState, toParams, fromState, fromParams) ->
+  #   _setPriceRangeToParams()
 
   ## EXPORTS
   data: _data

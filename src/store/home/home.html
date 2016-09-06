@@ -1,4 +1,5 @@
 <!-- Carousel -->
+<<<<<<< HEAD
 <div ng-if="home.ee.User.user.home_carousel.length > 0" class="container container-narrow">
   <div class="vert-10">
     <div class="margin-0-auto">
@@ -8,62 +9,70 @@
             <img ng-src="{{ collection.banner | cloudinaryResizeTo:800:420:'fill' }}" class="full-width" style="margin:auto;">
           </a>
         </div>
+=======
+<div ng-if="home.ee.User.user.home_carousel.length > 0" class="container">
+  <div class="margin-0-auto">
+    <div uib-carousel interval=6000 active="home.carouselActive" class="collection-carousel margin-0">
+      <div uib-slide ng-repeat="collection in home.ee.User.user.home_carousel" index="$index">
+        <a ui-sref="collection({ id: collection.id })">
+          <!-- <img ng-src="{{ collection.banner | cloudinaryResizeTo:1140:480:'fill' }}" class="full-width" style="margin:auto;"> -->
+          <img ng-src="{{ collection.banner | cloudinaryResizeTo:800:420:'fill' }}" class="full-width" style="margin:auto;">
+        </a>
+>>>>>>> eshopper
       </div>
     </div>
   </div>
 </div>
 <!-- /Carousel -->
 
-<!-- Arranged -->
-<div ng-if="home.ee.User.user.home_arranged.length > 0" class="container container-narrow">
-  <div ng-repeat="collection in home.ee.User.user.home_arranged">
-    <ee-collection-for-store collection="collection"></ee-collection-for-store>
-  </div>
-</div>
-<!-- /Arranged -->
+<section class="vert-50">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3">
+        <ee-sidebar></ee-sidebar>
+      </div>
 
-<ee-loading loading="home.ee.User.reading" ee-min-height="600"></ee-loading>
+      <div class="col-sm-9 padding-right" ng-hide="home.ee.User.reading">
+        <!-- featured_items -->
+        <div class="featured_items">
+          <h2 class="title text-center">Featured Items</h2>
+          <div class="col-sm-4" ng-repeat="product in home.ee.User.user.home_featured.rows">
+            <ee-product-single product="product"></ee-product-single>
+          </div>
+        </div>
+        <!-- /featured_items -->
 
-<!-- SR press section -->
-<div ng-show="home.ee.User.user.username == 'stylishrustic'"
-  class="container container-narrow white-background vert-20 margin-bottom-0 pad-5">
-  <h3 class="full-width text-center text-muted font-weight-200 vert-10 margin-top-0">As seen on...</h3>
-  <div class="row">
-    <div class="col col-sm-20 text-center">
-      <a href="http://www.mysweetsavannahblog.com/2016/07/stylish-rustic-giveaway.html" target="_blank">
-        <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1469580980/my-sweet-savannah.jpg' | cloudinaryResizeTo:300:80:'pad' }}"
-          alt="My Sweet Savannah"
-          class="full-width max-width-300 margin-0-auto hover-color">
-      </a>
-    </div>
-    <div class="col col-sm-20 text-center">
-      <a href="http://simplestylings.com/dining-room-update-giveaway-stylish-rustic/" target="_blank">
-        <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1469580962/simple-stylings.jpg' | cloudinaryResizeTo:300:80:'pad' }}"
-          alt="Simple Stylings"
-          class="full-width max-width-300 margin-0-auto hover-color">
-      </a>
-    </div>
-    <div class="col col-sm-20 text-center">
-      <a href="http://carriebradshawlied.com/2015/06/paris-stamped-ottoman.html" target="_blank">
-        <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1469580902/carrie-bradshaw-lied.jpg' | cloudinaryResizeTo:300:80:'pad' }}"
-          alt="Carrie Bradshaw Lied"
-          class="full-width max-width-300 margin-0-auto hover-color">
-      </a>
-    </div>
-    <div class="col col-sm-20 text-center">
-      <a href="http://bliss-athome.com/decor-love-pineapple-giveaway/" target="_blank">
-        <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1469582891/bliss-at-home-2.png' | cloudinaryResizeTo:300:60:'pad' }}"
-          alt="Bliss at Home"
-          class="full-width max-width-300 margin-0-auto hover-color">
-      </a>
-    </div>
-    <div class="col col-sm-20 text-center">
-      <a href="http://thewickerhouse.blogspot.com/2016/08/a-new-hammock-on-our-patio.html" target="_blank">
-        <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1470245854/the-wicker-house.png' | cloudinaryResizeTo:300:60:'pad' }}"
-          alt="The Wicker House"
-          class="full-width max-width-300 margin-0-auto hover-color">
-      </a>
+        <!-- subcategories -->
+        <div class="category-tab">
+          <div class="col-sm-12">
+            <div uib-tabset active="home.subtagActive">
+              <div uib-tab ng-repeat="subtag in home.ee.User.user.home_subtags" index="$index" heading="{{ subtag.name + 's' }}">
+                <div class="col-sm-3" ng-repeat="product in subtag.products">
+                  <ee-product-single product="product" hide-extra=true></ee-product-single>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /subcategories -->
+
+        <!--recommended_items-->
+        <div class="recommended_items">
+          <h2 class="title text-center">recommended items</h2>
+          <div uib-carousel interval="3000" class="product-carousel" active="home.recommendedActive" no-wrap="noWrapSlides">
+            <div uib-slide ng-repeat="group in home.ee.User.user.home_recommended.groups" class="carousel slide" index="$index">
+              <div class="col-sm-4" ng-repeat="product in group">
+                <ee-product-single product="product"></ee-product-single>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/recommended_items-->
+      </div>
+
+      <div class="col-sm-9" ng-show="home.ee.User.reading">
+        <ee-loading loading="home.ee.User.reading" ee-min-height="600"></ee-loading>
+      </div>
     </div>
   </div>
-</div>
-<!-- /SR press section -->
+</section>
