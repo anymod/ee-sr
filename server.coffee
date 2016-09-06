@@ -68,7 +68,7 @@ app.get '/products/:id/:title*?', (req, res, next) ->
   { bootstrap, host, path } = utils.setup req
   User.defineStorefront host, bootstrap
   .then () ->
-    Product.findCompleteById req.params.id, { id: bootstrap.id, pricing: bootstrap.pricing }
+    Product.findCompleteById req.params.id, { id: bootstrap.id, pricing: bootstrap.pricing, alpha: bootstrap.alpha }
   .then (product) ->
     bootstrap.product     = product
     bootstrap.title       = bootstrap.product.title
@@ -81,7 +81,7 @@ app.get '/products/:id/:title*?', (req, res, next) ->
     res.redirect '/'
 
 searchAndRespond = (res, opts, bootstrap) ->
-  Product.search { id: bootstrap.id, pricing: bootstrap.pricing }, opts
+  Product.search { id: bootstrap.id, pricing: bootstrap.pricing, alpha: bootstrap.alpha }, opts
   .then (data) ->
     { rows, count, page, perPage } = data
     bootstrap.products    = rows || []

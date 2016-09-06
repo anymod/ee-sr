@@ -23,6 +23,7 @@
     "angulartics": "~1.0.3",
     "angulartics-google-analytics": "~0.1.4",
     "angularjs-slider": "~5.4.1",
-    "drift": "^0.3.4"
+    "drift": "^0.3.4",
+    "angular-bootstrap-affix": "^0.2.2"
   }
 }

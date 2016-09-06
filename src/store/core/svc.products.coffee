@@ -50,6 +50,10 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
         step: 5
         hideLimitLabels: true
         translate: (value) -> if value < 300 then '$' + value else '>$' + value
+        onEnd: (id, min, max) ->
+          min ||= 0
+          max ||= 300
+          _setParam 'r', '' + min + '-' + max, { goTo: 'search'}
       update: () ->
         setSearchFromModal()
         $state.go 'search', $stateParams # , { notify: $state.current.name isnt 'search' }
@@ -181,6 +185,9 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
       else _runQuery()
 
   $rootScope.$on 'product:navigate', (e, prod) -> _searchLike prod, { silent: true }
+
+  $rootScope.$on 'foobar', (e, data) ->
+    return
 
   ## EXPORTS
   data: _data

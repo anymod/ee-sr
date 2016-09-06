@@ -5,7 +5,9 @@
         <ee-sidebar></ee-sidebar>
       </div>
 
-      <div class="col-sm-9 padding-right">
+      <div class="col-sm-9 padding-right"
+        ng-hide="search.ee.Products.reading">
+
         <!--featured_items-->
         <div class="featured_items">
           <h2 class="title text-center">Featured Items</h2>
@@ -31,16 +33,20 @@
           </div>
         </div>
         <!-- /pagination -->
+
+        <!-- no results -->
+        <div ng-if="search.ee.Products.products.length <= 0"
+          ng-hide="search.ee.Products.reading">
+          No results found
+        </div>
+        <!-- /no results -->
       </div>
 
-      <!-- no results -->
-      <div ng-if="search.ee.Products.products.length <= 0"
-        ng-hide="search.ee.Products.reading">
-        No results found
+
+      <div class="col-sm-9" ng-show="search.ee.Products.reading">
+        <ee-loading loading="search.ee.Products.reading"></ee-loading>
       </div>
-      <!-- /no results -->
+
     </div>
   </div>
 </section>
-
-<ee-loading loading="search.ee.Products.reading"></ee-loading>
