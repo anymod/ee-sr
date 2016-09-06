@@ -8931,6 +8931,9 @@ button.close {
   top: 25px !important;
   width: 200px;
 }
+.category-products .panel-default .panel-heading .panel-title a.active {
+  color: #F99;
+}
 .bg-white,
 .white-background {
   background: white !important;

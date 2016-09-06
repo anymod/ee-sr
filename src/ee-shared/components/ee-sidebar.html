@@ -16,7 +16,7 @@
       <div class="panel-heading">
         <h4 class="panel-title">
           <a ui-sref="category({ id: category.id, title: (category.title | urlText) })"
-            ui-sref-active="active"
+            ng-class="{ active: category.id == stateParams.c }"
             ng-bind="category.title">
             <!-- <span class="badge pull-right"><i class="fa fa-plus"></i></span> -->
           </a>
