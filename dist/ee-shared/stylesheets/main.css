@@ -1180,8 +1180,8 @@ h2.title {
 
 .view-product img {
   border: 1px solid #F7F7F0;
-  height: 380px;
-  width: 100%;
+  /*height: 380px;
+  width: 100%;*/
 }
 
 .view-product h3 {
@@ -1224,9 +1224,7 @@ h2.title {
 .product-information {
   border: 1px solid #F7F7F0;
   overflow: hidden;
-  padding-bottom: 60px;
-  padding-left: 60px;
-  padding-top: 60px;
+  padding: 60px 10px 60px 60px;
   position: relative;
 }
 

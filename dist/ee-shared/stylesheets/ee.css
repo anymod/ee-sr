@@ -10368,7 +10368,8 @@ ee-product-card .main-image {
   border-style: solid;
   border-width: 15px 15px 15px 0;
 }
-img[data-action="zoom"] {
+img[data-action="zoom"],
+img[name="mainImage"] {
   cursor: pointer;
   cursor: -webkit-zoom-in;
   cursor: -moz-zoom-in;

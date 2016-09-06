@@ -1,0 +1,80 @@
+<!-- product-details -->
+<div class="product-details">
+  <div class="col-sm-5">
+    <div class="view-product">
+      <ee-product-images product="product"></ee-product-images>
+    </div>
+  </div>
+  <div class="col-sm-7">
+    <!-- product-information -->
+    <div class="product-information" id="main-image-zoom">
+      <a ui-sref="sale({ id: product.discounted })"
+        ng-if="product.discounted">
+        <img src="ee-shared/img/sale.png" class="new" alt="Sale">
+      </a>
+      <!-- <img src="images/product-details/new.jpg" class="newarrival" alt="" /> -->
+      <h2 ng-bind="product.title"></h2>
+      <!-- <p>Web ID: 1089772</p> -->
+      <!-- <img src="images/product-details/rating.png" alt="" /> -->
+      <div ng-if="product.skus.length > 1">
+        <p ng-bind="currentSku.selection_text"></p>
+      </div>
+      <div ng-if="product.skus.length > 1">
+        <h4 ng-bind="currentSku.selection_text" class="inline-block font-weight-200 margin-top-0" style="width: 85%;"></h4>
+      </div>
+      <a ng-if="currentSku.discounted" ui-sref="sale({ id: currentSku.discounted })" class="btn btn-themed btn-arrow">Sale</a>
+      <div>
+        <h2 ng-bind="currentSku.price | centToDollar"
+          style="font-size: 26px; margin: 10px 0 5px;">
+        </h2>
+        <h4 ng-if="currentSku.msrp && currentSku.price && currentSku.msrp > currentSku.price && msrpDiscount > 0.049"
+          class="vert-7 margin-bottom-0 text-info" style="line-height: 33px;">
+          <span ng-bind="msrpDiscount | percentage:0" class="margin-0"></span>&nbsp;off&nbsp;<s ng-bind="currentSku.msrp | centToDollar"></s>
+        </h4>
+        <h5 ng-if="currentSku.shipping_price > 0"
+          class="margin-0 text-muted">
+          <span ng-bind="currentSku.shipping_price | centToDollar" class="margin-0"></span>&nbsp;s&h
+        </h5>
+        <h4 ng-if="currentSku.shipping_price == 0" class="vert-10 margin-top-0 text-success">
+          Free Shipping
+        </h4>
+      </div>
+
+
+      <div class="vert-7">
+        <div ng-if="currentSku.quantity > 0 && !currentSku.discontinued">
+          <div class="btn btn-lg btn-block btn-default vert-10 margin-top-0"
+            ng-disabled="disabled || adding"
+            ng-click="addToCart(currentSku)">
+            <i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Add to cart
+          </div>
+          <ee-paypal-button sku="currentSku"></ee-paypal-button>
+        </div>
+        <div class="btn btn-lg btn-info btn-block disabled" ng-if="currentSku.quantity < 1" disabled>Out of Stock</div>
+        <div class="btn btn-lg btn-info btn-block disabled" ng-if="currentSku.discontinued" disabled>Discontinued</div>
+      </div>
+      <div class="text-center product-info">
+        <h4 ng-if="currentSku.length || currentSku.width || currentSku.height"
+          class="font-weight-200"
+          style="margin-right: 12px;">
+          <img src="https://res.cloudinary.com/eeosk/image/upload/c_scale,w_30/v1447453155/ruler.png"/>
+          <span ng-if="currentSku.length">{{ currentSku.length }}"L </span>
+          <strong ng-if="currentSku.length && currentSku.width">&times;</strong>
+          <span ng-if="currentSku.width">{{ currentSku.width }}"W </span>
+          <strong ng-if="currentSku.width && currentSku.height">&times;</strong>
+          <span ng-if="currentSku.height">{{ currentSku.height }}"H </span>
+        </h4>
+        <ee-favorites-heart product-skus="product.skus" class="btn btn-default"></ee-favorites-heart>
+        <h5 class="vert-5 font-weight-200">
+          <a href ng-click="expanded = !expanded">
+            Details<i class="fa fa-fw" ng-class="expanded ? 'fa-caret-up' : 'fa-caret-down'"></i>
+          </a>
+          &nbsp;&nbsp;
+          Ships from USA
+        </h5>
+      </div>
+    </div>
+    <!-- /product-information -->
+  </div>
+</div>
+<!--/ product-details -->

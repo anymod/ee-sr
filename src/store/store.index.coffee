@@ -40,7 +40,7 @@ angular.module 'eeStore', [
   'ee-collection-nav'
   'ee-collection-for-store'
   # 'ee-product-for-store'
-  'ee-product-card'
+  # 'ee-product-card'
   # 'ee-product-card-compact'
   'ee-product-images'
   'ee-search-sort'
@@ -56,6 +56,7 @@ angular.module 'eeStore', [
   'ee-paypal-button'
   'ee-coupon-box'
   'ee-product-single'
+  'ee-product-detail'
   'ee-sidebar'
   # 'ee.templates' # commented out during build step for inline templates
 ]
