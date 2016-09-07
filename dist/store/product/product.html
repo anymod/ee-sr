@@ -1,4 +1,4 @@
-<section class="vert-50">
+<section class="vert-50 margin-top-0">
   <div class="container">
     <div class="row">
       <div class="col-sm-3">
@@ -12,6 +12,8 @@
           skus="product.data.product.skus"
           products="product.ee.Products.products">
         </ee-product-detail>
+        
+        <ee-loading loading="product.data.reading || product.ee.Products.reading" ee-min-height="600"></ee-loading>
       </div>
     </div>
   </div>
