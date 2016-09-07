@@ -35,7 +35,7 @@
 
   <div class="btn-group btn-group-justified vert-10">
     <div class="btn"
-      ng-repeat="order in modal.search.data.orderArray"
+      ng-repeat="order in modal.search.data.sortOrders"
       ng-if="order.use"
       ng-bind="order.title"
       ng-click="modal.setOrder(order)"

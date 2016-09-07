@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $stateParams, eeBootstrap, eeBack, categories, stopWords) ->
+angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $stateParams, eeBootstrap, eeBack, categories, sortOrders, stopWords) ->
 
   ## SETUP
   _params = $stateParams
@@ -20,14 +20,6 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     orderTitle:     null
     queryTokens:    []
 
-  _orderArray = [
-    { order: null,  title: 'Most relevant' }
-    { order: 'pa',  title: '$ - $$$', use: true } # price ASC (pa)
-    { order: 'pd',  title: '$$$ - $', use: true } # price DESC (pd)
-    { order: 'ta',  title: 'A to Z',  use: true } # title ASC (ta)
-    { order: 'td',  title: 'Z to A',  use: true } # title DESC (td)
-  ]
-
   ## PRIVATE EXPORT DEFAULTS
   _data =
     reading:      false
@@ -35,8 +27,11 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     fromParams:   angular.copy _fromParams
     products:     eeBootstrap?.products
     count:        eeBootstrap?.count
+    page:         eeBootstrap?.page
+    perPage:      eeBootstrap?.perPage
+    took:         eeBootstrap?.took
     categories:   categories
-    orderArray:   _orderArray
+    sortOrders:   sortOrders
     defaultSize:  eeBootstrap?.perPage || 48
     similarSize:  48
     searchInputs:
@@ -99,7 +94,7 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     if $stateParams.q? then _data.fromParams.queryTokens = _tokenizeQuery $stateParams.q
     if $stateParams.sz? then _data.fromParams.perPage = parseInt $stateParams.sz
     if $stateParams.s?
-      for order in _data.orderArray
+      for order in _data.sortOrders
         if order.order is $stateParams.s then _data.fromParams.orderTitle = order.title
     if $stateParams.c?
       for category in categories
@@ -138,10 +133,8 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     _data.reading = true
     eeBack.fns.productsGET _formQuery()
     .then (res) ->
-      { rows, count, took } = res
-      _data.products  = rows
-      _data.count     = count
-      _data.took      = took
+      _data[attr] = res[attr] for attr in ['count', 'page', 'perPage', 'took']
+      _data.products  = res.rows
     .catch (err) -> _data.count = null
     .finally () -> _data.reading = false
 

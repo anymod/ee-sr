@@ -163,6 +163,7 @@ sources.storeDirective = [
   './src/ee-shared/components/ee-product-single.coffee'
   './src/ee-shared/components/ee-product-detail.coffee'
   './src/ee-shared/components/ee-sidebar.coffee'
+  './src/ee-shared/components/ee-search-breadcrumb.coffee'
 ]
 
 module.exports = sources
