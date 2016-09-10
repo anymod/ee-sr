@@ -17,7 +17,7 @@ module.directive "eeSearchBreadcrumb", ($stateParams, categories, sortOrders, ee
       1 + (parseInt(eeProducts.data.page) - 1) * parseInt(eeProducts.data.perPage)
 
     scope.getEnd = () ->
-      parseInt(eeProducts.data.page) * parseInt(eeProducts.data.perPage)
+      Math.min(parseInt(eeProducts.data.page) * parseInt(eeProducts.data.perPage), parseInt(eeProducts.data.count))
 
     scope.getCount = () -> eeProducts.data.count
 
@@ -30,5 +30,8 @@ module.directive "eeSearchBreadcrumb", ($stateParams, categories, sortOrders, ee
       for order in sortOrders
         if order.order is eeProducts.data.params.s then return order.title
       return 'Featured'
+
+    scope.clearSearch = () -> eeProducts.fns.setParam 'q', null, { goTo: 'search' }
+    scope.clearCategory = () -> eeProducts.fns.setParam 'c', null, { goTo: 'search' }
 
     return
