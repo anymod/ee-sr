@@ -186,10 +186,12 @@ a#scrollUp i{
   box-shadow: none;
 }
 
-.dropdown-menu  li  a:hover, .dropdown-menu  li  a:focus {
+.dropdown-menu li a { font-family: 'Roboto', sans-serif; }
+
+.dropdown-menu li a:hover,
+.dropdown-menu li a:focus {
   background-color: #B6405F;
   color: #FFFFFF;
-  font-family: 'Roboto', sans-serif;
   text-decoration: none;
 }
 
