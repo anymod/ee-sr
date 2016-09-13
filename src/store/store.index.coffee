@@ -59,5 +59,6 @@ angular.module 'eeStore', [
   'ee-product-detail'
   'ee-sidebar'
   'ee-search-breadcrumb'
+  'ee-product-breadcrumb'
   # 'ee.templates' # commented out during build step for inline templates
 ]
