@@ -15,9 +15,9 @@ angular.module('store.core').config ($stateProvider, $urlRouterProvider) ->
 
   $stateProvider
 
-    .state 'storefront-about',
-      url:      '/about'
-      views:    aboutViews
+    .state 'about',
+      url: '/about'
+      views: aboutViews
 
     .state 'terms',
       url: '/terms'
