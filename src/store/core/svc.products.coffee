@@ -13,6 +13,7 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
   #   r: rangeStr e.g. "0-45"
   #   c: category_id
   #   coll: collection_id
+  #   t: tag
 
   _fromParams =
     perPage:        eeBootstrap?.perPage
@@ -84,6 +85,7 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     if $stateParams.s?    then query.order          = $stateParams.s
     if $stateParams.c?    then query.category_ids   = [$stateParams.c]
     if $stateParams.coll? then query.collection_id  = parseInt $stateParams.coll
+    if $stateParams.t?    then query.tag            = $stateParams.t
     # query.tag = 'Mirrors'
     _data.params = $stateParams
     _setFromParams()
