@@ -8,11 +8,11 @@ subtags =
     'Lamps, bases & shades'
     'Candles & holders'
     'Coat & hat racks'
-    'Friendship/Family'
+    # 'Friendship/Family'
     'Plants & Flowers'
     'Pillows'
     'General'
-    'Other'
+    # 'Other'
   ],
   furniture: [
     'Living room'

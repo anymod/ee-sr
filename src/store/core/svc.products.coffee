@@ -73,20 +73,19 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
 
   _formQuery = () ->
     query = {}
-    if $stateParams.q?
+    if $stateParams.q
       _tokenizeQuery $stateParams.q
       query.search = $stateParams.q
     if $stateParams.r is '0-0' then _setParam 'r', null
-    if $stateParams.r?
+    if $stateParams.r
       query.min_price = parseInt($stateParams.r.split('-')[0]) * 100
       query.max_price = parseInt($stateParams.r.split('-')[1]) * 100
-    if $stateParams.p?    then query.page           = parseInt $stateParams.p
-    if $stateParams.sz?   then query.size           = parseInt $stateParams.sz
-    if $stateParams.s?    then query.order          = $stateParams.s
-    if $stateParams.c?    then query.category_ids   = [$stateParams.c]
-    if $stateParams.coll? then query.collection_id  = parseInt $stateParams.coll
-    if $stateParams.t?    then query.tag            = $stateParams.t
-    # query.tag = 'Mirrors'
+    if $stateParams.p     then query.page           = parseInt $stateParams.p
+    if $stateParams.sz    then query.size           = parseInt $stateParams.sz
+    if $stateParams.s     then query.order          = $stateParams.s
+    if $stateParams.c     then query.category_ids   = [$stateParams.c]
+    if $stateParams.coll  then query.collection_id  = parseInt $stateParams.coll
+    if $stateParams.t     then query.tag            = $stateParams.t
     _data.params = $stateParams
     _setFromParams()
     query
