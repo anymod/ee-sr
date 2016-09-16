@@ -139,7 +139,10 @@ esqSetTag = (esq, opts) ->
       query:
         bool:
           must: [
-            match: { 'skus.tags': opts.tag }
+            match:
+              'skus.tags':
+                query: opts.tag
+                operator: 'and'
           ]
   esq.query 'query', 'bool', ['must'], tag_match
 
