@@ -9,7 +9,10 @@
           alt="{{ product.title }}"
           class="hover-pointer img-responsive full-width transition-400" />
       </a>
-      <h2 ng-bind="product.prices | priceRange"></h2>
+      <h2 ng-bind="product.prices | priceRange" class="margin-bottom-0"></h2>
+      <div class="vert-10 margin-top-0" style="height: 15px; line-height: 15px;">
+        <small ng-if="freeShipping" class="text-success">+ free shipping</small>
+      </div>
       <p ng-bind="product.title"
         style="width: 90%;
           text-overflow: ellipsis;
