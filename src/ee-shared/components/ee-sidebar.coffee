@@ -13,6 +13,6 @@ angular.module('ee-sidebar').directive 'eeSidebar', ($state, $stateParams, eeDef
 
     scope.setCategoryAndSubtag = (id, subtag) ->
       subtag ||= ''
-      eeProducts.fns.setParams { c: id, t: subtag, p: 1 }, { goTo: 'search' }
+      eeProducts.fns.setParams { c: id, t: subtag, p: 1, q: null }, { goTo: 'search' }
 
     return

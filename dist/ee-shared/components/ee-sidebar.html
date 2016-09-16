@@ -31,7 +31,10 @@
         <div class="panel-body">
           <ul>
             <li ng-repeat="subtag in category.subtags">
-              <a href ng-click="setCategoryAndSubtag(category.id, subtag)" ng-bind="subtag"></a>
+              <a href ng-click="setCategoryAndSubtag(category.id, subtag)"
+                ng-bind="subtag"
+                ng-class="{ 'text-primary-background font-weight-bold': subtag == stateParams.t }">
+              </a>
             </li>
           </ul>
         </div>

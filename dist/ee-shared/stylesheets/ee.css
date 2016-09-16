@@ -9556,6 +9556,9 @@ html {
 .font-weight-200 {
   font-weight: 200 !important;
 }
+.font-weight-bold {
+  font-weight: bold !important;
+}
 .overflow-hidden {
   overflow: hidden !important;
 }

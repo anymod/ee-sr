@@ -38,6 +38,7 @@ module.directive "eeSearchBreadcrumb", ($stateParams, categories, sortOrders, ee
     scope.setOrder = (order) -> eeProducts.fns.setParams { s: order, p: 1 }, { goTo: 'search' }
     scope.clearSearch = () -> eeProducts.fns.setParams { q: null, p: 1 }, { goTo: 'search' }
     scope.clearCategory = () -> eeProducts.fns.setParams { c: null, p: 1 }, { goTo: 'search' }
+    scope.clearTags = () -> eeProducts.fns.setParams { t: null, p: 1 }, { goTo: 'search' }
     scope.clearRange = () -> eeProducts.fns.setParams { r: null, p: 1 }, { goTo: 'search' }
 
     return
