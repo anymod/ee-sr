@@ -51,9 +51,9 @@ subtags =
     # 'Glassware'
   ],
   outdoor: [
-    'Patio furniture sets'
     'Chairs'
     'Tables'
+    'Patio furniture sets'
     'Plants & planting'
     'Firepits'
     'Birdhouses & accessories'
