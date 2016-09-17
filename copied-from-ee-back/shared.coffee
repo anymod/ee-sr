@@ -97,12 +97,17 @@ esqSetExclusions = (esq, opts) ->
     nested:
       path: 'skus'
       query:
-        bool:
-          must_not: [
-            # term: 'skus.discontinued': true
-            term: 'skus.hide_from_catalog': true
-            # term: 'skus.quantity': 0
-          ]
+        filtered:
+          query:
+            bool:
+              must_not: [
+                # term: 'skus.discontinued': true
+                term: 'skus.hide_from_catalog': true
+                # term: 'skus.quantity': 0
+              ]
+          filter:
+            script:
+              script: "doc['skus.baseline_price'].value < 3500 || doc['skus.supply_shipping_price'].value < 1.5 * doc['skus.supply_price'].value"
   esq.query 'query', 'bool', ['must'], nested_match
 
 esqSetPrice = (esq, opts) ->
@@ -231,7 +236,7 @@ fns.Product.search = (user, opts) ->
       body: esq.getQuery()
   .then (res) ->
     omitSkuAttrs = (prod) ->
-      prod.skus = _.map prod.skus, (sku) -> _.omit sku, ['discontinued', 'hide_from_catalog']
+      prod.skus = _.map prod.skus, (sku) -> _.omit sku, ['discontinued', 'hide_from_catalog', 'supply_price', 'supply_shipping_price']
       prod
     scope.rows    = _.map(res?.hits?.hits, (row) -> omitSkuAttrs row['_source'])
     scope.count   = res?.hits?.total
