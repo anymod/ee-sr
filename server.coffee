@@ -15,6 +15,7 @@ cookieParser  = require 'cookie-parser'
 ejs           = require 'ejs'
 compression   = require 'compression'
 _             = require 'lodash'
+Promise       = require 'bluebird'
 constants     = require './server.constants'
 utils         = require './models/utils'
 
