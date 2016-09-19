@@ -174,7 +174,7 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
   ## MESSAGING
   $rootScope.$on '$stateChangeStart', (e, toState, toParams, fromState, fromParams) ->
     if toState.name is 'category' then toParams.c = toParams.id
-    toParams.coll = null
+    if toState.name isnt 'search' then toParams.coll = null
     if toState.name is 'collection' or toState.name is 'sale'
       toParams.coll = toParams.id
       toParams.c = null

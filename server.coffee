@@ -80,8 +80,18 @@ app.get '/products/:id/:title*?', (req, res, next) ->
     console.error 'error in PRODUCTS', err
     res.redirect '/'
 
-searchAndRespond = (res, opts, bootstrap) ->
-  Product.search { id: bootstrap.id, pricing: bootstrap.pricing, alpha: bootstrap.alpha }, opts
+searchAndRespond = (res, bootstrap) ->
+  new Promise (resolve, reject) ->
+    if bootstrap.collection_id > 0
+      Collection.findById bootstrap.collection_id, bootstrap.id
+      .then (data) ->
+        bootstrap.collection = data[0]
+        resolve true
+    else
+      resolve false
+  .then () ->
+    opts = utils.searchOpts bootstrap
+    Product.search { id: bootstrap.id, pricing: bootstrap.pricing, alpha: bootstrap.alpha }, opts
   .then (data) ->
     { rows, count, page, perPage } = data
     bootstrap.products    = rows || []
@@ -92,40 +102,11 @@ searchAndRespond = (res, opts, bootstrap) ->
     bootstrap.stringified = utils.stringify bootstrap
     res.render 'store.ejs', { bootstrap: bootstrap }
 
-# COLLECTION
-app.get ['/collections/:id/:title*?', '/sale/:id/:title*?'], (req, res, next) ->
+# SEARCH, CATEGORY, COLLECTION, SALE
+app.get ['/search', '/categories/:id/:title*?', '/collections/:id/:title*?', '/sale/:id/:title*?'], (req, res, next) ->
   { bootstrap, host, path } = utils.setup req
   User.defineStorefront host, bootstrap
-  .then () ->
-    bootstrap.collection_id = parseInt(req.params.id)
-    Collection.findById bootstrap.collection_id, bootstrap.id
-  .then (data) ->
-    bootstrap.collection = data[0]
-    opts = utils.searchOpts bootstrap
-    searchAndRespond res, opts, bootstrap
-  .catch (err) ->
-    console.error 'error in COLLECTIONS', err
-    res.redirect '/'
-
-# CATEGORY
-app.get '/categories/:id/:title*?', (req, res, next) ->
-  { bootstrap, host, path } = utils.setup req
-  User.defineStorefront host, bootstrap
-  .then () ->
-    bootstrap.category = req.params.id
-    opts = utils.searchOpts bootstrap
-    searchAndRespond res, opts, bootstrap
-  .catch (err) ->
-    console.error 'error in CATEGORIES', err
-    res.redirect '/'
-
-# SEARCH
-app.get '/search', (req, res, next) ->
-  { bootstrap, host, path } = utils.setup req
-  User.defineStorefront host, bootstrap
-  .then () ->
-    opts = utils.searchOpts bootstrap
-    searchAndRespond res, opts, bootstrap
+  .then () -> searchAndRespond res, bootstrap
   .catch (err) ->
     console.error 'error in SEARCH', err
     res.redirect '/'

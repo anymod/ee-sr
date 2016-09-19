@@ -11,7 +11,6 @@ angular.module('store.search').controller 'searchCtrl', ($state, $stateParams, e
     eeProducts.fns.setParam 'p', search.ee.Products.params.p, { goTo: $state.current.name }
 
   if eeAnalytics.data.pageDepth > 1
-    switch $state.current.name
-      when 'collection', 'sale' then eeCollection.fns.defineCollection $state.params.id, true
+    if search.ee.Products.params?.coll > 0 then eeCollection.fns.defineCollection search.ee.Products.params.coll, true
 
   return

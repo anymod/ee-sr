@@ -1,7 +1,7 @@
 <!-- Carousel -->
-<div ng-if="home.ee.User.user.home_carousel.length > 0" class="container">
+<div class="container min-height-120">
   <div class="margin-0-auto">
-    <div uib-carousel interval=6000 active="home.carouselActive" class="collection-carousel margin-0" style="min-height: 200px;">
+    <div uib-carousel interval=6000 active="home.carouselActive" class="collection-carousel margin-0">
       <div uib-slide ng-repeat="collection in home.ee.User.user.home_carousel" index="$index">
         <a ui-sref="collection({ id: collection.id })">
           <img ng-src="{{ collection.banner | cloudinaryResizeTo:1140:480:'fill' }}" class="full-width" style="margin:auto;">

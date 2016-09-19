@@ -17,8 +17,9 @@ module.directive "eeSearchBreadcrumb", ($stateParams, categories, sortOrders, ee
       Math.min(parseInt(eeProducts.data.page) * parseInt(eeProducts.data.perPage), parseInt(eeProducts.data.count))
 
     scope.getRange = () ->
+      return unless eeProducts.data.params?.r
       switch eeProducts.data.params.r
-        when null, '', '0-0', '0-300' then return null
+        when '', '0-0', '0-300' then return null
         else
           [min, max] = eeProducts.data.params.r.split('-')
           if parseInt(max) >= 300 and parseInt(min) > 0 then return 'Over $' + min

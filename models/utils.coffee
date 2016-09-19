@@ -11,16 +11,17 @@ utils = {}
 utils.setup = (req) ->
   {
     bootstrap:
-      cart:     req.cart
-      url:      req.protocol + '://' + req.get('host') + req.originalUrl
-      perPage:  constants.perPage
-      query:    req.query.q
-      page:     req.query.p
-      order:    req.query.s
-      range:    req.query.r
-      category: req.query.c
-      tag:      req.query.t
-      referer:  req.headers.referer
+      cart:           req.cart
+      url:            req.protocol + '://' + req.get('host') + req.originalUrl
+      perPage:        constants.perPage
+      query:          req.query.q
+      page:           req.query.p
+      order:          req.query.s
+      range:          req.query.r
+      category:       req.query.c
+      tag:            req.query.t
+      collection_id:  req.query.coll
+      referer:        req.headers.referer
     host: req.headers.host
     path: url.parse(req.url).pathname
     protocol: req.protocol
@@ -89,7 +90,7 @@ utils.searchOpts = (bootstrap) ->
     page:   bootstrap.page
     order:  bootstrap.order
     tag:    bootstrap.tag
-  if bootstrap.category then opts.category_ids = bootstrap.category
+  if bootstrap.category_id then opts.category_ids = bootstrap.category_id
   if bootstrap.collection_id then opts.collection_id = bootstrap.collection_id
   if bootstrap.range then [opts.min_price, opts.max_price] = utils.rangeToPrices(bootstrap.range)
   opts
