@@ -1,6 +1,6 @@
 <!-- Carousel -->
 <div class="container min-height-120">
-  <div class="margin-0-auto">
+  <div class="margin-0-auto" ng-if="home.ee.User.user.home_carousel.length > 0">
     <div uib-carousel interval=6000 active="home.carouselActive" class="collection-carousel margin-0">
       <div uib-slide ng-repeat="collection in home.ee.User.user.home_carousel" index="$index">
         <a ui-sref="collection({ id: collection.id })">
