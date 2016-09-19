@@ -1,11 +1,11 @@
 <!-- Carousel -->
 <div ng-if="home.ee.User.user.home_carousel.length > 0" class="container">
   <div class="margin-0-auto">
-    <div uib-carousel interval=6000 active="home.carouselActive" class="collection-carousel margin-0">
+    <div uib-carousel interval=6000 active="home.carouselActive" class="collection-carousel margin-0" style="min-height: 200px;">
       <div uib-slide ng-repeat="collection in home.ee.User.user.home_carousel" index="$index">
         <a ui-sref="collection({ id: collection.id })">
-          <!-- <img ng-src="{{ collection.banner | cloudinaryResizeTo:1140:480:'fill' }}" class="full-width" style="margin:auto;"> -->
-          <img ng-src="{{ collection.banner | cloudinaryResizeTo:800:420:'fill' }}" class="full-width" style="margin:auto;">
+          <img ng-src="{{ collection.banner | cloudinaryResizeTo:1140:480:'fill' }}" class="full-width" style="margin:auto;">
+          <!-- <img ng-src="{{ collection.banner | cloudinaryResizeTo:800:420:'fill' }}" class="full-width" style="margin:auto;"> -->
         </a>
       </div>
     </div>
