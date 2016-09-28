@@ -5,7 +5,7 @@ angular.module('store.search').config ($stateProvider) ->
   $stateProvider
 
     .state 'search',
-      url: '/search?q&p&s&r&c&t&coll'
+      url: '/search?q&p&s&r&c&t&t1&t2&t3&coll'
       views:
         top:
           controller: 'storeCtrl as storefront'
@@ -23,6 +23,9 @@ angular.module('store.search').config ($stateProvider) ->
         r: null # range
         c: null # category
         t: null # tag
+        t1: null # tags1
+        t2: null # tags2
+        t3: null # tags3
         coll: null # collection
       data:
         pageTitle:        'Search'

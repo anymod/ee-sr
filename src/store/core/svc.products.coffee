@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $stateParams, eeBootstrap, eeBack, categories, sortOrders, stopWords) ->
+angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $stateParams, eeBootstrap, eeBack, tagTree, sortOrders, stopWords) ->
 
   ## SETUP
   _params = $stateParams
@@ -14,10 +14,13 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
   #   c: category_id
   #   coll: collection_id
   #   t: tag
+  #   t1: tags1
+  #   t2: tags2
+  #   t3: tags3
 
   _fromParams =
     perPage:        eeBootstrap?.perPage
-    categoryTitle:  null
+    # categoryTitle:  null
     orderTitle:     null
     queryTokens:    []
 
@@ -31,7 +34,7 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     page:         eeBootstrap?.page
     perPage:      eeBootstrap?.perPage
     took:         eeBootstrap?.took
-    categories:   categories
+    tagTree:      tagTree
     sortOrders:   sortOrders
     defaultSize:  eeBootstrap?.perPage || 48
     similarSize:  48
@@ -39,7 +42,6 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
       minValue: 0
       maxValue: 300
       # data: eeProducts.data
-      # categories: categories
       options:
         floor: 0
         ceil: 300
@@ -86,6 +88,9 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     if $stateParams.c     then query.category_ids   = [$stateParams.c]
     if $stateParams.coll  then query.collection_id  = parseInt $stateParams.coll
     if $stateParams.t     then query.tag            = $stateParams.t
+    if $stateParams.t1    then query.tags1          = $stateParams.t1
+    if $stateParams.t2    then query.tags2          = $stateParams.t2
+    if $stateParams.t3    then query.tags3          = $stateParams.t3
     _data.params = $stateParams
     _setFromParams()
     query
@@ -97,9 +102,9 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     if $stateParams.s?
       for order in _data.sortOrders
         if order.order is $stateParams.s then _data.fromParams.orderTitle = order.title
-    if $stateParams.c?
-      for category in categories
-        if category.id is parseInt($stateParams.c) then _data.fromParams.categoryTitle = category.title
+    # if $stateParams.c?
+    #   for category in categories
+    #     if category.id is parseInt($stateParams.c) then _data.fromParams.categoryTitle = category.title
     if $stateParams.r?
       [min, max] = $stateParams.r.split('-').map((v) -> parseInt(v))
       _data.searchInputs.maxValue = if max > 0 and max < 300 then max else 300

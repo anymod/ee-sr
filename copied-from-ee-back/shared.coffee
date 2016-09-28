@@ -152,6 +152,51 @@ esqSetTag = (esq, opts) ->
           ]
   esq.query 'query', 'bool', ['must'], tag_match
 
+esqSetTags = (esq, opts) ->
+  return unless opts?.tags1 || opts?.tags2 || opts?.tags3
+  matches = []
+  for tagLevel in ['tags1', 'tags2', 'tags3']
+    if opts[tagLevel]
+      matcher = match: {}
+      matcher.match['skus.' + tagLevel] =
+        query: opts[tagLevel]
+        operator: 'and'
+      matches.push matcher
+  console.log '~~~~~~~~~~~~~~~~~~~~~~~~~~'
+  console.log matches[0]
+  console.log '~~~~~~~~~~~~~~~~~~~~~~~~~~'
+  tag_match =
+    nested:
+      path: 'skus'
+      query:
+        bool:
+          must: matches
+  esq.query 'query', 'bool', ['must'], tag_match
+  # return unless opts?.tags1 || opts.tags2 || opts.tags3
+  # matches = []
+  # for tagLevel in ['tags1', 'tags2', 'tags3']
+  #   if opts[tagLevel]
+  #     match = {}
+  #     # match['skus.' + tagLevel] =
+  #     match['skus.tags'] =
+  #       query: opts[tagLevel]
+  #       operator: 'and'
+  #     matches.push match
+
+  # tag_match =
+  #   nested:
+  #     path: 'skus'
+  #     query:
+  #       bool:
+  #         must: matches
+  #         # must: [
+  #         #   match:
+  #         #     'skus.tags':
+  #         #       query: opts.tag
+  #         #       operator: 'and'
+  #         # ]
+  # esq.query 'query', 'bool', ['must'], tag_match
+
 esqSetProductIds = (esq, opts) ->
   return unless opts?.product_ids and opts.product_ids.split(',').length > 0
   id_match =
@@ -222,7 +267,7 @@ fns.Product.search = (user, opts) ->
   esqSetPrice esq, opts         # Price:      opts.min_price, opts.max_price
   # esqSetMaterial esq, opts      # Material: opts.material
   esqSetCategories esq, opts    # Categorization: opts.category_ids
-  esqSetTag esq, opts           # Tag:        opts.tag
+  esqSetTags esq, opts          # Tags:       opts.tags1, opts.tags2, opts.tags3
   esqSetProductIds esq, opts    # Product ids: opts.product_ids
   esqSetSkuIds esq, opts        # Sku ids: opts.sku_ids
   # esqSetSupplierId esq, opts    # Supplier (admin only): opts.supplier_id
