@@ -9,10 +9,10 @@ angular.module('store.sale').config ($stateProvider) ->
       views:
         top:
           controller: 'storeCtrl as storefront'
-          templateUrl: 'store/sale/sale.header.html'
+          templateUrl: 'store/search/search.header.html'
         middle:
           controller: 'searchCtrl as search'
-          templateUrl: 'store/sale/sale.html'
+          templateUrl: 'store/search/search.html'
         footer:
           controller: 'footerCtrl as storefront'
           templateUrl: 'ee-shared/storefront/storefront.footer.html'

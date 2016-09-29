@@ -1,11 +1,20 @@
+<!-- NOT CURRENTLY IN USE -->
+
 <section>
   <div class="container">
+
+    <div class="vert-20 margin-top-0">
+      <ee-search-breadcrumb></ee-search-breadcrumb>
+    </div>
+
     <div class="row">
       <div class="col-sm-3">
         <ee-sidebar></ee-sidebar>
       </div>
 
-      <div class="col-sm-9 padding-right">
+      <div class="col-sm-9 padding-right"
+        ng-hide="search.ee.Products.reading">
+
         <!--featured_items-->
         <div class="featured_items">
           <h2 class="title text-center">Featured Items</h2>

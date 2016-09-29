@@ -9,10 +9,10 @@ angular.module('store.collections').config ($stateProvider) ->
       views:
         top:
           controller: 'storeCtrl as storefront'
-          templateUrl: 'store/collections/collection.header.html'
+          templateUrl: 'store/search/search.header.html'
         middle:
           controller: 'searchCtrl as search'
-          templateUrl: 'store/collections/collection.html'
+          templateUrl: 'store/search/search.html'
         footer:
           controller: 'footerCtrl as storefront'
           templateUrl: 'ee-shared/storefront/storefront.footer.html'

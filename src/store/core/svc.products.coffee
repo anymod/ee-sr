@@ -182,7 +182,7 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     if toState.name isnt 'search' then toParams.coll = null
     if toState.name is 'collection' or toState.name is 'sale'
       toParams.coll = toParams.id
-      toParams.c = null
+      toParams.t1 = toParams.t2 = toParams.t3 = null
     if _pageResetNeeded(toState, toParams, fromState, fromParams) then toParams.p = null
     _setParams toParams
     switch toState.name

@@ -35,6 +35,11 @@
           <div class="col-sm-12">
             <div uib-tabset active="home.subtagActive">
               <div uib-tab ng-repeat="subtag in home.ee.User.user.home_subtags" index="$index" heading="{{ subtag.name + 's' }}">
+                <span class="inline-block full-width pad-10 pad-top-0">
+                  <a ui-sref="search({ q: subtag.name + 's' })" class="text-muted">
+                    More like these<i class="fa fa-fw fa-angle-double-right"></i>
+                  </a>
+                </span>
                 <div class="col-sm-3" ng-repeat="product in subtag.products">
                   <ee-product-single product="product" hide-extra=true></ee-product-single>
                 </div>
