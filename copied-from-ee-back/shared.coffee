@@ -137,20 +137,20 @@ esqSetCategories = (esq, opts) ->
       category_id: opts.category_ids.split(',')
   esq.query 'query', 'bool', ['must'], id_match
 
-esqSetTag = (esq, opts) ->
-  return unless opts?.tag
-  tag_match =
-    nested:
-      path: 'skus'
-      query:
-        bool:
-          must: [
-            match:
-              'skus.tags':
-                query: opts.tag
-                operator: 'and'
-          ]
-  esq.query 'query', 'bool', ['must'], tag_match
+# esqSetTag = (esq, opts) ->
+#   return unless opts?.tag
+#   tag_match =
+#     nested:
+#       path: 'skus'
+#       query:
+#         bool:
+#           must: [
+#             match:
+#               'skus.tags':
+#                 query: opts.tag
+#                 operator: 'and'
+#           ]
+#   esq.query 'query', 'bool', ['must'], tag_match
 
 esqSetTags = (esq, opts) ->
   return unless opts?.tags1 || opts?.tags2 || opts?.tags3
@@ -162,9 +162,6 @@ esqSetTags = (esq, opts) ->
         query: opts[tagLevel]
         operator: 'and'
       matches.push matcher
-  console.log '~~~~~~~~~~~~~~~~~~~~~~~~~~'
-  console.log matches[0]
-  console.log '~~~~~~~~~~~~~~~~~~~~~~~~~~'
   tag_match =
     nested:
       path: 'skus'
@@ -172,30 +169,6 @@ esqSetTags = (esq, opts) ->
         bool:
           must: matches
   esq.query 'query', 'bool', ['must'], tag_match
-  # return unless opts?.tags1 || opts.tags2 || opts.tags3
-  # matches = []
-  # for tagLevel in ['tags1', 'tags2', 'tags3']
-  #   if opts[tagLevel]
-  #     match = {}
-  #     # match['skus.' + tagLevel] =
-  #     match['skus.tags'] =
-  #       query: opts[tagLevel]
-  #       operator: 'and'
-  #     matches.push match
-
-  # tag_match =
-  #   nested:
-  #     path: 'skus'
-  #     query:
-  #       bool:
-  #         must: matches
-  #         # must: [
-  #         #   match:
-  #         #     'skus.tags':
-  #         #       query: opts.tag
-  #         #       operator: 'and'
-  #         # ]
-  # esq.query 'query', 'bool', ['must'], tag_match
 
 esqSetProductIds = (esq, opts) ->
   return unless opts?.product_ids and opts.product_ids.split(',').length > 0

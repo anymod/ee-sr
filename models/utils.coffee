@@ -20,6 +20,9 @@ utils.setup = (req) ->
       range:          req.query.r
       category:       req.query.c
       tag:            req.query.t
+      tags1:          req.query.t1
+      tags2:          req.query.t2
+      tags3:          req.query.t3
       collection_id:  req.query.coll
       referer:        req.headers.referer
     host: req.headers.host
@@ -87,9 +90,7 @@ utils.searchOpts = (bootstrap) ->
   opts =
     size:   bootstrap.perPage
     search: bootstrap.query
-    page:   bootstrap.page
-    order:  bootstrap.order
-    tag:    bootstrap.tag
+  opts[attr] = bootstrap[attr] for attr in ['page', 'order', 'tag', 'tags1', 'tags2', 'tags3']
   if bootstrap.category_id then opts.category_ids = bootstrap.category_id
   if bootstrap.collection_id then opts.collection_id = bootstrap.collection_id
   if bootstrap.range then [opts.min_price, opts.max_price] = utils.rangeToPrices(bootstrap.range)
