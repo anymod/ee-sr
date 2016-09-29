@@ -5,22 +5,20 @@
       <ee-product-breadcrumb product="product.data.product"></ee-product-breadcrumb>
     </div>
 
-    <div class="row">
+    <ee-product-detail
+      ng-if="product.data.product.id"
+      product="product.data.product"
+      skus="product.data.product.skus"
+      products="product.ee.Products.products">
+    </ee-product-detail>
+
+    <ee-loading loading="product.data.reading || product.ee.Products.reading" ee-min-height="600"></ee-loading>
+
+    <!-- <div class="row">
       <div class="col-sm-3">
         <ee-sidebar></ee-sidebar>
       </div>
-
-      <div class="col-sm-9">
-        <ee-product-detail
-          ng-if="product.data.product.id"
-          product="product.data.product"
-          skus="product.data.product.skus"
-          products="product.ee.Products.products">
-        </ee-product-detail>
-
-        <ee-loading loading="product.data.reading || product.ee.Products.reading" ee-min-height="600"></ee-loading>
-      </div>
-    </div>
+    </div> -->
   </div>
 </section>
 
