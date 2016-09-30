@@ -1,0 +1,35 @@
+<section class="vert-50 margin-top-0">
+
+  <div class="container pad-20" style="border-top: 1px solid #F5F5F5;">
+
+    <div class="full-width">
+      <div class="row" style="border-bottom: 1px dashed #d9d9d9;">
+        <h4 class="margin-0"
+          style="margin-top: 15px; padding-bottom: 10px;">
+          Just Added to Your Cart
+        </h4>
+      </div>
+      <div class="row" style="border-bottom: 1px dashed #d9d9d9; padding: 15px 0;">
+        <div class="col-sm-6">
+          <img src="https://res.cloudinary.com/eeosk/image/upload/e_trim/c_pad,w_220,h_220/v1471613407/7128.jpg"
+            class="max-width-120"/>
+        </div>
+        <div class="col-sm-6" style="background: #F0F0E9;">
+          <div class="pad-20">
+            Order Subtotal:
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ee-product-detail
+      ng-if="product.data.product.id"
+      product="product.data.product"
+      skus="product.data.product.skus"
+      products="product.ee.Products.products">
+    </ee-product-detail>
+
+    <ee-loading loading="product.data.reading || product.ee.Products.reading" ee-min-height="600"></ee-loading>
+
+  </div>
+</section>

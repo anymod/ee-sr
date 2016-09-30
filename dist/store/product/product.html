@@ -1,5 +1,7 @@
 <section class="vert-50 margin-top-0">
+
   <div class="container">
+    <a ui-sref="added({ id: product.data.product.id })" class="btn btn-default">Added</a>
 
     <div class="vert-20 margin-top-0">
       <ee-product-breadcrumb product="product.data.product"></ee-product-breadcrumb>
@@ -14,21 +16,7 @@
 
     <ee-loading loading="product.data.reading || product.ee.Products.reading" ee-min-height="600"></ee-loading>
 
-    <!-- <div class="row">
-      <div class="col-sm-3">
-        <ee-sidebar></ee-sidebar>
-      </div>
-    </div> -->
   </div>
 </section>
 
-<!-- <div ng-hide="product.data.reading" class="container text-center vert-10">
-  <ee-product-detail
-    ng-if="product.data.product.id"
-    product="product.data.product"
-    skus="product.data.product.skus"
-    products="product.ee.Products.products">
-  </ee-product-detail>
-</div>
-
-<ee-loading loading="product.data.reading || product.ee.Products.reading" ee-min-height="600"></ee-loading> -->
+<!-- <ee-cart-sidebar></ee-cart-sidebar> -->

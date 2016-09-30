@@ -94,6 +94,10 @@ sources.storeModule = [
   './src/store/product/product.module.coffee'
   './src/store/product/product.route.coffee'
   './src/store/product/product.controller.coffee'
+  # Module - added
+  './src/store/added/added.module.coffee'
+  './src/store/added/added.route.coffee'
+  './src/store/added/added.controller.coffee'
   # Module - sku
   './src/store/sku/sku.module.coffee'
   './src/store/sku/sku.route.coffee'
@@ -165,6 +169,7 @@ sources.storeDirective = [
   './src/ee-shared/components/ee-sidebar.coffee'
   './src/ee-shared/components/ee-search-breadcrumb.coffee'
   './src/ee-shared/components/ee-product-breadcrumb.coffee'
+  './src/ee-shared/components/ee-cart-sidebar.coffee'
 ]
 
 module.exports = sources

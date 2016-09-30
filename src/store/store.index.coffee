@@ -29,6 +29,7 @@ angular.module 'eeStore', [
   'store.search'
   'store.favorites'
   'store.coupons'
+  'store.added'
 
   # custom
   'ee-storefront-announcement'
@@ -60,5 +61,6 @@ angular.module 'eeStore', [
   'ee-sidebar'
   'ee-search-breadcrumb'
   'ee-product-breadcrumb'
+  'ee-cart-sidebar'
   # 'ee.templates' # commented out during build step for inline templates
 ]
