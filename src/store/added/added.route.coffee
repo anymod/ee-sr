@@ -5,7 +5,7 @@ angular.module('store.added').config ($stateProvider) ->
   $stateProvider
 
     .state 'added',
-      url: '/added/:id'
+      url: '/added/:id?q'
       views:
         top:
           controller: 'storeCtrl as store'
@@ -16,3 +16,7 @@ angular.module('store.added').config ($stateProvider) ->
         footer:
           controller: 'footerCtrl as storefront'
           templateUrl: 'ee-shared/storefront/storefront.footer.html'
+      params:
+        q: null
+      data:
+        pageTitle: 'Just Added to Your Cart'

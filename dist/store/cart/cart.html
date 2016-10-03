@@ -1,70 +1,95 @@
 <div class="container vert-5">
 
-  <h3 class="vert-10 margin-top-0 pad-10 pad-top-0 font-weight-200 text-center border-bottom-gray">
-    Shopping cart<span ng-if="cart.ee.Cart.skus.length < 1" ng-hide="cart.ee.Cart.reading || cart.ee.Cart.updating">&nbsp;is empty</span>
+  <h3 class="row vert-25 font-weight-200">
+    <div class="col-xs-12">
+      Shopping cart<span ng-if="cart.ee.Cart.skus.length < 1" ng-hide="cart.ee.Cart.reading || cart.ee.Cart.updating">&nbsp;is empty</span>
+      <div class="pull-right">
+        <a ui-sref="storefront"
+          class="btn btn-sm btn-default vert-5 pad-2">
+          &nbsp;Keep shopping&nbsp;
+        </a>
+        <div class="btn btn-themed"
+          ng-click="cart.buy()"
+          ng-disabled="cart.processing || cart.ee.Cart.updating || cart.ee.Cart.skus.length < 1">
+          Proceed to Checkout
+        </div>
+      </div>
+    </div>
   </h3>
 
   <div ng-if="cart.ee.Cart.skus.length < 1"
     ng-hide="cart.ee.Cart.reading || cart.ee.Cart.updating"
-    class="full-width text-center">
-    <div class="vert-10">
-      <img class="width-50" src="//cdn.shopify.com/s/files/1/0269/1895/t/2/assets/cc-paypal.png" alt="PayPal">&nbsp;<img class="width-50" src="//cdn.shopify.com/s/files/1/0269/1895/t/2/assets/cc-visa.png" alt="Visa">&nbsp;<img class="width-50" src="//cdn.shopify.com/s/files/1/0269/1895/t/2/assets/cc-mastercard.png" alt="Mastercard">&nbsp;<img class="width-50" src="//cdn.shopify.com/s/files/1/0269/1895/t/2/assets/cc-amex.png" alt="American Express">&nbsp;<img class="width-50" src="//cdn.shopify.com/s/files/1/0269/1895/t/2/assets/cc-discover.png" alt="Discover">
-      <br>
-      <div class="pad-10 max-width-300 margin-0-auto">
-        <ee-coupon-box></ee-coupon-box>
+    class="row text-center">
+    <div class="col-xs-12">
+      <div class="vert-10">
+        <img class="width-50" src="//cdn.shopify.com/s/files/1/0269/1895/t/2/assets/cc-paypal.png" alt="PayPal">&nbsp;<img class="width-50" src="//cdn.shopify.com/s/files/1/0269/1895/t/2/assets/cc-visa.png" alt="Visa">&nbsp;<img class="width-50" src="//cdn.shopify.com/s/files/1/0269/1895/t/2/assets/cc-mastercard.png" alt="Mastercard">&nbsp;<img class="width-50" src="//cdn.shopify.com/s/files/1/0269/1895/t/2/assets/cc-amex.png" alt="American Express">&nbsp;<img class="width-50" src="//cdn.shopify.com/s/files/1/0269/1895/t/2/assets/cc-discover.png" alt="Discover">
+        <br>
+        <div class="pad-10 max-width-300 margin-0-auto">
+          <ee-coupon-box></ee-coupon-box>
+        </div>
+        <h4 ng-if="cart.ee.Products.products.length > 0"
+          class="font-weight-200">
+          Choose a product to see more like it
+        </h4>
       </div>
-      <h4 ng-if="cart.ee.Products.products.length > 0"
-        class="font-weight-200">
-        Choose a product to see more like it
-      </h4>
+      <ee-products-list
+        products="cart.ee.Products.products"
+        show-signup=true>
+      </ee-products-list>
     </div>
-    <ee-products-list
-      products="cart.ee.Products.products"
-      show-signup=true>
-    </ee-products-list>
+
   </div>
 
   <div ng-if="cart.ee.Cart.skus.length > 0"
-    class="row vert-10"
+    class="vert-10"
     ng-class="{ 'opacity-05': cart.ee.Cart.reading || cart.ee.Cart.updating }">
 
-    <div class="col col-sm-7">
+    <div>
+
+      <div class="row border-bottom-gray">
+        <div class="col-xs-6"><small>Item</small></div>
+        <div class="col-xs-3"><small>Quantity</small></div>
+        <div class="col-xs-3 text-right"><small>Price</small></div>
+      </div>
 
       <div ng-repeat="sku in cart.ee.Cart.skus"
-        class="media border-bottom-gray max-width-400"
-        style="margin: 0 auto 10px;">
-        <div class="media-left media-top">
-          <a ui-sref="product({ id: sku.product_id, title: (sku.product.title | urlText) })">
-            <img ng-src="{{ sku.product.image | cloudinaryResizeTo:64:64 }}" />
-          </a>
-        </div>
-        <div class="media-body">
-          <h4 ng-bind="sku.product.title" class="font-weight-200 media-heading text-muted"></h4>
-          <h5 ng-bind="sku.selection_text" class="font-weight-200 margin-0 text-muted"></h5>
-          <div class="row vert-5">
-            <div class="col-xs-5 col-sm-3">
-              <span ng-show="sku.msrp && sku.msrp > sku.price">
-                <s class="text-muted" ng-bind="sku.msrp | centToDollar"></s>&nbsp;
-              </span>
-              <strong ng-bind="sku.price | centToDollar"></strong>
-              <div class="text-muted">
-                <em>
-                  <span ng-bind="(sku.shipping_price || 0) | centToDollar"></span>&nbsp;s/h
-                </em>
+        class="border-bottom-gray">
+        <div class="row vert-10">
+          <div class="col-xs-6">
+            <div class="media">
+              <div class="media-left media-top">
+                <a ui-sref="product({ id: sku.product_id, title: (sku.product.title | urlText) })">
+                  <img ng-src="{{ sku.product.image | cloudinaryResizeTo:64:64 }}" />
+                </a>
+              </div>
+              <div class="media-body">
+                <h4 ng-bind="sku.product.title" class="media-heading text-muted"></h4>
+                <h5 ng-bind="sku.selection_text" class="font-weight-200 margin-0 text-muted"></h5>
               </div>
             </div>
-            <div class="col-xs-7">
-              <div ng-repeat="pair in cart.ee.Cart.quantity_array"
-                ng-if="sku.id == pair.sku_id"
-                class="inline-block" style="width: 50px;">
-                <select class="form-control input-sm"
-                  ng-model="pair.quantity"
-                  ng-options="qty for qty in [1,2,3,4,5,6,7,8]"
-                  ng-change="cart.update()">
-                </select>
-              </div>&nbsp;
-              <div class="btn btn-xs btn-link text-dark-blue" ng-click="cart.removeSku(sku.id)">remove</div>
+          </div>
+          <div class="col-xs-3">
+            <div ng-repeat="pair in cart.ee.Cart.quantity_array"
+              ng-if="sku.id == pair.sku_id" style="width: 50px;">
+              <select class="form-control input-sm"
+                ng-model="pair.quantity"
+                ng-options="qty for qty in [1,2,3,4,5,6,7,8]"
+                ng-change="cart.update()">
+              </select>
             </div>
+            <!-- <div><small class="text-underline hover-pointer text-muted vert-5 margin-bottom-0" ng-click="cart.removeSku(sku.id)">Add to favorites</small></div> -->
+            <div><small class="text-underline hover-pointer text-muted" ng-click="cart.removeSku(sku.id)">Remove</small></div>
+          </div>
+          <div class="col-xs-3 text-right">
+            <!-- <span ng-show="sku.msrp && sku.msrp > sku.price">
+              <s class="text-muted" ng-bind="sku.msrp | centToDollar:true"></s>&nbsp;
+            </span> -->
+            <strong ng-bind="sku.price | centToDollar:true"></strong>
+            <!-- <div class="text-muted">
+              <em>
+                <span ng-bind="(sku.shipping_price || 0) | centToDollar:true"></span>&nbsp;s/h
+              </em>
+            </div> -->
           </div>
         </div>
       </div>
@@ -73,42 +98,53 @@
 
     </div>
 
-    <div class="col col-sm-5">
-      <div class="margin-0-auto" style="width: 280px;">
-
-        <ee-paypal-button></ee-paypal-button>
-
-        <h4 class="vert-10 text-center text-muted font-weight-200">
-          OR
-        </h4>
-
-
-        <div ng-click="cart.buy()"
-          class="btn btn-block btn-themed pad-7"
-          style="border: none !important;"
-          ng-disabled="cart.processing || cart.ee.Cart.updating || cart.ee.Cart.skus.length < 1">
-          Express Credit Card Checkout &raquo;
-        </div>
-        <div class="vert-10 full-width text-center">
-          <img class="width-40" src="//cdn.shopify.com/s/files/1/0269/1895/t/2/assets/cc-visa.png" alt="Visa">&nbsp;<img class="width-40" src="//cdn.shopify.com/s/files/1/0269/1895/t/2/assets/cc-mastercard.png" alt="Mastercard">&nbsp;<img class="width-40" src="//cdn.shopify.com/s/files/1/0269/1895/t/2/assets/cc-amex.png" alt="American Express">&nbsp;<img class="width-40" src="//cdn.shopify.com/s/files/1/0269/1895/t/2/assets/cc-discover.png" alt="Discover">
-        </div>
-
-        <h4>Order Summary</h4>
-        <p class="margin-0">Items: <span class="pull-right" ng-bind="cart.ee.Cart.cart.cumulative_price | centToDollar:true"></span></p>
-        <p class="margin-0" ng-if="cart.ee.Cart.cart.coupon_total > 0">
-          <span ng-bind="cart.ee.Coupon.coupon.off_text || 'Discount'"></span>:
-          <span class="pull-right text-success" ng-bind="'-' + cart.ee.Cart.cart.coupon_total | centToDollar:true"></span>
-        </p>
-        <p class="margin-0">Shipping & handling: <span class="pull-right"><span ng-hide="cart.ee.Cart.cart.shipping_total == 0" ng-bind="cart.ee.Cart.cart.shipping_total | centToDollar:true"></span><span ng-show="cart.ee.Cart.cart.shipping_total == 0" class="text-success">Free</span></span></p>
-        <hr class="vert-5">
-        <p class="margin-0">Total before tax: <span class="pull-right" ng-bind="cart.ee.Cart.cart.cumulative_price - cart.ee.Cart.cart.coupon_total + cart.ee.Cart.cart.shipping_total | centToDollar:true"></span></p>
-        <p class="margin-0">Estimated tax: <span class="pull-right" ng-bind="cart.ee.Cart.cart.taxes_total | centToDollar:true"></span></p>
-        <hr class="vert-5">
-        <h4 class="margin-0">Order total: <span class="pull-right" ng-bind="cart.ee.Cart.cart.grand_total | centToDollar:true"></span></h4>
-
-        <div class="vert-20">
+    <div class="row">
+      <div class="col-sm-7">
+        <div class="vert-20 max-width-200">
           <ee-coupon-box></ee-coupon-box>
         </div>
+      </div>
+      <div class="col col-sm-5">
+        <div>
+          <p class="margin-0">Product Total: <strong class="pull-right" ng-bind="cart.ee.Cart.cart.cumulative_price | centToDollar:true"></strong></p>
+          <p class="margin-0" ng-if="cart.ee.Cart.cart.coupon_total > 0">
+            <span ng-bind="cart.ee.Coupon.coupon.off_text || 'Discount'"></span>:
+            <span class="pull-right" ng-bind="'-' + cart.ee.Cart.cart.coupon_total | centToDollar:true"></span>
+          </p>
+          <p class="margin-0">Shipping: <span class="pull-right"><span ng-hide="cart.ee.Cart.cart.shipping_total == 0" ng-bind="cart.ee.Cart.cart.shipping_total | centToDollar:true"></span><span ng-show="cart.ee.Cart.cart.shipping_total == 0">FREE</span></span></p>
+          <!-- <hr class="vert-5"> -->
+          <!-- <p class="margin-0">Total before tax: <span class="pull-right" ng-bind="cart.ee.Cart.cart.cumulative_price - cart.ee.Cart.cart.coupon_total + cart.ee.Cart.cart.shipping_total | centToDollar:true"></span></p> -->
+          <p class="margin-0">Tax: <span class="pull-right" ng-bind="cart.ee.Cart.cart.taxes_total | centToDollar:true"></span></p>
+          <hr class="vert-10">
+          <h4 class="margin-0">Estimated total: <span class="pull-right" ng-bind="cart.ee.Cart.cart.grand_total | centToDollar:true"></span></h4>
+          <h5 ng-if="cart.ee.Cart.cart.msrp_total > cart.ee.Cart.cart.grand_total">
+            You save: <span class="pull-right"><span ng-bind="(cart.ee.Cart.cart.msrp_total - cart.ee.Cart.cart.grand_total) | centToDollar:true"></span>&nbsp;(<span ng-bind="(1 - (cart.ee.Cart.cart.grand_total / cart.ee.Cart.cart.msrp_total)) | percentage:0"></span>)</span>
+          </h5>
+        </div>
+        <div class="text-right vert-50">
+          <div>
+            <a ui-sref="storefront"
+              class="btn btn-sm btn-default vert-5 pad-2">
+              &nbsp;Keep shopping&nbsp;
+            </a>
+            <div class="btn btn-themed"
+              ng-click="cart.buy()"
+              ng-disabled="cart.processing || cart.ee.Cart.updating || cart.ee.Cart.skus.length < 1">
+              Proceed to Checkout
+            </div>
+          </div>
+          <!-- <div ng-click="cart.buy()"
+            class="btn btn-block btn-themed pad-7"
+            style="border: none !important;"
+            ng-disabled="cart.processing || cart.ee.Cart.updating || cart.ee.Cart.skus.length < 1">
+            Proceed to Checkout
+          </div> -->
+          <div class="vert-10" style="margin-right: 75px;">or</div>
+          <div class="pull-right" style="width: 160px;">
+            <ee-paypal-button button-size="small"></ee-paypal-button>
+          </div>
+        </div>
+        <br>
       </div>
     </div>
 

@@ -9,27 +9,75 @@
           Just Added to Your Cart
         </h4>
       </div>
-      <div class="row" style="border-bottom: 1px dashed #d9d9d9; padding: 15px 0;">
+      <div class="row"
+          ng-repeat="sku in added.ee.Cart.skus"
+          ng-if="sku.product && sku.product_id == added.$state.toParams.id"
+          ng-hide="added.ee.Cart.reading || added.ee.Cart.updating"
+          style="border-bottom: 1px dashed #d9d9d9; padding: 15px 0;">
         <div class="col-sm-6">
-          <img src="https://res.cloudinary.com/eeosk/image/upload/e_trim/c_pad,w_220,h_220/v1471613407/7128.jpg"
-            class="max-width-120"/>
+          <div class="media">
+            <div class="media-left media-top" style="min-width: 160px;">
+              <a ui-sref="product({ id: sku.product.id, title: (sku.product.title | urlText) })">
+                <img ee-image-fadein
+                  ee-src="sku.product.image"
+                  ee-w=220 ee-h=220 ee-trim=true
+                  load-boolean="added.loadBoolean"
+                  alt="{{ sku.product.title }}"
+                  class="img-responsive full-width transition-400" />
+              </a>
+            </div>
+            <div class="media-body">
+              <p ng-bind="sku.product.title"></p>
+              <!-- <h2 ng-bind="sku.price | centToDollar"></h2> -->
+              <a ng-if="sku.discounted" ui-sref="sale({ id: sku.discounted })" class="btn btn-themed btn-arrow">Sale</a>
+              <h4 ng-bind="sku.price | centToDollar:true" class="product-price margin-bottom-0" style="color: black;"></h4>
+              <h5 ng-if="sku.shipping_price > 0"
+                class="margin-0 text-muted">
+                <span ng-bind="sku.shipping_price | centToDollar:true"></span>&nbsp;s&h
+              </h5>
+              <p ng-if="sku.shipping_price == 0" class="vert-10 margin-top-0">FREE Shipping</p>
+            </div>
+          </div>
+
         </div>
         <div class="col-sm-6" style="background: #F0F0E9;">
           <div class="pad-20">
-            Order Subtotal:
+            <table class="table margin-bottom-0">
+              <tr>
+                <td class="border-none">Order Subtotal:</td>
+                <td class="border-none">
+                  <h4 ng-bind="added.ee.Cart.cart.cumulative_price | centToDollar:true" class="margin-0" style="color: black;"></h4>
+                </td>
+              </tr>
+              <tr>
+                <td>Item(s) in your cart:</td>
+                <td><h4 ng-bind="added.ee.Cart.skus.length" class="margin-0"></h4></td>
+              </tr>
+              <tr>
+                <td class="text-right">
+                  <a ui-sref="search({ q: sku.product.title, t1: sku.tags1[0] })"
+                    class="btn btn-sm btn-default vert-5 pad-2">
+                    &nbsp;Keep shopping&nbsp;
+                  </a>
+                </td>
+                <td><a ui-sref="cart" class="btn btn-themed">Checkout</a></td>
+              </tr>
+            </table>
           </div>
         </div>
       </div>
     </div>
 
-    <ee-product-detail
-      ng-if="product.data.product.id"
-      product="product.data.product"
-      skus="product.data.product.skus"
-      products="product.ee.Products.products">
-    </ee-product-detail>
-
-    <ee-loading loading="product.data.reading || product.ee.Products.reading" ee-min-height="600"></ee-loading>
+    <div class="vert-50" ng-hide="added.ee.Products.products.length < 1 || added.ee.Products.reading">
+      <p>You might also like...</p>
+      <ee-products-list
+        products="added.ee.Products.products"
+        excluded-id="added.$state.toParams.id"
+        custom-class="col-sm-2">
+      </ee-products-list>
+    </div>
 
   </div>
 </section>
+
+<ee-loading loading="added.ee.Cart.reading || added.ee.Cart.updating || added.ee.Products.reading" ee-min-height="600"></ee-loading>
