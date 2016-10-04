@@ -1,15 +1,19 @@
 <div>
-  <div class="position-absolute" style="top: 5px; right: 10px;">
-    <button type="button" class="close" ng-click="$close()">&times;</button>
-  </div>
-  <div class="inline-block full-width text-center bg-themed pad-10 vert-10 margin-top-0"
-    style="border-radius: 5px 5px 0 0;">
-    <!-- <img ng-src="{{ modal.ee.User.user.logo | cloudinaryTrim }}" class="max-width-200"> -->
+  <div class="inline-block full-width text-center bg-themed vert-20 margin-top-0"
+    style="padding: 50px 90px 20px;">
     <h3 ee-signup-message class="font-weight-200 vert-5"></h3>
   </div>
-  <ee-signup run-parse=true identifier="modal"></ee-signup>
-  <div class="max-width-300 margin-0-auto text-center pad-10">
-    <h4 class="text-muted font-weight-200 vert-5">Discover deals and shop new trends & styles at <span ng-bind="modal.ee.User.user.store_name"></span>.</h4>
+  <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1475543820/SR-offer-image.png' | cloudinaryResizeTo:450:120 }}" alt="Stylish Rustic" class="full-width">
+  <div class="vert-20">
+    <ee-signup run-parse=true identifier="modal"></ee-signup>
+    <div class="max-width-300 margin-0-auto text-center pad-10">
+      <h4 class="text-muted font-weight-200 vert-5">Discover deals and shop new trends & styles at <span ng-bind="modal.ee.User.user.store_name"></span>.</h4>
+    </div>
   </div>
-  <br>
+  <div class="position-absolute" style="bottom: 20px; right: 50%; margin-right: -38px;">
+    <div class="text-muted hover-pointer hover-underline"
+      ng-click="$close()">
+      <i class="fa fa-fw fa-times"></i>&nbsp;No thanks
+    </div>
+  </div>
 </div>

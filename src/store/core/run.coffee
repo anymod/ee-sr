@@ -5,18 +5,30 @@ angular.module('store.core').run ($rootScope, $cookies, $location, $window, eeMo
   ## SETUP
   $rootScope.isStore = true
 
-  if !$cookies.get('offered')?
-    $rootScope.openSignupModal = () ->
-      $cookies.put 'offered', (eeAnalytics.data.pageDepth || true)
-      eeModal.fns.open 'offer'
-      $rootScope.openSignupModal = () -> false
+  win = angular.element($window)
 
-    win = angular.element($window)
+  _openSignupModal = () ->
+    $cookies.put 'offered', (eeAnalytics.data.pageDepth || true)
+    eeModal.fns.open 'offer'
+    _openSignupModal = () -> false
+
+  _openCartOfferModal = () ->
+    # TODO get cart offer modal working
+    if $cookies.get('cart')
+      $cookies.put 'offered-cart', (eeAnalytics.data.pageDepth || true)
+      eeModal.fns.open 'offer-cart'
+      _openCartOfferModal = () -> false
+
+  $rootScope.eeMouseleave = () ->
+    _openSignupModal()
+    # _openCartOfferModal()
+
+  if !$cookies.get('offered')?
     win.bind 'touchstart', (e) ->
       win.unbind 'touchstart'
       win.bind 'scroll', (e) ->
         if $window.pageYOffset > 1999
-          $rootScope.openSignupModal()
+          _openSignupModal()
           win.unbind 'scroll'
 
   if $cookies.get('coupon')? then eeCoupon.fns.defineCoupon()

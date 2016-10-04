@@ -9264,6 +9264,22 @@ body.modal-open {
   overflow-y: scroll;
   overflow-x: hidden;
 }
+.modal-circle .modal-content {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 450px;
+  min-height: 450px;
+  max-width: 100%;
+}
+.modal-circle .modal-dialog {
+  width: 450px;
+  max-width: 94%;
+}
+@media (max-width: 470px) {
+  .modal-circle .modal-content {
+    border-radius: 5px;
+  }
+}
 .pagination > li > a,
 .pagination > li > span {
   color: #777777;
