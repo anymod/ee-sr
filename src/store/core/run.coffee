@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('store.core').run ($rootScope, $cookies, $location, $window, eeModal, eeCoupon, eeAnalytics) ->
+angular.module('store.core').run ($rootScope, $cookies, $location, $window, eeModal, eeCoupon, eeAnalytics, eeCart) ->
 
   ## SETUP
   $rootScope.isStore = true
@@ -8,20 +8,21 @@ angular.module('store.core').run ($rootScope, $cookies, $location, $window, eeMo
   win = angular.element($window)
 
   _openSignupModal = () ->
+    if $cookies.get 'offered' then return
     $cookies.put 'offered', (eeAnalytics.data.pageDepth || true)
     eeModal.fns.open 'offer'
     _openSignupModal = () -> false
 
   _openCartOfferModal = () ->
-    # TODO get cart offer modal working
+    if $cookies.get 'offered-cart' then return
     if $cookies.get('cart')
       $cookies.put 'offered-cart', (eeAnalytics.data.pageDepth || true)
-      eeModal.fns.open 'offer-cart'
+      eeModal.fns.open 'offer_cart'
       _openCartOfferModal = () -> false
 
   $rootScope.eeMouseleave = () ->
     _openSignupModal()
-    # _openCartOfferModal()
+    _openCartOfferModal()
 
   if !$cookies.get('offered')?
     win.bind 'touchstart', (e) ->
