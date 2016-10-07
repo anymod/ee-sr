@@ -374,6 +374,151 @@ fns.Product.findSubtags = (user) ->
   # .then () -> subtags
   [
     {
+      "name": "Candle Holder",
+      "products": [
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1433891137/ht1ligyswje1xr1qmmoa.jpg",
+          "skus": [
+            {
+              "shipping_price": 799,
+              "quantity": 20,
+              "color": null,
+              "length": 3,
+              "weight": 12,
+              "tags": [
+                "Home, garden & living",
+                "Home decor",
+                "Home decor accents"
+              ],
+              "material": "Metal, Polystone",
+              "size": null,
+              "product_id": 2310,
+              "msrp": 4529,
+              "width": 19,
+              "style": null,
+              "id": 3214,
+              "height": 11,
+              "price": 4000
+            }
+          ],
+          "category_id": 4,
+          "id": 2310,
+          "title": "Coral Candle Holder",
+          "msrps": [
+            4529
+          ],
+          "prices": [
+            4000
+          ]
+        },
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1433891141/vsefpmrkr1kh5dcddtko.jpg",
+          "skus": [
+            {
+              "shipping_price": 0,
+              "quantity": 20,
+              "color": null,
+              "length": 7,
+              "weight": 13,
+              "tags": [
+                "Home, garden & living",
+                "Furniture",
+                "Living room"
+              ],
+              "material": "Wood",
+              "size": null,
+              "product_id": 2276,
+              "msrp": 8570,
+              "width": 18,
+              "style": null,
+              "id": 3180,
+              "height": 10,
+              "price": 7800
+            }
+          ],
+          "category_id": 4,
+          "id": 2276,
+          "title": "Mirrored Candle Holder",
+          "msrps": [
+            8570
+          ],
+          "prices": [
+            7800
+          ]
+        },
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1463156649/4522.jpg",
+          "skus": [
+            {
+              "shipping_price": 799,
+              "quantity": 20,
+              "color": null,
+              "length": 10,
+              "weight": null,
+              "tags": [
+                "Home, garden & living",
+                "Home decor",
+                "Home decor accents"
+              ],
+              "material": null,
+              "size": null,
+              "product_id": 4522,
+              "msrp": 3474,
+              "width": 10,
+              "style": null,
+              "id": 6710,
+              "height": 10,
+              "price": 3000
+            }
+          ],
+          "category_id": 4,
+          "id": 4522,
+          "title": "Clear Glass Candle Holder",
+          "msrps": [
+            3474
+          ],
+          "prices": [
+            3000
+          ]
+        },
+        {
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1463156865/4626.jpg",
+          "skus": [
+            {
+              "shipping_price": 799,
+              "quantity": 20,
+              "color": null,
+              "length": 4,
+              "weight": null,
+              "tags": [
+                "Home, garden & living",
+                "Home decor",
+                "Home decor accents"
+              ],
+              "material": null,
+              "size": null,
+              "product_id": 4626,
+              "msrp": 3033,
+              "width": 23,
+              "style": null,
+              "id": 6814,
+              "height": 11,
+              "price": 2500
+            }
+          ],
+          "category_id": 4,
+          "id": 4626,
+          "title": "Metal Candle Holder",
+          "msrps": [
+            3033
+          ],
+          "prices": [
+            2500
+          ]
+        }
+      ]
+    },
+    {
       "name": "Mirror",
       "products": [
         {
@@ -949,151 +1094,6 @@ fns.Product.findSubtags = (user) ->
           ],
           "prices": [
             2200
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Candle Holder",
-      "products": [
-        {
-          "image": "https://res.cloudinary.com/eeosk/image/upload/v1433891137/ht1ligyswje1xr1qmmoa.jpg",
-          "skus": [
-            {
-              "shipping_price": 799,
-              "quantity": 20,
-              "color": null,
-              "length": 3,
-              "weight": 12,
-              "tags": [
-                "Home, garden & living",
-                "Home decor",
-                "Home decor accents"
-              ],
-              "material": "Metal, Polystone",
-              "size": null,
-              "product_id": 2310,
-              "msrp": 4529,
-              "width": 19,
-              "style": null,
-              "id": 3214,
-              "height": 11,
-              "price": 4000
-            }
-          ],
-          "category_id": 4,
-          "id": 2310,
-          "title": "Coral Candle Holder",
-          "msrps": [
-            4529
-          ],
-          "prices": [
-            4000
-          ]
-        },
-        {
-          "image": "https://res.cloudinary.com/eeosk/image/upload/v1433891141/vsefpmrkr1kh5dcddtko.jpg",
-          "skus": [
-            {
-              "shipping_price": 0,
-              "quantity": 20,
-              "color": null,
-              "length": 7,
-              "weight": 13,
-              "tags": [
-                "Home, garden & living",
-                "Furniture",
-                "Living room"
-              ],
-              "material": "Wood",
-              "size": null,
-              "product_id": 2276,
-              "msrp": 8570,
-              "width": 18,
-              "style": null,
-              "id": 3180,
-              "height": 10,
-              "price": 7800
-            }
-          ],
-          "category_id": 4,
-          "id": 2276,
-          "title": "Mirrored Candle Holder",
-          "msrps": [
-            8570
-          ],
-          "prices": [
-            7800
-          ]
-        },
-        {
-          "image": "https://res.cloudinary.com/eeosk/image/upload/v1463156649/4522.jpg",
-          "skus": [
-            {
-              "shipping_price": 799,
-              "quantity": 20,
-              "color": null,
-              "length": 10,
-              "weight": null,
-              "tags": [
-                "Home, garden & living",
-                "Home decor",
-                "Home decor accents"
-              ],
-              "material": null,
-              "size": null,
-              "product_id": 4522,
-              "msrp": 3474,
-              "width": 10,
-              "style": null,
-              "id": 6710,
-              "height": 10,
-              "price": 3000
-            }
-          ],
-          "category_id": 4,
-          "id": 4522,
-          "title": "Clear Glass Candle Holder",
-          "msrps": [
-            3474
-          ],
-          "prices": [
-            3000
-          ]
-        },
-        {
-          "image": "https://res.cloudinary.com/eeosk/image/upload/v1463156865/4626.jpg",
-          "skus": [
-            {
-              "shipping_price": 799,
-              "quantity": 20,
-              "color": null,
-              "length": 4,
-              "weight": null,
-              "tags": [
-                "Home, garden & living",
-                "Home decor",
-                "Home decor accents"
-              ],
-              "material": null,
-              "size": null,
-              "product_id": 4626,
-              "msrp": 3033,
-              "width": 23,
-              "style": null,
-              "id": 6814,
-              "height": 11,
-              "price": 2500
-            }
-          ],
-          "category_id": 4,
-          "id": 4626,
-          "title": "Metal Candle Holder",
-          "msrps": [
-            3033
-          ],
-          "prices": [
-            2500
           ]
         }
       ]
