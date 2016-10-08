@@ -8,21 +8,20 @@ angular.module('store.core').run ($rootScope, $cookies, $location, $window, eeMo
   win = angular.element($window)
 
   _openSignupModal = () ->
-    if $cookies.get 'offered' then return
+    if $cookies.get 'offered' then return false
     $cookies.put 'offered', (eeAnalytics.data.pageDepth || true)
     eeModal.fns.open 'offer'
-    _openSignupModal = () -> false
+    return true
 
   _openCartOfferModal = () ->
-    if $cookies.get 'offered-cart' then return
+    if $cookies.get 'offered-cart' then return false
     if $cookies.get('cart')
       $cookies.put 'offered-cart', (eeAnalytics.data.pageDepth || true)
       eeModal.fns.open 'offer_cart'
-      _openCartOfferModal = () -> false
+      return true
 
   $rootScope.eeMouseleave = () ->
-    _openSignupModal()
-    _openCartOfferModal()
+    _openCartOfferModal() || _openSignupModal()
 
   if !$cookies.get('offered')?
     win.bind 'touchstart', (e) ->

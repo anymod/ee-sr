@@ -17,7 +17,14 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-3">
-        <ee-sidebar></ee-sidebar>
+        <!-- <ee-sidebar></ee-sidebar> -->
+        <!--shipping-->
+        <div class="vert-50 margin-bottom-0">
+          <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1475888542/Free-Shipping-Square.jpg' | cloudinaryResizeTo:300:300:'pad' }}"
+            class="full-width"
+            alt="Free shipping on orders over $49">
+        </div>
+        <!--/shipping-->
       </div>
 
       <div class="col-sm-9 padding-right" ng-hide="home.ee.User.reading">
