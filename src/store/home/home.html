@@ -37,6 +37,12 @@
         </div>
         <!-- /featured_items -->
 
+        <div class="vert-50 margin-top-0">
+          <img ng-src="{{ home.ee.User.user.home_arranged[0].banner | cloudinaryResizeTo:1140:480:'fill' }}"
+            ui-sref="collection({ id: home.ee.User.user.home_arranged[0].id })"
+            class="full-width hover-pointer"/>
+        </div>
+
         <!-- subcategories -->
         <div class="category-tab">
           <div class="col-sm-12">
@@ -68,6 +74,12 @@
           </div>
         </div>
         <!--/recommended_items-->
+
+        <div class="vert-50 margin-top-0">
+          <img ng-src="{{ home.ee.User.user.home_arranged[1].banner | cloudinaryResizeTo:1140:480:'fill' }}"
+            ui-sref="collection({ id: home.ee.User.user.home_arranged[1].id })"
+            class="full-width hover-pointer"/>
+        </div>
       </div>
 
       <div class="col-sm-9" ng-show="home.ee.User.reading">
