@@ -31,7 +31,9 @@
         <!-- featured_items -->
         <div class="featured_items">
           <h2 class="title text-center">Featured Items</h2>
-          <div class="col-sm-4" ng-repeat="product in home.ee.User.user.home_featured.rows">
+          <div class="col-sm-4"
+            ng-repeat="product in home.ee.User.user.home_featured.rows"
+            ng-if="$index < 6">
             <ee-product-single product="product"></ee-product-single>
           </div>
         </div>
