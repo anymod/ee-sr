@@ -36,10 +36,12 @@
               <li class="free-shipping">
                 <a href uib-tooltip="Orders over $49 automatically receive free shipping."
                   tooltip-placement="bottom">
-                  <i class="fa fa-truck"></i>&nbsp;&nbsp;Free Shipping over $49
+                  <i class="fa fa-truck"></i>&nbsp;&nbsp;<strong>Free Shipping over $49</strong>
                 </a>
               </li>
-              <li>&nbsp;&nbsp;</li>
+              <li></li>
+              <li><a ui-sref="help"><i class="fa fa-repeat"></i>&nbsp;&nbsp;Easy Returns</a></li>
+              <li></li>
               <li><a ui-sref="help"><i class="fa fa-info-circle"></i>&nbsp;&nbsp;Help</a></li>
             </ul>
           </div>
@@ -139,7 +141,11 @@
                 </ul>
               </li>
               <li class="pull-right">
-                <a ui-sref="sale({ id: 13016 })" style="padding-right: 0px;">Sale</a>
+                <a ui-sref="sale({ id: 13016 })"
+                  class="btn-themed white-color vert-5"
+                  style="padding: 7px 12px;">
+                  Sale
+                </a>
               </li>
               <!-- <li class="dropdown">
                 <a ui-sref="category({ id: 4 })">Home Accents<i class="fa fa-angle-down"></i></a>
