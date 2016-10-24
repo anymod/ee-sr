@@ -30,6 +30,7 @@ angular.module 'eeStore', [
   'store.favorites'
   'store.coupons'
   'store.added'
+  'store.signup'
 
   # custom
   'ee-storefront-announcement'

@@ -134,6 +134,10 @@ sources.storeModule = [
   # Module - coupons
   './src/store/coupons/coupons.module.coffee'
   './src/store/coupons/coupons.route.coffee'
+  # Module - signup
+  './src/store/signup/signup.module.coffee'
+  './src/store/signup/signup.route.coffee'
+  './src/store/signup/signup.controller.coffee'
 ]
 
 ### DIRECTIVES ###
