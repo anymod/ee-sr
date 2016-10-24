@@ -8,13 +8,13 @@ angular.module('store.core').run ($rootScope, $cookies, $location, $window, eeMo
   win = angular.element($window)
 
   _openSignupModal = () ->
-    if $cookies.get 'offered' then return false
+    if $cookies.get('offered') or $cookies.get('coupon') then return false
     $cookies.put 'offered', (eeAnalytics.data.pageDepth || true)
     eeModal.fns.open 'offer'
     return true
 
   _openCartOfferModal = () ->
-    if $cookies.get 'offered-cart' then return false
+    if $cookies.get('offered-cart') or $cookies.get('coupon') then return false
     if $cookies.get('cart')
       $cookies.put 'offered-cart', (eeAnalytics.data.pageDepth || true)
       eeModal.fns.open 'offer_cart'
