@@ -377,38 +377,38 @@ fns.Product.findSubtags = (user) ->
       "name": "Candle Holder",
       "products": [
         {
-          "image": "https://res.cloudinary.com/eeosk/image/upload/v1433891137/ht1ligyswje1xr1qmmoa.jpg",
+          "image": "https://res.cloudinary.com/eeosk/image/upload/v1463156647/4521.jpg",
           "skus": [
             {
               "shipping_price": 799,
-              "quantity": 20,
+              "quantity": 460,
               "color": null,
-              "length": 3,
-              "weight": 12,
+              "length": 5,
+              "weight": null,
               "tags": [
-                "Home, garden & living",
                 "Home decor",
-                "Home decor accents"
+                "Home decor accents",
+                "Candles & holders"
               ],
-              "material": "Metal, Polystone",
+              "material": null,
               "size": null,
-              "product_id": 2310,
-              "msrp": 4529,
-              "width": 19,
+              "product_id": 4251,
+              "msrp": 2726,
+              "width": 5,
               "style": null,
-              "id": 3214,
+              "id": 6709,
               "height": 11,
-              "price": 4000
+              "price": 2300
             }
           ],
           "category_id": 4,
-          "id": 2310,
-          "title": "Coral Candle Holder",
+          "id": 4521,
+          "title": "Metal Candle Holders, Set of 3",
           "msrps": [
-            4529
+            2726
           ],
           "prices": [
-            4000
+            2300
           ]
         },
         {
