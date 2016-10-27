@@ -28,47 +28,49 @@
 
   <hr>
 
-  <div ng-repeat="quote in guests.quotes"
-    class="product-quote">
+  <div ng-hide="guests.reading">
+    <div ng-repeat="quote in guests.quotes"
+      class="product-quote">
+      <div class="row">
+        <div class="col col-sm-2 hidden-xs"></div>
+        <div class="col col-sm-5 pad-20"
+          ng-if="$odd">
+          <blockquote class="vert-50 blockquote-reverse">
+            <p ng-bind="quote.text"></p>
+          </blockquote>
+        </div>
+        <div class="col col-sm-3">
+          <ee-product-single
+            ng-if="quote.product.id"
+            product="quote.product">
+          </ee-product-single>
+        </div>
+        <div class="col col-sm-5 pad-20"
+          ng-if="$even">
+          <blockquote class="vert-50">
+            <p ng-bind="quote.text"></p>
+          </blockquote>
+        </div>
+      </div>
+      <hr class="margin-top-0">
+    </div>
+
     <div class="row">
-      <div class="col col-sm-2 hidden-xs"></div>
-      <div class="col col-sm-5 pad-20"
-        ng-if="$odd">
-        <blockquote class="vert-50 blockquote-reverse">
-          <p ng-bind="quote.text"></p>
-        </blockquote>
+      <div class="col col-sm-6">
+        <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1477525918/simple-stylings-2.jpg' | cloudinaryResizeTo:400:400:'fill' }}"
+          alt="Summer Hogan Simple Stylings"
+          class="full-width round-50-pct">
       </div>
-      <div class="col col-sm-3">
-        <ee-product-single
-          ng-if="quote.product.id"
-          product="quote.product">
-        </ee-product-single>
-      </div>
-      <div class="col col-sm-5 pad-20"
-        ng-if="$even">
+      <div class="col col-sm-6 pad-20">
         <blockquote class="vert-50">
-          <p ng-bind="quote.text"></p>
+          <p>I hope these picks get your home decor juices flowing and don’t forget about gifts for the design lovers in your life!</p>
+          <p>Now, if I can only choose what I want to order first!</p>
+          <footer>Summer Hogan, <a href="http://simplestylings.com/fun-new-finds-from-a-favorite-online-home-decor-shop/" target="_blank" class="text-muted text-underline">simplestylings.com</a></footer>
         </blockquote>
       </div>
     </div>
-    <hr class="margin-top-0">
   </div>
 
-  <div class="row">
-    <div class="col col-sm-6">
-      <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1477525918/simple-stylings-2.jpg' | cloudinaryResizeTo:400:400:'fill' }}"
-        alt="Summer Hogan Simple Stylings"
-        class="full-width round-50-pct">
-    </div>
-    <div class="col col-sm-6 pad-20">
-      <blockquote class="vert-50">
-        <p>I hope these picks get your home decor juices flowing and don’t forget about gifts for the design lovers in your life!</p>
-        <p>Now, if I can only choose what I want to order first!</p>
-        <footer>Summer Hogan, <a href="http://simplestylings.com/fun-new-finds-from-a-favorite-online-home-decor-shop/" target="_blank" class="text-muted text-underline">simplestylings.com</a></footer>
-      </blockquote>
-    </div>
-  </div>
-
-
+  <ee-loading loading="guests.reading"></ee-loading>
 
 </div>

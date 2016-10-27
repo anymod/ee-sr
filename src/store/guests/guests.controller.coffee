@@ -5,6 +5,7 @@ angular.module('store.guests').controller 'guestsCtrl', (eeBack) ->
   guests = this
 
   guests.quotes = []
+  guests.reading = true
 
   eeBack.fns.productsGET { collection_id: 13476 }
   .then (res) ->
@@ -12,6 +13,7 @@ angular.module('store.guests').controller 'guestsCtrl', (eeBack) ->
       for product in res.rows
         if quote.product_id is product.id
           quote.product = product
+  .finally () -> guests.reading = false
 
   guests.quotes = [
     {
