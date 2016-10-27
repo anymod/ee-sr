@@ -9,7 +9,7 @@ angular.module('store.signup').config ($stateProvider) ->
       views:
         top:
           controller: 'storeCtrl as storefront'
-          templateUrl: 'store/home/home.header.html'
+          templateUrl: 'store/signup/signup.header.html'
         middle:
           controller: 'signupCtrl as signup'
           templateUrl: 'store/signup/signup.html'

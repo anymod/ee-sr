@@ -1,0 +1,73 @@
+<!--header-->
+<header id="header">
+  <!--header_top-->
+  <div class="header_top">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="contactinfo">
+            <ul class="nav nav-pills">
+              <li class="free-shipping">
+                <a href uib-tooltip="Orders over $49 automatically receive free shipping."
+                  tooltip-placement="bottom">
+                  <i class="fa fa-truck"></i>&nbsp;&nbsp;<strong>Free Shipping over $49</strong>
+                </a>
+              </li>
+              <li></li>
+              <li><a ui-sref="help"><i class="fa fa-repeat"></i>&nbsp;&nbsp;Easy Returns</a></li>
+              <li></li>
+              <li><a ui-sref="help"><i class="fa fa-info-circle"></i>&nbsp;&nbsp;Help</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-6 hidden-xs">
+          <div class="social-icons pull-right">
+            <ul class="nav navbar-nav">
+              <li ng-repeat="site in ['facebook','pinterest','twitter','instagram']"
+                ng-if="user.storefront_meta.audience.social[site]">
+                <a href="https://{{ site }}.com/{{ user.storefront_meta.audience.social[site] }}" target="_blank">
+                  <i class="fa fa-{{ site }}"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/header_top-->
+
+  <!--header-middle-->
+  <div class="header-middle">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="logo pull-left">
+            <a ui-sref="storefront"><img src="https://res.cloudinary.com/eeosk/image/upload/v1462488274/logo_300x80/i9ncfyc8hwshqrppkl1c.jpg" alt="" /></a>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <div class="shop-menu pull-right">
+            <ul class="nav navbar-nav">
+              <div class="search_box pull-left" style="margin-right:20px">
+                <form ng-submit="addToQuery()" class="position-relative margin-0">
+                  <input type="text" placeholder="Search" ng-model="boxValue" />
+                  <div class="position-absolute hover-pointer"
+                    ng-click="addToQuery()"
+                    style="top: 0; right: 0; width: 35px; height: 35px;">
+                  </div>
+                </form>
+              </div>
+              <!-- <li><a href="#"><i class="fa fa-user"></i> Account</a></li> -->
+              <li><a href ng-click="modalOrFavorites()"><i class="fa fa-heart"></i> Favorites</a></li>
+              <!-- <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li> -->
+              <li><a ui-sref="cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+              <!-- <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/header-middle-->
+</div>
