@@ -138,6 +138,10 @@ sources.storeModule = [
   './src/store/signup/signup.module.coffee'
   './src/store/signup/signup.route.coffee'
   './src/store/signup/signup.controller.coffee'
+  # Module - guests
+  './src/store/guests/guests.module.coffee'
+  './src/store/guests/guests.route.coffee'
+  './src/store/guests/guests.controller.coffee'
 ]
 
 ### DIRECTIVES ###

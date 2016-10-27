@@ -31,6 +31,7 @@ angular.module 'eeStore', [
   'store.coupons'
   'store.added'
   'store.signup'
+  'store.guests'
 
   # custom
   'ee-storefront-announcement'
