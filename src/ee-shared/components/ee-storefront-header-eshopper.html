@@ -77,8 +77,12 @@
           <div class="shop-menu pull-right">
             <ul class="nav navbar-nav">
               <div class="search_box pull-left" style="margin-right:20px">
-                <form ng-submit="addToQuery()" class="margin-0">
+                <form ng-submit="addToQuery()" class="position-relative margin-0">
                   <input type="text" placeholder="Search" ng-model="boxValue" />
+                  <div class="position-absolute hover-pointer"
+                    ng-click="addToQuery()"
+                    style="top: 0; right: 0; width: 35px; height: 35px;">
+                  </div>
                 </form>
               </div>
               <!-- <li><a href="#"><i class="fa fa-user"></i> Account</a></li> -->
