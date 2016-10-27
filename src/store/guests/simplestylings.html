@@ -1,8 +1,18 @@
+<link href="https://fonts.googleapis.com/css?family=Kalam" rel="stylesheet">
+<style>
+  blockquote p { font-family: 'Kalam', cursive; }
+  .product-quote blockquote p { font-size: 28px; }
+</style>
+
 <div class="container vert-50">
 
   <div class="row">
     <div class="col col-sm-6 pad-20">
-      <blockquote class="vert-50">
+      <h1 style="font-family: 'Kalam', cursive; font-weight: bold; margin: 0 0 30px; font-size: 32px;">
+        Top Picks from Simple Stylings
+      </h1>
+
+      <blockquote class="vert-50 margin-top-0">
         <p>My name is Summer Hogan and I'm the creator and writer behind the blog Simple Stylings.</p>
         <p>Simple Stylings was born out of my love for decorating and DIY projects and quickly grew into a place of inspiration for easy recipes, budget friendly fashion, entertaining ideas and fun travel destinations.</p>
         <p>As a busy mom I know how crazy life can get, so our goal is to help you create simple style for their home and life.</p>
@@ -18,7 +28,8 @@
 
   <hr>
 
-  <div ng-repeat="quote in guests.quotes">
+  <div ng-repeat="quote in guests.quotes"
+    class="product-quote">
     <div class="row">
       <div class="col col-sm-2 hidden-xs"></div>
       <div class="col col-sm-5 pad-20"
@@ -33,14 +44,14 @@
           product="quote.product">
         </ee-product-single>
       </div>
-      <div class="col col-sm-7 pad-20"
+      <div class="col col-sm-5 pad-20"
         ng-if="$even">
         <blockquote class="vert-50">
           <p ng-bind="quote.text"></p>
         </blockquote>
       </div>
     </div>
-    <hr>
+    <hr class="margin-top-0">
   </div>
 
   <div class="row">
