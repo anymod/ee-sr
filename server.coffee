@@ -31,7 +31,38 @@ app.use compression()
 app.set 'view engine', 'ejs'
 app.set 'views', path.join __dirname, 'dist'
 
-if process.env.NODE_ENV is 'production' then app.use morgan 'common' else app.use morgan 'dev'
+forceSsl = (req, res, next) ->
+  if req.headers.host is 'stylishrustic.com' and req.headers['x-forwarded-proto'] isnt 'https'
+    res.redirect [
+      'https://'
+      req.get('Host')
+      req.url
+    ].join('')
+  else
+    next()
+  return
+
+redirectToApex = (req, res, next) ->
+  if req.headers.host is 'www.stylishrustic.com'
+    res.writeHead 301,
+      Location: [
+        'https://stylishrustic.com'
+        req.url
+      ].join('')
+      Expires: (new Date).toGMTString()
+
+    res.end()
+  else
+    next()
+  return
+
+if process.env.NODE_ENV is 'production'
+  # Force SSL and redirect on SR properties only
+  app.use redirectToApex
+  app.use forceSsl
+  app.use morgan 'common'
+else
+  app.use morgan 'dev'
 
 app.use serveStatic(path.join __dirname, 'dist')
 app.use cookieParser()
