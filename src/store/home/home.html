@@ -15,7 +15,7 @@
 
 <section class="vert-50">
   <div class="container">
-    <div class="row">
+    <div class="row" ng-hide="home.ee.User.reading">
       <div class="col-sm-3">
         <!-- <ee-sidebar></ee-sidebar> -->
         <!--shipping-->
@@ -34,7 +34,7 @@
         <!--/shipping-->
       </div>
 
-      <div class="col-sm-9 padding-right" ng-hide="home.ee.User.reading">
+      <div class="col-sm-9 padding-right">
         <!-- featured_items -->
         <div class="featured_items">
           <h2 class="title text-center">Featured Items</h2>
@@ -45,6 +45,12 @@
           </div>
         </div>
         <!-- /featured_items -->
+
+        <div class="vert-50 margin-top-0">
+          <img src="https://res.cloudinary.com/eeosk/image/upload/v1477946487/Simple-Stylings-3.png"
+            ui-sref="guests_simple_stylings"
+            class="full-width hover-pointer"/>
+        </div>
 
         <div class="vert-50 margin-top-0">
           <img ng-src="{{ home.ee.User.user.home_arranged[0].banner | cloudinaryResizeTo:1140:480:'fill' }}"
@@ -91,9 +97,8 @@
         </div>
       </div>
 
-      <div class="col-sm-9" ng-show="home.ee.User.reading">
-        <ee-loading loading="home.ee.User.reading" ee-min-height="600"></ee-loading>
-      </div>
     </div>
+
+    <ee-loading loading="home.ee.User.reading" ee-min-height="600"></ee-loading>
   </div>
 </section>
