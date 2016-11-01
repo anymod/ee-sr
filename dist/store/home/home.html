@@ -16,7 +16,7 @@
 <section class="vert-50">
   <div class="container">
     <div class="row" ng-hide="home.ee.User.reading">
-      <div class="col-sm-3">
+      <div class="col-sm-3 hidden-xs">
         <!-- <ee-sidebar></ee-sidebar> -->
         <!--shipping-->
         <div class="vert-50 margin-bottom-0">
@@ -24,14 +24,28 @@
             class="full-width"
             alt="Free shipping on orders over $49">
         </div>
-        <div class="vert-50 margin-bottom-0">
+        <!--/shipping-->
+
+        <!-- returns -->
+        <div class="vert-25 margin-bottom-0">
           <a ui-sref="help" class="no-underline">
             <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1477065705/Easy-Returns-Square_xmtyzp.png' | cloudinaryResizeTo:300:300:'pad' }}"
               class="full-width"
               alt="Easy returns">
           </a>
         </div>
-        <!--/shipping-->
+        <!--/returns-->
+
+        <!-- sidebar products -->
+        <div class="vert-25 margin-bottom-0"
+          ng-repeat="prod in home.sidebarProducts">
+          <a ui-sref="product({ id: prod.id, title: (prod.title | urlText) })">
+            <img ng-src="{{ prod.image | cloudinaryResizeTo:300:550:'limit' | cloudinaryTrim }}"
+              class="full-width"
+              alt="{{ prod.title }}">
+          </a>
+        </div>
+        <!-- /sidebar products -->
       </div>
 
       <div class="col-sm-9 padding-right">
