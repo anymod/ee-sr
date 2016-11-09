@@ -1154,12 +1154,24 @@ fns.Sku.findCompleteByObfuscatedId = (obfuscated_id, user) ->
   fns.Sku.findComplete id, user
 
 fns.Sku.findAllByProductId = (product_id) ->
-  # where: { product_id: scope.product.id, discontinued: { $not: true }, quantity: { $gt: 0 } }, order: 'baseline_price asc'
+  scope = {}
   q = 'SELECT * FROM "Skus" WHERE product_id = ? AND discontinued != true AND quantity > 0 ORDER BY baseline_price ASC;'
   sequelize.query q, { type: sequelize.QueryTypes.SELECT, replacements: [product_id] }
   .then (skus) ->
-    fns.Sku.setObfuscatedId sku for sku in skus
-    skus
+    scope.skus = skus
+    Promise.reduce scope.skus, ((total, sku) -> fns.Sku.addFavoritesCount(sku)), 0
+  .then () ->
+    fns.Sku.setObfuscatedId sku for sku in scope.skus
+    scope.skus
+
+# TODO implement
+fns.Sku.addFavoritesCount = (sku) ->
+  q = 'SELECT count(*) FROM "Favorites" WHERE ? = ANY(sku_ids)'
+  sequelize.query q, { type: sequelize.QueryTypes.SELECT, replacements: [sku.id] }
+  .then (count) ->
+    # console.log('count', count)
+    # TODO implement favorites count
+    sku.favorites_count = parseInt(count[0]?.count)
 
 fns.Sku.restricted_attrs = [
   'filter_applied',
