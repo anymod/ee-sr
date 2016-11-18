@@ -32,6 +32,7 @@ angular.module 'eeStore', [
   'store.added'
   'store.signup'
   'store.guests'
+  'store.doorbusters'
 
   # custom
   'ee-storefront-announcement'

@@ -64,12 +64,20 @@ esqSetSort = (esq, opts) ->
     order: order
     type: 'number'
     script: "doc['baseline_price'].value + doc['shipping_price'].value - doc['supply_price'].value - doc['supply_shipping_price'].value"
+  sku_sort_by_percentage_off_script =
+    nested_path: 'skus'
+    mode:  'min'
+    order: order
+    type: 'number'
+    script: "1 - ((doc['baseline_price'].value + doc['shipping_price'].value) / doc['msrp'].value)"
   switch opts.order
     when 'pa', 'pd' then esq.query 'sort', 'skus.baseline_price', sku_sort_order
     when 'ua', 'ud' then esq.query 'sort', 'updated_at', order
     when 'ca', 'cd' then esq.query 'sort', 'created_at', order
     when 'ta', 'td' then esq.query ['sort'], 'title.raw', { order: order }
     when 'shipa', 'shipd' then esq.query 'sort', 'skus.shipping_price', sku_sort_order
+    when 'eeprofa', 'eeprofd' then esq.query 'sort', '_script', sku_sort_script
+    when 'pctoffa', 'pctoffd' then esq.query 'sort', '_script', sku_sort_by_percentage_off_script
     # TODO rework without regular_price column
     # when 'discd'
     #   attributes += ', max((1.0*s.msrp - s.regular_price)/s.msrp) as discount'
@@ -77,13 +85,6 @@ esqSetSort = (esq, opts) ->
     # when 'disca'
     #   attributes += ', min((1.0*s.msrp - s.regular_price)/s.msrp) as discount'
     #   order = "discount ASC"
-    # TODO rework with calculation
-    when 'eeprofa', 'eeprofd' then esq.query 'sort', '_script', sku_sort_script
-    #   attributes += ', max(1.0 - (1.0*s.supply_price + s.supply_shipping_price) / (1.0*s.baseline_price + s.shipping_price)) as profit'
-    #   order = "profit DESC"
-    # when 'eeprofa'
-    #   attributes += ', min(1.0 - (1.0*s.supply_price + s.supply_shipping_price) / (1.0*s.baseline_price + s.shipping_price)) as profit'
-    #   order = "profit ASC"
     # TODO rework without regular_price column
     # when 'sellprofd'
     #   attributes += ', max(1.0*regular_price - baseline_price) as profit'
@@ -151,6 +152,11 @@ esqSetCategories = (esq, opts) ->
 #                 operator: 'and'
 #           ]
 #   esq.query 'query', 'bool', ['must'], tag_match
+
+# esqSetProductTag = (esq, opts) ->
+#   return unless opts.product_tag # Admin interface
+#   opts.tagMatchOperator = 'or'
+#   opts[tagLevel] = opts.product_tag for tagLevel in ['tags1']
 
 esqSetTags = (esq, opts) ->
   return unless opts?.tags1 || opts?.tags2 || opts?.tags3
@@ -240,6 +246,7 @@ fns.Product.search = (user, opts) ->
   esqSetPrice esq, opts         # Price:      opts.min_price, opts.max_price
   # esqSetMaterial esq, opts      # Material: opts.material
   esqSetCategories esq, opts    # Categorization: opts.category_ids
+  # esqSetProductTag esq, opts    # Admin interface: opts.product_tag
   esqSetTags esq, opts          # Tags:       opts.tags1, opts.tags2, opts.tags3
   esqSetProductIds esq, opts    # Product ids: opts.product_ids
   esqSetSkuIds esq, opts        # Sku ids: opts.sku_ids
