@@ -9,6 +9,15 @@
 
       <div ng-hide="search.ee.Products.reading">
 
+        <div class="vert-50 margin-top-0">
+          <h2 ng-bind="search.doorbusters[search.params.handle].title"
+            class="font-weight-200">
+          </h2>
+          <img ng-src="{{ search.doorbusters[search.params.handle].image | cloudinaryResizeTo:1140:400:'fill' }}"
+            class="full-width"/>
+        </div>
+
+
         <!--featured_items-->
         <div class="featured_items">
           <ee-products-list
