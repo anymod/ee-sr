@@ -91,6 +91,7 @@ angular.module('store.core').factory 'eeProducts', ($rootScope, $q, $state, $sta
     if $stateParams.t1    then query.tags1          = $stateParams.t1
     if $stateParams.t2    then query.tags2          = $stateParams.t2
     if $stateParams.t3    then query.tags3          = $stateParams.t3
+    if $stateParams.handle then query.tags3         = $stateParams.handle # doorbusters
     _data.params = $stateParams
     _setFromParams()
     query

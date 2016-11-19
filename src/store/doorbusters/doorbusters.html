@@ -2,9 +2,11 @@
   <div class="container">
 
     <div>
-      <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1479435037/doorbusters-1-sr.png' | cloudinaryResizeTo:1140:480 }}"
-        class="full-width"
-        alt="" />
+      <a ui-sref="doorbuster({ handle: 'statement-furniture-pieces' })" class="hover-pointer no-underline">
+        <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1479435037/doorbusters-1-sr.png' | cloudinaryResizeTo:1140:480 }}"
+          class="full-width"
+          alt="" />
+      </a>
     </div>
 
   </div>
@@ -16,7 +18,7 @@
       <div class="col-sm-3 hidden-xs">
         <!-- <ee-sidebar></ee-sidebar> -->
         <!--shipping-->
-        <div class="vert-50 margin-bottom-0">
+        <div>
           <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1475888542/Free-Shipping-Square.jpg' | cloudinaryResizeTo:300:300:'pad' }}"
             class="full-width"
             alt="Free shipping on orders over $49">
@@ -54,14 +56,18 @@
 <section class="vert-50">
   <div class="container">
     <div class="vert-50 margin-top-0">
-      <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1479442653/doorbusters-2-sr.png' | cloudinaryResizeTo:1140:480 }}"
-        class="full-width"
-        alt="" />
+      <a ui-sref="doorbuster({ handle: 'signature-lighting' })" class="hover-pointer no-underline">
+        <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1479442653/doorbusters-2-sr.png' | cloudinaryResizeTo:1140:480 }}"
+          class="full-width"
+          alt="" />
+      </a>
     </div>
     <div class="">
-      <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1479510039/doorbusters-3-sr.png' | cloudinaryResizeTo:1140:480 }}"
-        class="full-width"
-        alt="" />
+      <a ui-sref="doorbuster({ handle: 'steals-under-100' })" class="hover-pointer no-underline">
+        <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1479510039/doorbusters-3-sr.png' | cloudinaryResizeTo:1140:480 }}"
+          class="full-width"
+          alt="" />
+      </a>
     </div>
   </div>
 </div>
@@ -91,16 +97,37 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-4">
-        <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1479426205/doorbusters-1.jpg' | cloudinaryResizeTo:360:360:'fill' }}"
-          class="full-width"/>
+        <a ui-sref="doorbuster({ handle: 'statement-furniture-pieces' })"
+          class="inline-block no-underline position-relative">
+          <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1479426205/doorbusters-1.jpg' | cloudinaryResizeTo:360:360:'fill' }}"
+            class="full-width"/>
+          <div class="position-absolute text-center pad-20"
+            style="bottom: 20px; left: 10%; width: 80%; background: rgba(255,255,255,0.9)">
+            <span style="font-size: 16px; color: #555;" class="font-weight-200">Statement Furniture</span>&nbsp;<i class="fa fa-fw fa-chevron-right"></i>
+          </div>
+        </a>
       </div>
       <div class="col-sm-4">
-        <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1479426275/doorbusters-2.jpg' | cloudinaryResizeTo:360:360:'fill' }}"
-          class="full-width"/>
+        <a ui-sref="doorbuster({ handle: 'signature-lighting' })"
+          class="inline-block no-underline position-relative">
+          <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1479426275/doorbusters-2.jpg' | cloudinaryResizeTo:360:360:'fill' }}"
+            class="full-width"/>
+          <div class="position-absolute text-center pad-20"
+            style="bottom: 20px; left: 10%; width: 80%; background: rgba(255,255,255,0.9)">
+            <span style="font-size: 16px; color: #555;" class="font-weight-200">Signature Lighting</span>&nbsp;<i class="fa fa-fw fa-chevron-right"></i>
+          </div>
+        </a>
       </div>
       <div class="col-sm-4">
-        <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1479426233/doorbusters-3.jpg' | cloudinaryResizeTo:360:360:'fill' }}"
-          class="full-width"/>
+        <a ui-sref="doorbuster({ handle: 'steals-under-100' })"
+          class="inline-block no-underline position-relative">
+          <img ng-src="{{ 'https://res.cloudinary.com/eeosk/image/upload/v1479426233/doorbusters-3.jpg' | cloudinaryResizeTo:360:360:'fill' }}"
+            class="full-width"/>
+          <div class="position-absolute text-center pad-20"
+            style="bottom: 20px; left: 10%; width: 80%; background: rgba(255,255,255,0.9)">
+            <span style="font-size: 16px; color: #555;" class="font-weight-200">Steals under $100</span>&nbsp;<i class="fa fa-fw fa-chevron-right"></i>
+          </div>
+        </a>
       </div>
     </div>
   </div>

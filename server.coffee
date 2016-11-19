@@ -135,7 +135,7 @@ searchAndRespond = (res, bootstrap) ->
     res.render 'store.ejs', { bootstrap: bootstrap }
 
 # SEARCH, CATEGORY, COLLECTION, SALE
-app.get ['/search', '/categories/:id/:title*?', '/collections/:id/:title*?', '/sale/:id/:title*?'], (req, res, next) ->
+app.get ['/search', '/categories/:id/:title*?', '/collections/:id/:title*?', '/sale/:id/:title*?', '/doorbusters/:handle'], (req, res, next) ->
   { bootstrap, host, path } = utils.setup req
   User.defineStorefront host, bootstrap
   .then () -> searchAndRespond res, bootstrap

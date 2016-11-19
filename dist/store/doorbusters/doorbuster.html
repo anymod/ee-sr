@@ -1,0 +1,52 @@
+<section>
+  <div class="container">
+
+    <div class="vert-20 margin-top-0">
+      <ee-search-breadcrumb></ee-search-breadcrumb>
+    </div>
+
+    <div class="row">
+
+      <div ng-hide="search.ee.Products.reading">
+
+        <!--featured_items-->
+        <div class="featured_items">
+          <ee-products-list
+            products="search.ee.Products.products"
+            show-signup=true>
+          </ee-products-list>
+        </div>
+        <!--featured_items-->
+
+        <!-- pagination -->
+        <div ng-if="search.ee.Products.count > search.ee.Products.fromParams.perPage"
+          class="pad-20 vert-20">
+          <div uib-pagination
+            total-items="search.ee.Products.count"
+            items-per-page="search.ee.Products.fromParams.perPage"
+            ng-model="search.ee.Products.params.p"
+            max-size="5"
+            class="pagination-sm margin-0 vertical-align-top"
+            previous-text="&lsaquo;" next-text="&rsaquo;"
+            rotate="false"
+            ng-change="search.update()">
+          </div>
+        </div>
+        <!-- /pagination -->
+
+        <!-- no results -->
+        <div ng-if="search.ee.Products.products.length <= 0"
+          ng-hide="search.ee.Products.reading">
+          No results found
+        </div>
+        <!-- /no results -->
+      </div>
+
+
+      <div ng-show="search.ee.Products.reading">
+        <ee-loading loading="search.ee.Products.reading"></ee-loading>
+      </div>
+
+    </div>
+  </div>
+</section>

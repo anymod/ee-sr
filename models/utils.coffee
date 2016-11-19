@@ -22,7 +22,7 @@ utils.setup = (req) ->
       tag:            req.query.t
       tags1:          req.query.t1
       tags2:          req.query.t2
-      tags3:          req.query.t3
+      tags3:          req.query.t3 || req.params.handle # doorbusters
       collection_id:  req.query.coll
       referer:        req.headers.referer
     host: req.headers.host
