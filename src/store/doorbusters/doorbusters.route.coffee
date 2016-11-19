@@ -5,7 +5,7 @@ angular.module('store.sale').config ($stateProvider) ->
   $stateProvider
 
     .state 'doorbusters',
-      url: '/doorbusters'
+      url: '/'
       views:
         top:
           controller: 'storeCtrl as storefront'

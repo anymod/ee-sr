@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('store.core').run ($rootScope, $cookies, $location, $window, eeModal, eeCoupon, eeAnalytics, eeCart) ->
+angular.module('store.core').run ($rootScope, $cookies, $location, $window, $state, eeModal, eeCoupon, eeAnalytics, eeCart) ->
 
   ## SETUP
   $rootScope.isStore = true
@@ -42,6 +42,9 @@ angular.module('store.core').run ($rootScope, $cookies, $location, $window, eeMo
 
   # # Broadcast page reset on stateChangeStart and stateChangeSuccess to remove page param
   $rootScope.$on '$stateChangeStart', (e, toState, toParams, fromState, fromParams) ->
+    if toState.redirectTo # doorbusters
+      e.preventDefault()
+      $state.go toState.redirectTo, toParams, { location: 'replace' }
     if eeAnalytics.data.pageDepth > 1 and (toState.name isnt fromState.name or toParams.id isnt fromParams.id) then $rootScope.$broadcast 'reset:page'
 
   $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
