@@ -9,11 +9,9 @@ angular.module('store.core').factory 'eeAnalytics', ($window, $cookies, $locatio
     writeKey: 'a36f4230d8a77258c853d2bcf59509edc5ae16b868a6dbd8d6515b9600086dbca7d5d674c9307314072520c35f462b79132c2a1654406bdf123aba2e8b1e880bd919482c04dd4ce9801b5865f4bc95d72fbe20769bc238e1e6e453ab244f9243cf47278e645b2a79398b86d7072cb75c'
 
   _signupTextArray = [
-    'Receive 10% off when you join our mailing list'
-    'Follow us and receive 10% off your first order'
-    # 'Follow us for sales and exclusive offers'
-    # 'Follow us for decor ideas'
-    # 'Stay in the know on the latest home furnishings'
+    'Sign up to know when the doorbuster sale starts'
+    # 'Receive 10% off when you join our mailing list'
+    # 'Follow us and receive 10% off your first order'
   ]
 
   ## PRIVATE EXPORT DEFAULTS

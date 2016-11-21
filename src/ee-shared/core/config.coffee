@@ -34,12 +34,11 @@ angular.module('app.core').config ($locationProvider, $stateProvider, $urlRouter
           if urlTags.t2 is $filter('urlText')(tag2)
             plaintextTag2 = tag2
             break
-      if urlTags.t3 and plaintextTag1
+      if urlTags.t3
         for tag3 in tagTree[plaintextTag1][plaintextTag2]
           if urlTags.t3 is $filter('urlText')(tag3)
             plaintextTag3 = tag3
             break
-
       return { tag1: plaintextTag1, tag2: plaintextTag2, tag3: plaintextTag3 }
 
     $rootScope.$on '$stateChangeStart', (e, toState, toParams) ->

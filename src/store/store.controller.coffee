@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('eeStore').controller 'storeCtrl', ($state, $stateParams, eeDefiner, eeUser, eeCoupon, eeAnalytics, categories) ->
+angular.module('eeStore').controller 'storeCtrl', ($state, $stateParams, eeDefiner, eeUser, eeCoupon, eeAnalytics, eeModal, categories) ->
 
   storefront = this
 
@@ -19,5 +19,7 @@ angular.module('eeStore').controller 'storeCtrl', ($state, $stateParams, eeDefin
     when 'coupon'
       if !$state.params.uuid? or $state.params.uuid is '' then return $state.go 'storefront'
       if !eeCoupon.data.coupon?.id then eeCoupon.fns.defineCoupon $state.params.uuid
+
+  storefront.openSignupModal = () -> eeModal.fns.open 'offer'
 
   return
