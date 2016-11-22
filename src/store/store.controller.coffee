@@ -14,7 +14,7 @@ angular.module('eeStore').controller 'storeCtrl', ($state, $stateParams, eeDefin
     $state.go 'storefront', { p: storefront.ee.Products.storefront.page }
 
   switch $state.current.name
-    when 'storefront'
+    when 'storefront', 'doorbusters'
       if eeAnalytics.data.pageDepth > 1 then eeUser.fns.getUser()
     when 'coupon'
       if !$state.params.uuid? or $state.params.uuid is '' then return $state.go 'storefront'
