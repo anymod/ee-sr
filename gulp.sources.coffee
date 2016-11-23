@@ -143,8 +143,8 @@ sources.storeModule = [
   './src/store/guests/guests.route.coffee'
   './src/store/guests/guests.controller.coffee'
   # Module - doorbusters
-  './src/store/doorbusters/doorbusters.module.coffee'
-  './src/store/doorbusters/doorbusters.route.coffee'
+  # './src/store/doorbusters/doorbusters.module.coffee'
+  # './src/store/doorbusters/doorbusters.route.coffee'
   # './src/store/doorbusters/doorbusters.controller.coffee'
 ]
 

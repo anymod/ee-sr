@@ -1,24 +1,37 @@
 <section>
   <div class="container">
 
+    <!-- doorbuster banner -->
+    <div class="vert-25"
+      ng-if="search.params.t1 == 'doorbusters' && !!search.params.t3">
+      <img ng-src="{{ search.doorbusters[search.params.t3].image | cloudinaryResizeTo:1140:300:'fill' }}"
+        class="full-width"/>
+    </div>
+    <!-- /doorbuster banner -->
+
+
     <div class="vert-20 margin-top-0">
       <ee-search-breadcrumb></ee-search-breadcrumb>
     </div>
 
     <div class="row">
-      <div class="col-sm-3">
+      <div class="col-sm-3" ng-hide="search.params.t1 == 'doorbusters'">
         <ee-sidebar></ee-sidebar>
       </div>
 
-      <div class="col-sm-9 padding-right"
+      <div class="padding-right"
+        ng-class="search.params.t1 == 'doorbusters' ? '' : 'col-sm-9'"
         ng-hide="search.ee.Products.reading">
 
         <!--featured_items-->
         <div class="featured_items">
-          <h2 class="title text-center">Featured Items</h2>
+          <h2 class="title text-center"
+              ng-hide="search.params.t1 == 'doorbusters'">
+            Featured Items
+          </h2>
           <ee-products-list
             products="search.ee.Products.products"
-            show-signup=true>
+            show-signup="search.params.t1 != 'doorbusters'">
           </ee-products-list>
         </div>
         <!--featured_items-->
@@ -48,8 +61,9 @@
       </div>
 
 
-      <div class="col-sm-9" ng-show="search.ee.Products.reading">
-        <ee-loading loading="search.ee.Products.reading"></ee-loading>
+      <div ng-show="search.ee.Products.reading"
+          ng-class="search.params.t1 == 'doorbusters' ? '' : 'col-sm-9'">
+        <ee-loading loading="search.ee.Products.reading" ee-min-height="600"></ee-loading>
       </div>
 
     </div>
