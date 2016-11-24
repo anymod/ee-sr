@@ -352,11 +352,11 @@ fns.Product.elasticsearch_findall_attrs = [
 
 fns.Product.findHomeFeatured = (product_ids, user) ->
   product_ids ||= '0'
-  fns.Product.search user, { product_ids: product_ids }
+  fns.Product.search user, { product_ids: product_ids, order: 'ud' }
 
 fns.Product.findHomeRecommended = (product_ids, user) ->
   product_ids ||= '0'
-  fns.Product.search user, { product_ids: product_ids }
+  fns.Product.search user, { product_ids: product_ids, order: 'ud' }
   .then (res) ->
     recommended =
       groups: []

@@ -52,10 +52,16 @@ User =
       Collection.findHomeArranged bootstrap.home_arranged.join(','), { id: bootstrap.id, pricing: bootstrap.pricing, alpha: bootstrap.alpha }
     .then (collections) ->
       bootstrap.home_arranged = collections
-      Shared.Product.findHomeFeatured '6291,4516,717,2182,5059,1890,2229,5599,6597,6818', { id: bootstrap.id, pricing: bootstrap.pricing, alpha: bootstrap.alpha }
+      # Doorbusters
+      featured = '6211,6335,7590,6242,6655,7597,6251,6072'
+      # featured = '6291,4516,717,2182,5059,1890,2229,5599,6597,6818'
+      Shared.Product.findHomeFeatured featured, { id: bootstrap.id, pricing: bootstrap.pricing, alpha: bootstrap.alpha }
     .then (products) ->
       bootstrap.home_featured = products
-      Shared.Product.findHomeRecommended '665,1373,2028,1207,2019,2047,2029,1670,392,1624,2024,1392,558,2040,722,717,1742,2118,805,739,2123,762,2137,761,2168,2166,796,2231,2220,2258,2275,820,2395', { id: bootstrap.id, pricing: bootstrap.pricing, alpha: bootstrap.alpha }
+      # Doorbusters
+      recommended = '222,4770,5619,5599,5022,2250,4909,4778,6412,7517,6688,6220,6240,7570,6097,6089,6305,3742'
+      # recommended = '665,1373,2028,1207,2019,2047,2029,1670,392,1624,2024,1392,558,2040,722,717,1742,2118,805,739,2123,762,2137,761,2168,2166,796,2231,2220,2258,2275,820,2395'
+      Shared.Product.findHomeRecommended recommended, { id: bootstrap.id, pricing: bootstrap.pricing, alpha: bootstrap.alpha }
     .then (products) ->
       bootstrap.home_recommended = products
       Shared.Product.findSubtags { id: bootstrap.id, pricing: bootstrap.pricing, alpha: bootstrap.alpha }
