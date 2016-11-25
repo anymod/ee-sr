@@ -20,16 +20,16 @@ angular.module('store.core').run ($rootScope, $cookies, $location, $window, $sta
       eeModal.fns.open 'offer_cart'
       return true
 
-  $rootScope.eeMouseleave = () ->
-    _openCartOfferModal() || _openSignupModal()
-
-  if !$cookies.get('offered')?
-    win.bind 'touchstart', (e) ->
-      win.unbind 'touchstart'
-      win.bind 'scroll', (e) ->
-        if $window.pageYOffset > 1999
-          _openSignupModal()
-          win.unbind 'scroll'
+  # $rootScope.eeMouseleave = () ->
+  #   _openCartOfferModal() || _openSignupModal()
+  #
+  # if !$cookies.get('offered')?
+  #   win.bind 'touchstart', (e) ->
+  #     win.unbind 'touchstart'
+  #     win.bind 'scroll', (e) ->
+  #       if $window.pageYOffset > 1999
+  #         _openSignupModal()
+  #         win.unbind 'scroll'
 
   if $cookies.get('coupon')? then eeCoupon.fns.defineCoupon()
 
