@@ -4,7 +4,7 @@
     <div class="col-xs-12">
       Shopping cart<span ng-if="cart.ee.Cart.skus.length < 1" ng-hide="cart.ee.Cart.reading || cart.ee.Cart.updating">&nbsp;is empty</span>
       <div class="pull-right">
-        <a ui-sref="storefront"
+        <!-- <a ui-sref="storefront"
           class="btn btn-sm btn-default vert-5 pad-2">
           &nbsp;Keep shopping&nbsp;
         </a>
@@ -12,6 +12,9 @@
           ng-click="cart.buy()"
           ng-disabled="cart.processing || cart.ee.Cart.updating || cart.ee.Cart.skus.length < 1">
           Proceed to Checkout
+        </div> -->
+        <div class="btn btn-themed disabled">
+          Checkout is currently disabled
         </div>
       </div>
     </div>
@@ -122,7 +125,7 @@
           </h5>
         </div>
         <div class="text-right vert-50">
-          <div>
+          <!-- <div>
             <a ui-sref="storefront"
               class="btn btn-sm btn-default vert-5 pad-2">
               &nbsp;Keep shopping&nbsp;
@@ -133,15 +136,12 @@
               Proceed to Checkout
             </div>
           </div>
-          <!-- <div ng-click="cart.buy()"
-            class="btn btn-block btn-themed pad-7"
-            style="border: none !important;"
-            ng-disabled="cart.processing || cart.ee.Cart.updating || cart.ee.Cart.skus.length < 1">
-            Proceed to Checkout
-          </div> -->
           <div class="vert-10" style="margin-right: 75px;">or</div>
           <div class="pull-right" style="width: 160px;">
             <ee-paypal-button button-size="small"></ee-paypal-button>
+          </div> -->
+          <div class="btn btn-themed disabled">
+            Checkout is currently disabled
           </div>
         </div>
         <br>
